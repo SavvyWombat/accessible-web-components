@@ -1,0 +1,6 @@
+.github/
+coverage/
+test/
+.*.json
+jestconfig.coverage.json
+.idea

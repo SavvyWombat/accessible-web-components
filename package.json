@@ -1,0 +1,29 @@
+{
+  "name": "@savvywombat/datepicker",
+  "version": "0.1.0",
+  "description": "An accessible web component for picking dates",
+  "keywords": [
+    "date",
+    "date picker",
+    "accessible date picker"
+  ],
+  "license": "MIT",
+  "author": "Stuart Jones <stuart@savvywombat.com.au>",
+  "type": "module",
+  "main": "src/index.js",
+  "module": "src/index.js",
+  "scripts": {
+    "analyze": "cem analyze --litelement",
+    "start": "web-dev-server"
+  },
+  "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.5.7",
+    "@web/dev-server": "^0.1.29",
+    "eslint": "^8.7.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0"
+  },
+  "dependencies": {
+    "lit": "^2.1.1"
+  }
+}

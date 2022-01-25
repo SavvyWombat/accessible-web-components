@@ -15,12 +15,19 @@
     import { html, render } from 'lit';
     import './date-picker.js';
 
-    const title = 'Hello owc World!';
     render(
       html`
-        <date-picker .title=${title}>
-          some light-dom
-        </date-picker>
+        <form>
+          <label>
+            Name <input type="text"/>
+          </label>
+
+          <date-picker></date-picker>
+
+          <label>
+            Something else <input type="text"/>
+          </label>
+        </form>
       `,
       document.querySelector('#demo')
     );

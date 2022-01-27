@@ -15,12 +15,12 @@ export class DatePicker extends HTMLElement {
     datePicker.setAttribute('class', 'date-picker');
 
     // Show the current date in a disabled input
-    const date = document.createElement('input');
-    date.setAttribute('class', 'date');
-    date.setAttribute('type', 'input');
-    date.disabled = true;
-    date.setAttribute('value', new Intl.DateTimeFormat().format(this.__date));
-    datePicker.append(date);
+    this.date = document.createElement('input');
+    this.date.setAttribute('class', 'date');
+    this.date.setAttribute('type', 'input');
+    this.date.disabled = true;
+    this.date.setAttribute('value', new Intl.DateTimeFormat().format(this.__date));
+    datePicker.append(this.date);
 
     // Selector to control the month
     const monthSelector = document.createElement('div');
@@ -50,6 +50,12 @@ export class DatePicker extends HTMLElement {
     this.shadowRoot.append(this.__styles(), datePicker);
   }
 
+  __update(picker) {
+    picker.monthLabel.textContent = new Intl.DateTimeFormat('default', {month: 'long'}).format(picker.__date)
+    picker.yearLabel.textContent = new Intl.DateTimeFormat('default', {year: 'numeric'}).format(picker.__date)
+    picker.date.setAttribute('value', new Intl.DateTimeFormat().format(this.__date));
+  }
+
   __button(listener, content, label) {
     const button = document.createElement('button');
     button.setAttribute('type', 'button');
@@ -63,21 +69,25 @@ export class DatePicker extends HTMLElement {
   __decMonth(picker) {
     picker.__date.setMonth(picker.__date.getMonth() - 1);
     picker.__date = new Date(picker.__date);
+    picker.__update(picker);
   }
 
   __incMonth(picker) {
     picker.__date.setMonth(picker.__date.getMonth() + 1);
     picker.__date = new Date(picker.__date);
+    picker.__update(picker);
   }
 
   __decYear(picker) {
     picker.__date.setFullYear(picker.__date.getFullYear() - 1);
     picker.__date = new Date(picker.__date);
+    picker.__update(picker);
   }
 
   __incYear(picker) {
     picker.__date.setFullYear(picker.__date.getFullYear() + 1);
     picker.__date = new Date(picker.__date);
+    picker.__update(picker);
   }
 
   __styles() {
@@ -87,6 +97,8 @@ export class DatePicker extends HTMLElement {
   border: 1px solid black;
   min-width: 10em;
   min-height: 10em;
+  
+  font-variant-numeric: tabular-nums;
   
   display: grid;
   grid-template-areas:
@@ -100,6 +112,7 @@ export class DatePicker extends HTMLElement {
 
 .date {
   grid-area: date;
+  font-variant-numeric: tabular-nums;
 }
 
 .month {

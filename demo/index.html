@@ -3,8 +3,15 @@
 <head>
   <meta charset="utf-8">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500&display=swap');
+
     body {
       background: #fafafa;
+      font-family: 'Fira Sans', sans-serif;
+    }
+
+    input {
+      font-family: inherit;
     }
   </style>
 </head>
@@ -18,7 +25,13 @@
       Name <input type="text"/>
     </label>
 
-    <date-picker></date-picker>
+    <date-picker>
+      <style slot="styles">
+        .date {
+          background-color: red;
+        }
+      </style>
+    </date-picker>
 
     <label>
       Something else <input type="text"/>

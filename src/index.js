@@ -6,6 +6,14 @@ export class DatePicker extends HTMLElement {
     // Element functionality written in here
 
     this.__date = new Date();
+    this.buttons = {
+      decMonth: this.__button(this.__decMonth, '<', 'Go back one month'),
+      incMonth: this.__button(this.__incMonth, '>', 'Go forward one month'),
+      decYear: this.__button(this.__decYear, '<', 'Go back one year'),
+      incYear: this.__button(this.__incYear, '>', 'Go forward one year'),
+    };
+
+    this.addEventListener('click', this.__click);
 
     // Create a shadow root
     this.attachShadow({mode: 'open'}); // sets and returns 'this.shadowRoot'
@@ -19,75 +27,99 @@ export class DatePicker extends HTMLElement {
     this.date.setAttribute('class', 'date');
     this.date.setAttribute('type', 'input');
     this.date.disabled = true;
-    this.date.setAttribute('value', new Intl.DateTimeFormat().format(this.__date));
     datePicker.append(this.date);
 
     // Selector to control the month
     const monthSelector = document.createElement('div');
     monthSelector.setAttribute('class', 'month');
-    monthSelector.append(this.__button(this.__decMonth, '<', 'Go back one month'));
 
     this.monthLabel = document.createElement('span');
-    this.monthLabel.textContent = new Intl.DateTimeFormat('default', {month: 'long'}).format(this.__date)
-    monthSelector.append(this.monthLabel);
 
-    monthSelector.append(this.__button(this.__incMonth, '>', 'Go forward one month'));
+    monthSelector.append(
+      this.buttons.decMonth,
+      this.monthLabel,
+      this.buttons.incMonth
+    );
+
     datePicker.append(monthSelector);
 
     // Selector to control the year
     const yearSelector = document.createElement('div');
     yearSelector.setAttribute('class', 'year');
-    yearSelector.append(this.__button(this.__decYear, '<', 'Go back one year'));
 
     this.yearLabel = document.createElement('span');
-    this.yearLabel.textContent = new Intl.DateTimeFormat('default', {year: 'numeric'}).format(this.__date)
-    yearSelector.append(this.yearLabel);
 
-    yearSelector.append(this.__button(this.__incYear, '>', 'Go forward one year'));
+    yearSelector.append(
+      this.buttons.decYear,
+      this.yearLabel,
+      this.buttons.incYear
+    );
+
     datePicker.append(yearSelector);
 
     // Add component and styles to the shadow DOM
     this.shadowRoot.append(this.__styles(), datePicker);
+
+    this.__update();
   }
 
-  __update(picker) {
-    picker.monthLabel.textContent = new Intl.DateTimeFormat('default', {month: 'long'}).format(picker.__date)
-    picker.yearLabel.textContent = new Intl.DateTimeFormat('default', {year: 'numeric'}).format(picker.__date)
-    picker.date.setAttribute('value', new Intl.DateTimeFormat().format(this.__date));
+  __update() {
+    this.monthLabel.textContent = new Intl.DateTimeFormat('default', {month: 'long'}).format(this.__date)
+    this.yearLabel.textContent = new Intl.DateTimeFormat('default', {year: 'numeric'}).format(this.__date)
+    this.date.setAttribute('value', new Intl.DateTimeFormat().format(this.__date));
+  }
+
+  __click(event) {
+    switch (event.path[0]) {
+      case this.buttons.decMonth:
+        this.__decMonth();
+        break;
+
+      case this.buttons.incMonth:
+        this.__incMonth();
+        break;
+
+      case this.buttons.decYear:
+        this.__decYear();
+        break;
+
+      case this.buttons.incYear:
+        this.__incYear();
+        break;
+    }
   }
 
   __button(listener, content, label) {
     const button = document.createElement('button');
     button.setAttribute('type', 'button');
     button.setAttribute('aria-label', label);
-    button.addEventListener('click', () => listener(this));
     button.textContent = content;
 
     return button;
   }
 
-  __decMonth(picker) {
-    picker.__date.setMonth(picker.__date.getMonth() - 1);
-    picker.__date = new Date(picker.__date);
-    picker.__update(picker);
+  __decMonth() {
+    this.__date.setMonth(this.__date.getMonth() - 1);
+    this.__date = new Date(this.__date);
+    this.__update();
   }
 
-  __incMonth(picker) {
-    picker.__date.setMonth(picker.__date.getMonth() + 1);
-    picker.__date = new Date(picker.__date);
-    picker.__update(picker);
+  __incMonth() {
+    this.__date.setMonth(this.__date.getMonth() + 1);
+    this.__date = new Date(this.__date);
+    this.__update();
   }
 
-  __decYear(picker) {
-    picker.__date.setFullYear(picker.__date.getFullYear() - 1);
-    picker.__date = new Date(picker.__date);
-    picker.__update(picker);
+  __decYear() {
+    this.__date.setFullYear(this.__date.getFullYear() - 1);
+    this.__date = new Date(this.__date);
+    this.__update();
   }
 
-  __incYear(picker) {
-    picker.__date.setFullYear(picker.__date.getFullYear() + 1);
-    picker.__date = new Date(picker.__date);
-    picker.__update(picker);
+  __incYear() {
+    this.__date.setFullYear(this.__date.getFullYear() + 1);
+    this.__date = new Date(this.__date);
+    this.__update();
   }
 
   __styles() {

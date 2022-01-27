@@ -9,28 +9,20 @@
   </style>
 </head>
 <body>
-  <div id="demo"></div>
-
   <script type="module">
-    import { html, render } from 'lit';
     import './date-picker.js';
-
-    render(
-      html`
-        <form>
-          <label>
-            Name <input type="text"/>
-          </label>
-
-          <date-picker></date-picker>
-
-          <label>
-            Something else <input type="text"/>
-          </label>
-        </form>
-      `,
-      document.querySelector('#demo')
-    );
   </script>
+
+  <form>
+    <label>
+      Name <input type="text"/>
+    </label>
+
+    <date-picker></date-picker>
+
+    <label>
+      Something else <input type="text"/>
+    </label>
+  </form>
 </body>
 </html>

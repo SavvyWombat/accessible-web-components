@@ -6,6 +6,7 @@ export class DatePicker extends HTMLElement {
     // Element functionality written in here
 
     this.date = new Date();
+    this.date.setMonth(7);
     this.buttons = {
       decMonth: this.__button(this.__decMonth, '<', 'Go back one month'),
       incMonth: this.__button(this.__incMonth, '>', 'Go forward one month'),
@@ -73,7 +74,7 @@ export class DatePicker extends HTMLElement {
     const yearControl = document.createElement('div');
     yearControl.setAttribute('class', 'year');
 
-    this.yearSelector = document.createElement('span');
+    this.yearSelector = document.createElement('ul');
     this.yearSelector.setAttribute('class', 'select');
     this.yearSelector.setAttribute('tabIndex', '0');
     this.yearSelector.setAttribute('role', 'listbox');
@@ -84,14 +85,14 @@ export class DatePicker extends HTMLElement {
     this.yearSelector.addEventListener('focus', (event) => {this.__focus(event)});
     this.yearSelector.addEventListener('blur', (event) => {this.__blur(event)});
 
-
-    for (let y = this.date.getFullYear() - 6; y < this.date.getFullYear() + 6; y++) {
+    const offset = this.date.getFullYear() - 1970;
+    for (let y = 0; y < 12; y++) {
       const yearOption = document.createElement('li');
       yearOption.setAttribute('id', 'year-' + y);
       yearOption.setAttribute('tabIndex', '-1');
       yearOption.setAttribute('role', 'option');
-      yearOption.setAttribute('data-value', `${y}`);
-      yearOption.textContent = `${y}`;
+      yearOption.setAttribute('data-value', `${offset + y - 6}`);
+      yearOption.textContent = `${this.date.getFullYear()}`;
 
       this.yearSelector.append(yearOption);
     }
@@ -113,22 +114,26 @@ export class DatePicker extends HTMLElement {
   __update() {
     this.monthValue.textContent = new Intl.DateTimeFormat('default', {month: 'long'}).format(this.date);
     this.monthSelector.setAttribute('aria-activedescendent', 'month-' + this.date.getMonth());
-    this.monthSelector.childNodes.forEach((option) => {
+    this.monthSelector.querySelectorAll('[data-value]').forEach((option) => {
       option.setAttribute('aria-selected', 'false');
       if (option.getAttribute('data-value') === `${this.date.getMonth()}`) {
         option.setAttribute('aria-selected', 'true');
+        option.setAttribute('data-active', 'true');
       }
     });
 
-    this.yearSelector.setAttribute('aria-activedescendent', 'year-' + this.date.getFullYear());
-    this.yearSelector.childNodes.forEach((option, index) => {
-      option.setAttribute('data-value', `${this.date.getFullYear() - 6 + index}`);
-      option.textContent = `${this.date.getFullYear() - 6 + index}`;
+    const offset = this.date.getFullYear() - 1970;
+    this.yearValue.textContent = `${this.date.getFullYear()}`;
+    this.yearSelector.querySelectorAll('[data-value]').forEach((option, y) => {
       option.setAttribute('aria-selected', 'false');
-      if (option.getAttribute('data-value') === `${this.date.getFullYear()}`) {
+      option.textContent = `${1970 + offset + y - 6}`;
+      option.setAttribute('data-value', `${offset + y - 6}`);
+      if (y === 6) {
         option.setAttribute('aria-selected', 'true');
+        option.setAttribute('data-active', 'true');
       }
-    });
+    })
+
 
     this.dateDisplay.textContent = new Intl.DateTimeFormat().format(this.date);
   }
@@ -163,7 +168,7 @@ export class DatePicker extends HTMLElement {
 
       case this.yearSelector:
         if (event.path[0].hasAttribute('data-value')) {
-          this.__setYear(event.path[0].getAttribute('data-value'));
+          this.__setYear(1970 + Number.parseInt(event.path[0].getAttribute('data-value')));
           event.path[0].blur();
         }
         break;
@@ -200,26 +205,17 @@ export class DatePicker extends HTMLElement {
     }
 
     if (event.path[0] === this.yearSelector || event.path[1] === this.yearSelector) {
-        this.yearSelector.childNodes[this.yearSelector.getAttribute('aria-activedescendent')].removeAttribute('data-active');
+      if (event.code === 'ArrowUp') {
 
-        if (event.code === 'ArrowUp' && this.yearSelector.getAttribute('aria-activedescendent') > 0) {
-          this.yearSelector.setAttribute('aria-activedescendent',
-            `${this.yearSelector.getAttribute('aria-activedescendent') - 1}`);
-        }
+      }
 
-        if (event.code === 'ArrowDown' && this.yearSelector.getAttribute('aria-activedescendent') < 11) {
-          this.yearSelector.setAttribute('aria-activedescendent',
-            `${this.yearSelector.getAttribute('aria-activedescendent') - 0 + 1}`);
-        }
+      if (event.code === 'ArrowDown') {
 
-        if (event.code === 'Space') {
-          this.__setYear(this.yearSelector.getAttribute('aria-activedescendent'));
-          return;
-        }
+      }
 
-        this.yearSelector.childNodes[this.yearSelector.getAttribute('aria-activedescendent')].setAttribute('data-active', '');
+      if (event.code === 'Space') {
 
-        return;
+      }
     }
   }
 

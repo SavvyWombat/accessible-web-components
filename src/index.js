@@ -79,9 +79,16 @@ export class DatePicker extends HTMLElement {
     this.yearSelector.setAttribute('role', 'listbox');
     this.yearSelector.setAttribute('aria-roledescription', 'Select a year');
 
+    this.yearValue = document.createElement('li');
+    this.yearSelector.append(this.yearValue);
+    this.yearSelector.addEventListener('focus', (event) => {this.__focus(event)});
+    this.yearSelector.addEventListener('blur', (event) => {this.__blur(event)});
+
+
     for (let y = this.date.getFullYear() - 6; y < this.date.getFullYear() + 6; y++) {
       const yearOption = document.createElement('li');
       yearOption.setAttribute('id', 'year-' + y);
+      yearOption.setAttribute('tabIndex', '-1');
       yearOption.setAttribute('role', 'option');
       yearOption.setAttribute('data-value', `${y}`);
       yearOption.textContent = `${y}`;
@@ -145,18 +152,19 @@ export class DatePicker extends HTMLElement {
         break;
     }
 
+    // Clicked on something in the month/year selector
     switch (event.path[1]) {
       case this.monthSelector:
-        if (this.monthSelector === this.shadowRoot.activeElement && event.path[0].hasAttribute('data-value')) {
+        if (event.path[0].hasAttribute('data-value')) {
           this.__setMonth(event.path[0].getAttribute('data-value'));
-          this.monthSelector.blur();
+          event.path[0].blur();
         }
         break;
 
       case this.yearSelector:
-        if (this.yearSelector === this.shadowRoot.activeElement) {
+        if (event.path[0].hasAttribute('data-value')) {
           this.__setYear(event.path[0].getAttribute('data-value'));
-          this.yearSelector.blur();
+          event.path[0].blur();
         }
         break;
     }
@@ -218,7 +226,6 @@ export class DatePicker extends HTMLElement {
   __focus(event) {
     switch (event.path[0]) {
       case this.monthSelector:
-        console.log(this.monthSelector.getAttribute('aria-activedescendent'));
         this.shadowRoot.getElementById(this.monthSelector.getAttribute('aria-activedescendent')).setAttribute('data-active', '');
         this.shadowRoot.getElementById(this.monthSelector.getAttribute('aria-activedescendent')).focus();
         break;
@@ -334,11 +341,12 @@ export class DatePicker extends HTMLElement {
 
 .select li {
   display: none;
+  list-style-type: none;
   padding: 0.5rem 0;
   outline: none;
 }
 
-.select li[aria-selected='true'] {
+.select li:first-child {
   display: block;
 }
 
@@ -346,16 +354,13 @@ export class DatePicker extends HTMLElement {
 .select:focus li,
 .select:focus-within li {
   display: block;
-  background-color: var(--bg-color, #fafafa);
+  background-color: var(--bg-color, #f0f0f0);
 }
 
 .select:hover li:hover,
-.select:focus li:hover,
-.select:focus-within li:hover,
-.select:hover li[data-active],
 .select:focus li[data-active],
 .select:focus-within li[data-active] {
-  background-color: var(--bg-focus, #cccccc);
+  background-color: var(--bg-focus, #ccdcec);
 }
 
 .select:hover li:first-child,
@@ -364,8 +369,6 @@ export class DatePicker extends HTMLElement {
   background-color: var(--bg-color, #fafafa);
   border-bottom: 1px solid currentcolor;
 }
-
-
 `;
 
     return styles;

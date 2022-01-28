@@ -142,6 +142,12 @@ export class DatePicker extends HTMLElement {
           break;
         }
 
+        if (event.code === 'Escape') {
+          this.monthSelector.setAttribute('aria-activedescendent', `${this.date.getMonth()}`);
+          this.monthSelector.blur();
+          break;
+        }
+
         this.monthSelector.childNodes[this.monthSelector.getAttribute('aria-activedescendent')].setAttribute('data-active', '');
 
         break;

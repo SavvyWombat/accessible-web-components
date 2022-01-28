@@ -22,22 +22,20 @@ export class DatePicker extends HTMLElement {
     const datePicker = document.createElement('fieldset');
     datePicker.setAttribute('class', 'date-picker');
 
-    // Show the current date in a disabled input
-    this.date = document.createElement('input');
-    this.date.setAttribute('class', 'date');
-    this.date.setAttribute('type', 'input');
-    this.date.disabled = true;
-    datePicker.append(this.date);
+    // Show the current date as a calculated output
+    this.dateDisplay = document.createElement('output');
+    this.dateDisplay.setAttribute('class', 'date');
+    datePicker.append(this.dateDisplay);
 
     // Selector to control the month
     const monthSelector = document.createElement('div');
     monthSelector.setAttribute('class', 'month');
 
-    this.monthLabel = document.createElement('span');
+    this.monthDisplay = document.createElement('span');
 
     monthSelector.append(
       this.buttons.decMonth,
-      this.monthLabel,
+      this.monthDisplay,
       this.buttons.incMonth
     );
 
@@ -47,11 +45,11 @@ export class DatePicker extends HTMLElement {
     const yearSelector = document.createElement('div');
     yearSelector.setAttribute('class', 'year');
 
-    this.yearLabel = document.createElement('span');
+    this.yearDisplay = document.createElement('span');
 
     yearSelector.append(
       this.buttons.decYear,
-      this.yearLabel,
+      this.yearDisplay,
       this.buttons.incYear
     );
 
@@ -64,9 +62,9 @@ export class DatePicker extends HTMLElement {
   }
 
   __update() {
-    this.monthLabel.textContent = new Intl.DateTimeFormat('default', {month: 'long'}).format(this.__date)
-    this.yearLabel.textContent = new Intl.DateTimeFormat('default', {year: 'numeric'}).format(this.__date)
-    this.date.setAttribute('value', new Intl.DateTimeFormat().format(this.__date));
+    this.monthDisplay.textContent = new Intl.DateTimeFormat('default', {month: 'long'}).format(this.__date)
+    this.yearDisplay.textContent = new Intl.DateTimeFormat('default', {year: 'numeric'}).format(this.__date)
+    this.dateDisplay.textContent = new Intl.DateTimeFormat().format(this.__date);
   }
 
   __click(event) {
@@ -124,13 +122,14 @@ export class DatePicker extends HTMLElement {
 
   __styles() {
     const styles = document.createElement('style');
-    styles.textContent = `
+    styles.textContent = `  
 .date-picker {
   border: 1px solid black;
   min-width: 10em;
   min-height: 10em;
   
   font-variant-numeric: tabular-nums;
+  text-align: center;
   
   display: grid;
   grid-template-areas:

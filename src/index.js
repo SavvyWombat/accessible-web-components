@@ -79,6 +79,7 @@ export class DatePicker extends HTMLElement {
     this.yearSelector.setAttribute('tabIndex', '0');
     this.yearSelector.setAttribute('role', 'listbox');
     this.yearSelector.setAttribute('aria-roledescription', 'Select a year');
+    this.yearSelector.setAttribute('aria-activedescendent', 'year-6');
 
     this.yearValue = document.createElement('li');
     this.yearSelector.append(this.yearValue);
@@ -205,16 +206,28 @@ export class DatePicker extends HTMLElement {
     }
 
     if (event.path[0] === this.yearSelector || event.path[1] === this.yearSelector) {
-      if (event.code === 'ArrowUp') {
+      const selectedOption = this.shadowRoot.getElementById((this.yearSelector.getAttribute('aria-activedescendent')));
 
+      if (event.code === 'ArrowUp') {
+        this.yearSelector.querySelectorAll('[data-value]').forEach((option) => {
+          option.setAttribute('data-value', `${Number.parseInt(option.getAttribute('data-value')) - 1}`)
+          option.textContent = `${Number.parseInt(option.textContent) - 1}`;
+        });
+
+        selectedOption.focus();
       }
 
       if (event.code === 'ArrowDown') {
+        this.yearSelector.querySelectorAll('[data-value]').forEach((option) => {
+          option.setAttribute('data-value', `${Number.parseInt(option.getAttribute('data-value')) + 1}`)
+          option.textContent = `${Number.parseInt(option.textContent) + 1}`;
+        });
 
+        selectedOption.focus();
       }
 
       if (event.code === 'Space') {
-
+        this.__setYear(1970 + Number.parseInt(selectedOption.getAttribute('data-value')));
       }
     }
   }

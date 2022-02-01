@@ -13,39 +13,40 @@
 </head>
 <body>
   <script type="module">
-    import './date-picker.js';
+    import { DatePicker } from '../src/index.js';
+    import { DropdownSelector } from '../src/dropdown-selector.js';
+
+    customElements.define('date-picker', DatePicker);
+    customElements.define('dropdown-selector', DropdownSelector);
   </script>
 
   <form id="form">
-    <label>
-      Name <input type="text"/>
-    </label>
-
     <date-picker></date-picker>
 
-    <label>
-      Something else <input type="text"/>
-    </label>
+    <select>
+      <option value="0">Option 0</option>
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+    </select>
 
-    <label style="display: block; margin-top: 5rem">
-      Pick something
-      <select>
-        <option value="1">Option 1</option>
-        <option value="2">Option 2</option>
-        <option value="3">Option 3</option>
-        <option value="4">Option 4</option>
-      </select>
-    </label>
+    <dropdown-selector>
+      <option value="0">January</option>
+      <option value="1">February</option>
+      <option value="2">March</option>
+      <option value="3">April</option>
+      <option value="4">May</option>
+      <option value="5" selected>June</option>
+      <option value="6">July</option>
+      <option value="7">August</option>
+      <option value="8">September</option>
+      <option value="9">October</option>
+      <option value="10">November</option>
+      <option value="11">December</option>
+    </dropdown-selector>
 
-    <label style="display: block; margin-top: 1rem">
-      Pick something needs to be longer
-      <ul role="listbox" tabindex="0">
-        <li value="1">Option 1</li>
-        <li value="2">Option 2</li>
-        <li value="3">Option 3</li>
-        <li value="4">Option 4</li>
-      </ul>
-    </label>
+    <dropdown-selector>
+      <option value="2010">2010</option>
+    </dropdown-selector>
   </form>
 </body>
 </html>

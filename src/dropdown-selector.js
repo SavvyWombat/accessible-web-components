@@ -32,8 +32,6 @@ export class DropdownSelector extends HTMLElement {
     this.addEventListener('click', this.__click);
     this.addEventListener('focus', this.__focus);
     this.addEventListener('keydown', this.__keydown);
-    this.addEventListener('mouseout', this.__mouseout);
-    this.addEventListener('mouseenter', this.__mouseenter);
   }
 
   disconnectedCallback() {
@@ -44,8 +42,6 @@ export class DropdownSelector extends HTMLElement {
     this.removeEventListener('click', this.__click);
     this.removeEventListener('focus', this.__focus);
     this.removeEventListener('keydown', this.__keydown);
-    this.addEventListener('mouseout', this.__mouseout);
-    this.addEventListener('mouseenter', this.__mouseenter);
   }
 
   __click(event) {
@@ -163,14 +159,6 @@ export class DropdownSelector extends HTMLElement {
         this.__close();
         break;
     }
-  }
-
-  __mouseout(event) {
-    console.log(event.path);
-  }
-
-  __mouseenter(event) {
-    console.log(event.path);
   }
 
   __isOpen() {
@@ -313,6 +301,14 @@ const template = `<div class="container">
   }
   
   .current {
+    background-color: var(--bg-active-color, #88ccff);
+  }
+  
+  #listbox:hover .current {
+    background-color: transparent;
+  }
+  
+  #listbox:hover .option:hover {
     background-color: var(--bg-active-color, #88ccff);
   }
 </style>`;

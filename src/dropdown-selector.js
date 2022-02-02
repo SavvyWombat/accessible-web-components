@@ -3,9 +3,13 @@ export class DropdownSelector extends HTMLElement {
     // Always call super first in constructor
     super();
 
-    // Element functionality written in here
-
     this.__options = [];
+    this.__selectedIndex = 0;
+    this.__rootNode = null;
+    this.__outputNode = null;
+    this.__listNode = null;
+
+    this.__observer = null;
 
     this.__mapOptions();
     this.__render();
@@ -16,65 +20,153 @@ export class DropdownSelector extends HTMLElement {
       return;
     }
 
-    const observer = new MutationObserver((mutations) => {
+    this.__observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         console.log(mutation);
       });
     });
 
-    observer.observe(this, { childList: true });
+    this.__observer.observe(this, { childList: true });
+
+    this.addEventListener('click', this.__click);
+    this.addEventListener('focus', this.__focus);
+    this.addEventListener('keydown', this.__keydown);
+  }
+
+  disconnectedCallback() {
+    this.__observer.disconnect();
+    this.__observer = null;
+
+    this.removeEventListener('click', this.__click);
+    this.removeEventListener('click', this.__focus);
+    this.removeEventListener('keydown', this.__keydown);
+  }
+
+  __click(event) {
+    console.log(event);
+  }
+
+  __focus(event) {
+    console.log(event);
+  }
+
+  __keydown(event) {
+    switch (event.key) {
+      case 'ArrowDown':
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (this.__selectedIndex < this.__options.length) {
+          this.__selectedIndex++;
+        }
+        this.__update();
+        break;
+
+      case 'ArrowUp':
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (this.__selectedIndex > 0) {
+          this.__selectedIndex--;
+        }
+        this.__update();
+        break;
+    }
   }
 
   __mapOptions() {
     this.__options = Array.from(this.querySelectorAll('option')).map((option) => {
       return {
-        ...Array.from(option.attributes).reduce((attributes, attribute) => {
-          return {
-            ...attributes,
-            [attribute.name]: attribute.value,
-          }
-        }, {}),
-
+        selected: option.getAttribute('selected'),
+        value: option.getAttribute('value'),
         text: option.textContent
       }
     });
   }
 
   __render() {
-    // Create the shadow root
-    this.attachShadow({mode: 'open'}); // sets and returns 'this.shadowRoot'
+    this.attachShadow({mode: 'open'});
 
     this.shadowRoot.innerHTML = template;
 
-    let selected = this.__options.find((option) => {
-      return option.hasOwnProperty('selected') && option.selected !== 'false';
+    this.__rootNode = this.shadowRoot.firstElementChild;
+    this.__outputNode = this.shadowRoot.getElementById('selected-option-text');
+    this.__listNode = this.shadowRoot.getElementById('list');
+
+    this.__selectedIndex = this.__options.findIndex((option) => {
+      return option.selected !== null && option.selected !== 'false';
     });
-    if (selected === undefined) {
-      selected = this.__options[0];
+    if (this.__selectedIndex < 0) {
+      this.__selectedIndex = 0;
     }
 
-    this.shadowRoot.getElementById('selected-option-text').innerHTML = selected.text;
+    this.__outputNode.textContent = this.__options[this.__selectedIndex].text;
+    this.__rootNode.setAttribute('aria-activedescendant', this.__selectedIndex);
+    this.__rootNode.setAttribute('aria-roledescription', `${this.__options[this.__selectedIndex].text} combobox open menu focus mode`)
 
     this.__options.forEach((option, index) => {
-      const item = this.shadowRoot.getElementById('list').appendChild(document.createElement('li'));
-      item.setAttribute('data-index', `${index}`);
+      const item = this.__listNode.appendChild(document.createElement('li'));
+
+      item.setAttribute('id', `option-${index}`);
+      item.setAttribute('value', option.value);
+      item.setAttribute('tabindex', '-1');
+      if (this.__selectedIndex === index) {
+        item.setAttribute('selected', '');
+      }
+
       item.textContent = option.text;
-    })
+    });
+  }
+
+  __update() {
+    this.__rootNode.setAttribute('aria-activedescendant', this.__selectedIndex);
+    this.__rootNode.setAttribute('aria-roledescription', `${this.__options[this.__selectedIndex].text} combobox open menu focus mode`)
+
+    this.__outputNode.textContent = this.__options[this.__selectedIndex].text;
+
+
+    this.__listNode.childNodes.forEach((item, index) => {
+        item.removeAttribute('selected');
+        if (index === this.__selectedIndex) {
+          item.setAttribute('selected', '');
+        }
+    });
   }
 }
 
-const template = `<div>
-  <span id="selected-option-text"></span>
-  <ul id="list" role="listbox"></ul>
+const template = `<div id="container" role="listbox" tabindex="0">
+  <output id="selected-option-text"></output>
+  <ul id="list"></ul>
 </div>
 
 <style>
-ul {
+  div {
+    display: block;
+    cursor: default;
+    height: 2em;
+    width: fit-content;
+    position: relative;
+    border: var(--outline, 1px solid #000000);
+    background-color: var(--bg-color, #fefefe);
+  }
+ 
+  output {
+    display: block;
+    height: 1em;
+    padding: 0.5em;
+  }
+  
+  ul {
     margin: 0;
     padding: 0;
-}
-
-li {
+    overflow-y: visible;
+    background-color: var(--bg-color, #fefefe);
+  }
+  
+  li {
+    height: 0;
+    padding: 0 0.5em;
     list-style-type: none;
-}
+    overflow-y: hidden;
+  }
 </style>`;

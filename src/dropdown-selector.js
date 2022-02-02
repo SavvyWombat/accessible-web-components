@@ -5,9 +5,9 @@ export class DropdownSelector extends HTMLElement {
 
     this.__options = [];
     this.__selectedIndex = 0;
-    this.__rootNode = null;
-    this.__outputNode = null;
-    this.__listNode = null;
+    this.__currentIndex = 0;
+    this.__combobox = null;
+    this.__listbox = null;
 
     this.__observer = null;
 
@@ -43,35 +43,95 @@ export class DropdownSelector extends HTMLElement {
   }
 
   __click(event) {
-    console.log(event);
+    if (!this.__isOpen()) {
+      this.__open();
+
+      return;
+    }
+
+    this.__close();
   }
 
   __focus(event) {
-    console.log(event);
+    this.__combobox.focus();
   }
 
   __keydown(event) {
-    switch (event.key) {
-      case 'ArrowDown':
-        event.preventDefault();
-        event.stopPropagation();
+    console.log(event);
 
-        if (this.__selectedIndex < this.__options.length) {
-          this.__selectedIndex++;
+    switch (event.code) {
+      case 'ArrowDown':
+        if (!this.__isOpen()) {
+          this.__open();
+          break;
         }
-        this.__update();
+
+        if (event.altKey) {
+          return;
+        }
+
+        if (this.__currentIndex < this.__options.length) {
+          this.__currentIndex++;
+          this.__update();
+        }
         break;
 
       case 'ArrowUp':
-        event.preventDefault();
-        event.stopPropagation();
-
-        if (this.__selectedIndex > 0) {
-          this.__selectedIndex--;
+        if (event.altKey) {
+          this.__close();
+          return;
         }
-        this.__update();
+
+        if (!this.__isOpen()) {
+          this.__open();
+          break;
+        }
+
+        if (this.__currentIndex > 0) {
+          this.__currentIndex--;
+          this.__update();
+        }
+        break;
+
+      case 'Enter':
+      case 'Space':
+        if (!this.__isOpen()) {
+          this.__open();
+          break;
+        }
+
+        if (this.__isOpen()) {
+          this.__selectedIndex = this.__currentIndex;
+          this.__close();
+          this.__combobox.focus();
+        }
         break;
     }
+  }
+
+  __isOpen() {
+    return this.__combobox.getAttribute('aria-expanded') === 'true';
+  }
+
+  __open() {
+    this.__combobox.setAttribute('aria-expanded', 'true');
+    this.__listbox.setAttribute('aria-hidden', 'false');
+
+    this.__currentIndex = this.__selectedIndex;
+    this.__combobox.setAttribute('aria-activedescendant', `option-${this.__currentIndex}`);
+
+    this.__update();
+  }
+
+  __close() {
+    this.__combobox.setAttribute('aria-expanded', 'false');
+    this.__listbox.setAttribute('aria-hidden', 'true');
+
+    this.__currentIndex = null;
+    this.__combobox.setAttribute('aria-activedescendant', '');
+    this.__combobox.textContent = this.__options[this.__selectedIndex].text;
+
+    this.__update();
   }
 
   __mapOptions() {
@@ -89,9 +149,8 @@ export class DropdownSelector extends HTMLElement {
 
     this.shadowRoot.innerHTML = template;
 
-    this.__rootNode = this.shadowRoot.firstElementChild;
-    this.__outputNode = this.shadowRoot.getElementById('selected-option-text');
-    this.__listNode = this.shadowRoot.getElementById('list');
+    this.__combobox = this.shadowRoot.getElementById('combobox');
+    this.__listbox = this.shadowRoot.getElementById('listbox');
 
     this.__selectedIndex = this.__options.findIndex((option) => {
       return option.selected !== null && option.selected !== 'false';
@@ -100,18 +159,17 @@ export class DropdownSelector extends HTMLElement {
       this.__selectedIndex = 0;
     }
 
-    this.__outputNode.textContent = this.__options[this.__selectedIndex].text;
-    this.__rootNode.setAttribute('aria-activedescendant', this.__selectedIndex);
-    this.__rootNode.setAttribute('aria-roledescription', `${this.__options[this.__selectedIndex].text} combobox open menu focus mode`)
+    this.__combobox.textContent = this.__options[this.__selectedIndex].text;
 
     this.__options.forEach((option, index) => {
-      const item = this.__listNode.appendChild(document.createElement('li'));
+      const item = this.__listbox.appendChild(document.createElement('div'));
 
+      item.classList.add('option');
       item.setAttribute('id', `option-${index}`);
-      item.setAttribute('value', option.value);
-      item.setAttribute('tabindex', '-1');
+      item.setAttribute('aria-selected', 'false');
       if (this.__selectedIndex === index) {
-        item.setAttribute('selected', '');
+        item.classList.add('current');
+        item.setAttribute('aria-selected', 'true');
       }
 
       item.textContent = option.text;
@@ -119,54 +177,74 @@ export class DropdownSelector extends HTMLElement {
   }
 
   __update() {
-    this.__rootNode.setAttribute('aria-activedescendant', this.__selectedIndex);
-    this.__rootNode.setAttribute('aria-roledescription', `${this.__options[this.__selectedIndex].text} combobox open menu focus mode`)
+    this.__combobox.setAttribute('aria-activedescendant', `option-${this.__currentIndex}`);
 
-    this.__outputNode.textContent = this.__options[this.__selectedIndex].text;
+    Array.from(this.__listbox.children).forEach((option, index) => {
+      option.setAttribute('aria-selected', 'false');
+      option.classList.remove('current');
 
-
-    this.__listNode.childNodes.forEach((item, index) => {
-        item.removeAttribute('selected');
-        if (index === this.__selectedIndex) {
-          item.setAttribute('selected', '');
-        }
+      if (index === this.__currentIndex) {
+        option.setAttribute('aria-selected', 'true');
+        option.classList.add('current');
+      }
     });
   }
 }
 
-const template = `<div id="container" role="listbox" tabindex="0">
-  <output id="selected-option-text"></output>
-  <ul id="list"></ul>
+const template = `<div class="container">
+  <div id="combobox"
+    aria-controls="listbox"
+    aria-expanded="false"
+    aria-haspopup="listbox"
+    role="combobox"
+    tabindex="0"
+    aria-activedescendant
+  ></div>
+  
+  <div id="listbox"
+    role="listbox"
+    tabindex="-1"
+    aria-hidden="true"
+  ></div>
 </div>
 
 <style>
-  div {
+  .container {
     display: block;
     cursor: default;
     height: 2em;
     width: fit-content;
-    position: relative;
     border: var(--outline, 1px solid #000000);
     background-color: var(--bg-color, #fefefe);
   }
  
-  output {
+  #combobox {
     display: block;
-    height: 1em;
     padding: 0.5em;
   }
   
-  ul {
-    margin: 0;
-    padding: 0;
-    overflow-y: visible;
+  #listbox {
+    position: relative;
+    z-index: 1;
+  }
+  
+  #listbox[aria-hidden='true'] {
+    height: 0;
+    overflow: hidden;
+  }
+  
+  #listbox[aria-hidden='false'] {
+    border: var(--outline, 1px solid #000000);
     background-color: var(--bg-color, #fefefe);
   }
   
-  li {
-    height: 0;
-    padding: 0 0.5em;
-    list-style-type: none;
-    overflow-y: hidden;
+  .option {
+    display: block;
+    padding: 0.5em;
+    padding-right: 1em;
+  }
+  
+  .current {
+    background-color: var(--bg-active-color, #88ccff);
   }
 </style>`;

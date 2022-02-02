@@ -28,24 +28,38 @@ export class DropdownSelector extends HTMLElement {
 
     this.__observer.observe(this, { childList: true });
 
+    this.addEventListener('blur', this.__close);
     this.addEventListener('click', this.__click);
     this.addEventListener('focus', this.__focus);
     this.addEventListener('keydown', this.__keydown);
+    this.addEventListener('mouseout', this.__mouseout);
+    this.addEventListener('mouseenter', this.__mouseenter);
   }
 
   disconnectedCallback() {
     this.__observer.disconnect();
     this.__observer = null;
 
+    this.removeEventListener('blur', this.__close);
     this.removeEventListener('click', this.__click);
-    this.removeEventListener('click', this.__focus);
+    this.removeEventListener('focus', this.__focus);
     this.removeEventListener('keydown', this.__keydown);
+    this.addEventListener('mouseout', this.__mouseout);
+    this.addEventListener('mouseenter', this.__mouseenter);
   }
 
   __click(event) {
     if (!this.__isOpen()) {
       this.__open();
+      this.__combobox.focus();
 
+      return;
+    }
+
+    if (event.path[0].classList.contains('option')) {
+      this.__selectedIndex = Number.parseInt(event.path[0].dataset.index);
+      this.__close();
+      this.__combobox.focus();
       return;
     }
 
@@ -57,9 +71,7 @@ export class DropdownSelector extends HTMLElement {
   }
 
   __keydown(event) {
-    console.log(event);
-
-    switch (event.code) {
+    switch (event.key) {
       case 'ArrowDown':
         if (!this.__isOpen()) {
           this.__open();
@@ -72,6 +84,16 @@ export class DropdownSelector extends HTMLElement {
 
         if (this.__currentIndex < this.__options.length) {
           this.__currentIndex++;
+          this.__update();
+        }
+        break;
+
+      case 'PageDown':
+        if (this.__isOpen()) {
+          this.__currentIndex += 10;
+          if (this.__currentIndex >= this.__options.length) {
+            this.__currentIndex = this.__options.length - 1;
+          }
           this.__update();
         }
         break;
@@ -93,8 +115,38 @@ export class DropdownSelector extends HTMLElement {
         }
         break;
 
+      case 'PageUp':
+        if (this.__isOpen()) {
+          this.__currentIndex -= 10;
+          if (this.__currentIndex < 0) {
+            this.__currentIndex = 0;
+          }
+          this.__update();
+        }
+        break;
+
+      case 'Home':
+        if (!this.__isOpen()) {
+          this.__open();
+        }
+
+        this.__currentIndex = 0;
+        this.__update();
+
+        break;
+
+      case 'End':
+        if (!this.__isOpen()) {
+          this.__open();
+        }
+
+        this.__currentIndex = this.__options.length - 1;
+        this.__update();
+
+        break;
+
       case 'Enter':
-      case 'Space':
+      case ' ': // space
         if (!this.__isOpen()) {
           this.__open();
           break;
@@ -106,7 +158,19 @@ export class DropdownSelector extends HTMLElement {
           this.__combobox.focus();
         }
         break;
+
+      case 'Escape':
+        this.__close();
+        break;
     }
+  }
+
+  __mouseout(event) {
+    console.log(event.path);
+  }
+
+  __mouseenter(event) {
+    console.log(event.path);
   }
 
   __isOpen() {
@@ -132,6 +196,20 @@ export class DropdownSelector extends HTMLElement {
     this.__combobox.textContent = this.__options[this.__selectedIndex].text;
 
     this.__update();
+  }
+
+  __update() {
+    this.__combobox.setAttribute('aria-activedescendant', `option-${this.__currentIndex}`);
+
+    Array.from(this.__listbox.children).forEach((option, index) => {
+      option.setAttribute('aria-selected', 'false');
+      option.classList.remove('current');
+
+      if (index === this.__currentIndex) {
+        option.setAttribute('aria-selected', 'true');
+        option.classList.add('current');
+      }
+    });
   }
 
   __mapOptions() {
@@ -167,26 +245,13 @@ export class DropdownSelector extends HTMLElement {
       item.classList.add('option');
       item.setAttribute('id', `option-${index}`);
       item.setAttribute('aria-selected', 'false');
+      item.dataset.index = `${index}`;
       if (this.__selectedIndex === index) {
         item.classList.add('current');
         item.setAttribute('aria-selected', 'true');
       }
 
       item.textContent = option.text;
-    });
-  }
-
-  __update() {
-    this.__combobox.setAttribute('aria-activedescendant', `option-${this.__currentIndex}`);
-
-    Array.from(this.__listbox.children).forEach((option, index) => {
-      option.setAttribute('aria-selected', 'false');
-      option.classList.remove('current');
-
-      if (index === this.__currentIndex) {
-        option.setAttribute('aria-selected', 'true');
-        option.classList.add('current');
-      }
     });
   }
 }
@@ -221,9 +286,12 @@ const template = `<div class="container">
   #combobox {
     display: block;
     padding: 0.5em;
+    height: calc(100% - 1em);
   }
   
   #listbox {
+    margin: 0;
+    padding: 0;
     position: relative;
     z-index: 1;
   }

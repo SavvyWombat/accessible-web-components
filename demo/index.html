@@ -5,10 +5,6 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500&display=swap');
 
-    :root {
-      /*--bg-color-selected: #ccffee;*/
-    }
-
     body {
       background: #fafafa;
       font-family: 'Fira Sans', sans-serif;
@@ -17,16 +13,12 @@
 </head>
 <body>
   <script type="module">
-    import { DatePicker } from '../src/index.js';
-    import { DropdownSelector } from '../src/dropdown-selector.js';
+    import { DropdownSelector } from '../src/index.js';
 
-    customElements.define('date-picker', DatePicker);
     customElements.define('dropdown-selector', DropdownSelector);
   </script>
 
   <form id="form">
-    <date-picker></date-picker>
-
     <dropdown-selector style="margin: 3em;">
       <option value="0">January</option>
       <option value="1">February</option>
@@ -40,10 +32,6 @@
       <option value="9">October</option>
       <option value="10">November</option>
       <option value="11">December</option>
-    </dropdown-selector>
-
-    <dropdown-selector>
-      <option value="2010">2010</option>
     </dropdown-selector>
   </form>
 </body>

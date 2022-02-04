@@ -24,6 +24,20 @@ export class DropdownSelector extends HTMLElement {
 }
 
 const html = `<div>
-    <div id="combobox"></div>
-    <div id="listbox"></div>
+    <label id="label"></label>
+    
+    <div id="combobox"
+         role="combobox"
+         aria-controls="listbox"
+         aria-expanded="false"
+         aria-haspopup="listbox"
+         aria-labelledby="label"
+         tabindex="0"
+    ></div>
+    
+    <div id="listbox"
+         role="listbox"
+         aria-labelledby="label"
+         tabindex="-1"
+    ></div>
 </div>`;

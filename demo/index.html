@@ -3,11 +3,8 @@
 <head>
   <meta charset="utf-8">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500&display=swap');
-
     body {
       background: #fafafa;
-      font-family: 'Fira Sans', sans-serif;
     }
   </style>
 </head>
@@ -18,8 +15,8 @@
     customElements.define('dropdown-selector', DropdownSelector);
   </script>
 
-  <form id="form">
-    <dropdown-selector style="margin: 3em;">
+  <form id="form" class="display: flex; justify-content: space-around">
+    <dropdown-selector>
       <option value="0">January</option>
       <option value="1">February</option>
       <option value="2">March</option>

@@ -203,7 +203,7 @@ export class DropdownSelector extends HTMLElement {
   }
 
   refreshList() {
-    this.__combobox.setAttribute('aria-activedescendant', `option-${this.activeIndex}`);
+    this.__combobox.setAttribute('aria-activedescendant', `option-${this.currentIndex}`);
 
     const options = this.__listbox.querySelectorAll('[role=option]');
     [...options].forEach((option) => {
@@ -226,9 +226,7 @@ export class DropdownSelector extends HTMLElement {
 
     this.currentIndex = this.selectedIndex;
 
-    this.__combobox.setAttribute('aria-activedescendant', `option-${this.currentIndex}`);
-
-    this.__listbox.children[this.currentIndex].classList.add('current');
+    this.refreshList();
 
     this.__combobox.focus();
   }

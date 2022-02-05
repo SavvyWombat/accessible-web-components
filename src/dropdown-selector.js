@@ -95,6 +95,7 @@ export class DropdownSelector extends HTMLElement {
     }
 
     if (this.open) {
+      this.select(this.currentIndex);
       this.closeList();
     }
   }

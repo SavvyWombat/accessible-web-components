@@ -93,4 +93,32 @@ describe('DropDownSelector', () => {
     expect(dropdown.options[0].label).to.equal('Some Value');
     expect(dropdown.options[0].value).to.equal('Some Value');
   });
+
+  it('sets the combobox value if no options are selected', async () => {
+    const dropdown = await fixture(html`
+        <dropdown-selector>
+            <option>Some Value</option>
+            <option>Another Value</option>
+        </dropdown-selector>
+    `);
+
+    const combobox = dropdown.shadowRoot.querySelector('#combobox');
+    expect(combobox).to.not.be.a('null');
+    expect(combobox.textContent).to.equal('Some Value');
+  });
+
+
+
+  it('sets the combobox value to the selected option', async () => {
+    const dropdown = await fixture(html`
+        <dropdown-selector>
+            <option>Some Value</option>
+            <option selected>Another Value</option>
+        </dropdown-selector>
+    `);
+
+    const combobox = dropdown.shadowRoot.querySelector('#combobox');
+    expect(combobox).to.not.be.a('null');
+    expect(combobox.textContent).to.equal('Another Value');
+  });
 });

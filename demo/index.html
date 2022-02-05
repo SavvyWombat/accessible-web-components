@@ -6,6 +6,11 @@
     body {
       background: #fafafa;
     }
+
+    label {
+      display: block;
+      margin: 1em 0;
+    }
   </style>
 </head>
 <body>
@@ -31,6 +36,11 @@
       <option value="10">November</option>
       <option value="11">December</option>
     </dropdown-selector>
+
+    <hr />
+
+    <label id="label-for-input" for="text-input">Use the input</label>
+    <input type="text" aria-labelledby="label-for-input" id="text-input" />
   </form>
 </body>
 </html>

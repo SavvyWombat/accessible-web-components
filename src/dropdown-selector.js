@@ -15,6 +15,7 @@ export class DropdownSelector extends HTMLElement {
     const parentLabel = document.getElementById(this.getAttribute('aria-labelledby'));
     if (parentLabel) {
       this.__label.textContent = parentLabel.textContent;
+      parentLabel.addEventListener('click', () => this.__combobox.focus());
     }
 
     this.options = [...this.querySelectorAll('option')].map((option, index) => {

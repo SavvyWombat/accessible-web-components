@@ -6,7 +6,14 @@ export class DropdownSelector extends HTMLElement {
 
     this.shadowRoot.innerHTML = html;
 
-    this.listbox = this.shadowRoot.getElementById('listbox');
+    this.__label = this.shadowRoot.getElementById('label');
+    this.__combobox = this.shadowRoot.getElementById('combobox');
+    this.__listbox = this.shadowRoot.getElementById('listbox');
+
+    const parentLabel = document.getElementById(this.getAttribute('aria-labelledby'));
+    if (parentLabel) {
+      this.__label.textContent = parentLabel.textContent;
+    }
 
     this.options = [...this.querySelectorAll('option')].map((option, index) => {
       return {
@@ -18,7 +25,7 @@ export class DropdownSelector extends HTMLElement {
     this.options.forEach((option) => {
       const element = document.createElement('div');
       element.textContent = option.label;
-      this.listbox.appendChild(element);
+      this.__listbox.appendChild(element);
     });
   }
 }

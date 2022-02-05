@@ -135,7 +135,7 @@ describe('DropDownSelector', () => {
     expect(listbox.clientHeight).to.equal(0);
   });
 
-  it('opens the listbox', async () => {
+  it('opens the listbox when clicked', async () => {
     const dropdown = await fixture(html`
         <dropdown-selector>
             <option>Some Value</option>
@@ -152,6 +152,25 @@ describe('DropDownSelector', () => {
     expect(listbox.clientHeight).to.be.greaterThan(0);
   });
 
+  it('leaves the listbox closed when tabbed into', async () => {
+    const dropdown = await fixture(html`
+        <dropdown-selector>
+            <option>Some Value</option>
+        </dropdown-selector>
+    `);
+
+    const combobox = dropdown.shadowRoot.getElementById('combobox');
+    await sendKeys({
+      press: 'Tab',
+    });
+
+    expect(dropdown.shadowRoot.activeElement).to.equal(combobox);
+    expect(combobox.getAttribute('aria-expanded')).to.equal('false');
+
+    const listbox = dropdown.shadowRoot.getElementById('listbox');
+    expect(listbox.clientHeight).to.equal(0);
+  });
+
   it('sets the active descendant when opening', async() => {
     const dropdown = await fixture(html`
         <dropdown-selector>
@@ -164,7 +183,7 @@ describe('DropDownSelector', () => {
     await combobox.click();
 
     expect(combobox.getAttribute('aria-activedescendant')).to.equal('option-1');
-  })
+  });
 
   it('closes the list', async() => {
     const dropdown = await fixture(html`
@@ -181,7 +200,7 @@ describe('DropDownSelector', () => {
 
     const listbox = dropdown.shadowRoot.getElementById('listbox');
     expect(listbox.clientHeight).to.equal(0);
-  })
+  });
 
   it('unsets the active descendant when closing', async() => {
     const dropdown = await fixture(html`
@@ -196,5 +215,140 @@ describe('DropDownSelector', () => {
     await combobox.click();
 
     expect(combobox.getAttribute('aria-activedescendant')).to.equal('');
-  })
+  });
+
+  ['ArrowDown', 'ArrowUp', 'Enter', ' ', 'Home', 'End'].forEach((key) => {
+    it('opens the list box with "' + key + '"', async () => {
+      const dropdown = await fixture(html`
+          <dropdown-selector>
+              <option>Some Value</option>
+              <option selected>Another Value</option>
+          </dropdown-selector>
+      `);
+
+      const combobox = dropdown.shadowRoot.getElementById('combobox');
+      await combobox.focus();
+
+      await sendKeys({
+        press: key
+      });
+
+      expect(dropdown.shadowRoot.activeElement).to.equal(combobox);
+      expect(combobox.getAttribute('aria-expanded')).to.equal('true');
+
+      const listbox = dropdown.shadowRoot.getElementById('listbox');
+      expect(listbox.clientHeight).to.be.greaterThan(0);
+    });
+  });
+
+  [
+    { key: 'ArrowUp', expectedIndex: 11 },
+    { key: 'ArrowDown', expectedIndex: 13 },
+    { key: 'PageUp', expectedIndex: 2},
+    { key: 'PageDown', expectedIndex: 22 },
+    { key: 'Home', expectedIndex: 0 },
+    { key: 'End', expectedIndex: 25 },
+  ].forEach(({key, expectedIndex}) => {
+    it('changes the active index with a key press "' + key + '"', async () => {
+      const dropdown = await fixture(html`
+          <dropdown-selector>
+              <option>asdf</option>
+              <option>sdfg</option>
+              <option>dfgh</option>
+              <option>fghj</option>
+              <option>ghjk</option>
+              <option>qwer</option>
+              <option>wert</option>
+              <option>erty</option>
+              <option>rtyu</option>
+              <option>tyui</option>
+              <option>yuio</option>
+              <option>uiop</option>
+              <option selected>zxcv</option> // 11
+              <option>xcvb</option>
+              <option>asdf</option>
+              <option>sdfg</option>
+              <option>dfgh</option>
+              <option>fghj</option>
+              <option>ghjk</option>
+              <option>qwer</option>
+              <option>wert</option>
+              <option>erty</option>
+              <option>rtyu</option>
+              <option>tyui</option>
+              <option>yuio</option>
+              <option>uiop</option>
+          </dropdown-selector>
+      `);
+
+      const combobox = dropdown.shadowRoot.getElementById('combobox');
+      await combobox.click();
+
+      await sendKeys({
+        press: key
+      });
+
+      expect(dropdown.currentIndex).to.equal(expectedIndex);
+    });
+  });
+
+  it('close the list without saving when pressing the "Escape" key', async () => {
+    const dropdown = await fixture(html`
+          <dropdown-selector>
+              <option>Some Value</option>
+              <option selected>Another Value</option>
+          </dropdown-selector>
+      `);
+
+    const combobox = dropdown.shadowRoot.getElementById('combobox');
+    await combobox.click();
+
+    await sendKeys({
+      press: 'ArrowUp',
+    });
+
+    await sendKeys({
+      press: 'Escape',
+    });
+
+    expect(dropdown.selectedIndex).to.equal(1);
+    expect(dropdown.value).to.equal('Another Value');
+
+    expect(dropdown.shadowRoot.activeElement).to.equal(combobox);
+    expect(combobox.getAttribute('aria-expanded')).to.equal('false');
+
+    const listbox = dropdown.shadowRoot.getElementById('listbox');
+    expect(listbox.clientHeight).to.equal(0);
+  });
+
+  ['Enter', ' '].forEach((key) => {
+    it('closes the list and saves when pressing the "' + key + '" key', async () => {
+      const dropdown = await fixture(html`
+          <dropdown-selector>
+              <option>Some Value</option>
+              <option selected>Another Value</option>
+          </dropdown-selector>
+      `);
+
+      const combobox = dropdown.shadowRoot.getElementById('combobox');
+      await combobox.click();
+
+      await sendKeys({
+        press: 'ArrowUp',
+      });
+
+      await sendKeys({
+        press: key,
+      });
+
+      expect(dropdown.selectedIndex).to.equal(0);
+      expect(dropdown.value).to.equal('Some Value');
+
+      expect(dropdown.shadowRoot.activeElement).to.equal(combobox);
+      expect(combobox.getAttribute('aria-expanded')).to.equal('false');
+
+      const listbox = dropdown.shadowRoot.getElementById('listbox');
+      expect(listbox.clientHeight).to.equal(0);
+    });
+  });
 });

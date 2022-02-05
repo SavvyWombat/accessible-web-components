@@ -8,8 +8,9 @@ export class DropdownSelector extends HTMLElement {
 
     this.ignoreBlur = false;
     this.open = false;
-    this.activeIndex = null;
+    this.currentIndex = null;
     this.selectedIndex = null;
+    this.value = null;
 
     this.__parentLabel = document.getElementById(this.getAttribute('aria-labelledby'));
     this.__label = this.shadowRoot.getElementById('label');
@@ -30,6 +31,7 @@ export class DropdownSelector extends HTMLElement {
 
       element.classList.add('option');
       element.setAttribute('id', `option-${index}`);
+      element.setAttribute('role', 'option');
       element.setAttribute('aria-selected', 'false');
       if (option.selected) {
         this.selectedIndex = index;
@@ -45,6 +47,7 @@ export class DropdownSelector extends HTMLElement {
 
     if (this.options[0]) {
       this.__combobox.textContent = this.options[this.selectedIndex].label
+      this.value = this.options[this.selectedIndex].value;
     }
   }
 
@@ -58,6 +61,7 @@ export class DropdownSelector extends HTMLElement {
 
       this.__combobox.addEventListener('blur', this.blur.bind(this));
       this.__combobox.addEventListener('click', this.click.bind(this));
+      this.__combobox.addEventListener('keydown', this.keydown.bind(this));
     }
   }
 
@@ -68,10 +72,144 @@ export class DropdownSelector extends HTMLElement {
 
     this.__combobox.removeEventListener('blur', this.blur.bind(this));
     this.__combobox.removeEventListener('click', this.click.bind(this));
+    this.__combobox.addEventListener('keydown', this.keydown.bind(this));
+  }
+
+  blur(event) {
+    if (this.ignoreBlur) {
+      this.ignoreBlur = false;
+      return;
+    }
+
+    if (this.open) {
+      this.closeList();
+    }
   }
 
   click(event) {
     this.open ? this.closeList() : this.openList();
+  }
+
+  keydown(event) {
+    const action = this.actionFromKey(event);
+
+    switch (action) {
+      case Actions.First:
+      case Actions.Last:
+        this.openList();
+        // intentional fallthrough
+      case Actions.Up:
+      case Actions.Down:
+      case Actions.PageUp:
+      case Actions.PageDown:
+        event.preventDefault();
+        this.updateCurrentIndex(action);
+        this.refreshList();
+        break;
+      case Actions.SelectAndClose:
+        event.preventDefault();
+        this.select(this.currentIndex);
+        // intentional fallthrough
+      case Actions.Close:
+        event.preventDefault();
+        this.closeList();
+        return;
+      case Actions.Open:
+        event.preventDefault();
+        this.openList();
+        return;
+    }
+  }
+
+  actionFromKey(event) {
+    const {key, altKey, ctrlKey, metaKey} = event;
+    const openKeys = ['ArrowDown', 'ArrowUp', 'Enter', ' ']; // all keys that will do the default open action
+    // handle opening when closed
+    if (!this.open && openKeys.includes(key)) {
+      return Actions.Open;
+    }
+
+    // home and end move the selected option when open or closed
+    if (key === 'Home') {
+      return Actions.First;
+    }
+    if (key === 'End') {
+      return Actions.Last;
+    }
+
+    if (this.open) {
+      if (key === 'ArrowUp' && altKey) {
+        return Actions.SelectAndClose;
+      } else if (key === 'ArrowDown' && !altKey) {
+        return Actions.Down;
+      } else if (key === 'ArrowUp') {
+        return Actions.Up;
+      } else if (key === 'PageUp') {
+        return Actions.PageUp;
+      } else if (key === 'PageDown') {
+        return Actions.PageDown;
+      } else if (key === 'Escape') {
+        return Actions.Close;
+      } else  if (key === 'Enter' || key === ' ') {
+        return Actions.SelectAndClose;
+      }
+    }
+  }
+
+  updateCurrentIndex(action) {
+    const max = this.options.length - 1;
+
+    switch (action) {
+      case Actions.Up:
+        this.currentIndex -= 1;
+        break;
+      case Actions.Down:
+        this.currentIndex += 1;
+        break;
+      case Actions.PageUp:
+        this.currentIndex -= 10;
+        break;
+      case Actions.PageDown:
+        this.currentIndex += 10;
+        break;
+      case Actions.First:
+        this.currentIndex = 0;
+        break;
+      case Actions.Last:
+        this.currentIndex = max;
+        break;
+    }
+
+    if (this.currentIndex > max) {
+      this.currentIndex = max;
+    }
+    if (this.currentIndex < 0) {
+      this.currentIndex = 0;
+    }
+  }
+
+  select(index) {
+    this.currentIndex = index;
+    this.selectedIndex = index;
+
+    this.value = this.options[index].value;
+    this.__combobox.textContent = this.options[index].label;
+
+    const options = this.__listbox.querySelectorAll('[role=option]');
+    [...options].forEach((option) => {
+      option.setAttribute('aria-selected', 'false');
+    });
+    options[index].setAttribute('aria-selected', 'true');
+  }
+
+  refreshList() {
+    this.__combobox.setAttribute('aria-activedescendant', `option-${this.activeIndex}`);
+
+    const options = this.__listbox.querySelectorAll('[role=option]');
+    [...options].forEach((option) => {
+      option.classList.remove('current');
+    });
+    options[this.currentIndex].classList.add('current');
   }
 
   closeList() {
@@ -86,16 +224,28 @@ export class DropdownSelector extends HTMLElement {
     this.open = true;
     this.__combobox.setAttribute('aria-expanded', 'true');
 
-    if (this.activeIndex === null) {
-      this.activeIndex = this.selectedIndex;
-    }
-    this.__combobox.setAttribute('aria-activedescendant', `option-${this.activeIndex}`);
+    this.currentIndex = this.selectedIndex;
 
-    this.__listbox.children[this.activeIndex].classList.add('current');
+    this.__combobox.setAttribute('aria-activedescendant', `option-${this.currentIndex}`);
+
+    this.__listbox.children[this.currentIndex].classList.add('current');
 
     this.__combobox.focus();
   }
 }
+
+const Actions = {
+  Open: 0,
+  Close: 1,
+  Up: 2,
+  Down: 3,
+  PageUp: 4,
+  PageDown: 5,
+  First: 7,
+  Last: 8,
+  Select: 9,
+  SelectAndClose: 10,
+};
 
 const html = `<div id="root">
     <label id="label"></label>
@@ -159,7 +309,11 @@ const html = `<div id="root">
         padding: 1em;
     }
     
-    .option.current,
+    .option.current {
+        outline: 2px solid #acdcfc;
+        background-color: #f0f0f0;
+    }
+    
     .option:hover {
         background-color: #acdcfc;
     }

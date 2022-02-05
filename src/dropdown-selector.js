@@ -62,6 +62,15 @@ export class DropdownSelector extends HTMLElement {
       this.__combobox.addEventListener('blur', this.blur.bind(this));
       this.__combobox.addEventListener('click', this.click.bind(this));
       this.__combobox.addEventListener('keydown', this.keydown.bind(this));
+
+      [...this.__listbox.children].forEach((element, index) => {
+        element.addEventListener('click', (event) => {
+          event.stopPropagation();
+          this.select(index);
+          this.click(event);
+        });
+        element.addEventListener('mousedown', this.setIgnoreBlur.bind(this));
+      });
     }
   }
 
@@ -73,6 +82,10 @@ export class DropdownSelector extends HTMLElement {
     this.__combobox.removeEventListener('blur', this.blur.bind(this));
     this.__combobox.removeEventListener('click', this.click.bind(this));
     this.__combobox.addEventListener('keydown', this.keydown.bind(this));
+
+    [...this.__listbox.children].forEach((element, index) => {
+      element.removeEventListener('mousedown', this.setIgnoreBlur.bind(this));
+    });
   }
 
   blur(event) {
@@ -119,6 +132,10 @@ export class DropdownSelector extends HTMLElement {
         this.openList();
         return;
     }
+  }
+
+  setIgnoreBlur() {
+    this.ignoreBlur = true;
   }
 
   actionFromKey(event) {

@@ -1,11 +1,11 @@
 {
-  "name": "@savvywombat/datepicker",
+  "name": "@savvywombat/accessible-web-components",
   "version": "0.1.0",
-  "description": "An accessible web component for picking dates",
+  "description": "A library of accessible web components",
   "keywords": [
-    "date",
-    "date picker",
-    "accessible date picker"
+    "accessible",
+    "web component",
+    "accessible web component"
   ],
   "license": "MIT",
   "author": "Stuart Jones <stuart@savvywombat.com.au>",

@@ -5,6 +5,9 @@
   <style>
     body {
       background: #fafafa;
+      max-width: 480px;
+      margin: 0 auto;
+      text-align: center;
     }
 
     label {
@@ -15,6 +18,10 @@
     hr {
       margin: 2em 0 1em;
     }
+
+    a {
+      white-space: nowrap;
+    }
   </style>
 </head>
 <body>
@@ -23,6 +30,19 @@
 
     customElements.define('dropdown-selector', DropdownSelector);
   </script>
+
+  <p>
+    This is a demonstration of the accessible dropdown (also known as a select-only combobox).
+  </p>
+
+  <p>
+    The dropdown for selecting the month should work according to the pattern and behaviour laid out in
+    <a href="https://w3c.github.io/aria-practices/examples/combobox/combobox-select-only.html">
+      Select-Only Combobox Example | WAI-ARIA Authoring Practices 1.2
+    </a> except that typeahead has not been implemented yet.
+  </p>
+
+  <hr />
 
   <form id="form" class="display: flex; justify-content: space-around">
     <label id="label-for-dropdown">Choose a month</label>
@@ -40,11 +60,6 @@
       <option value="10">November</option>
       <option value="11">December</option>
     </dropdown-selector>
-
-    <hr />
-
-    <label id="label-for-input" for="text-input">Use the input</label>
-    <input type="text" aria-labelledby="label-for-input" id="text-input" />
   </form>
 </body>
 </html>

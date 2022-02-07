@@ -263,9 +263,8 @@ const Actions = {
   SelectAndClose: 10,
 };
 
-const html = `<div id="root">
-    <label id="label"></label>
-    
+const html = `<label id="label"></label>
+<div id="root">
     <div id="combobox"
          role="combobox"
          aria-activedescendant=""
@@ -290,7 +289,6 @@ const html = `<div id="root">
     
     #root {
         height: 3em;
-        width: fit-content;
     }
     
     #label {

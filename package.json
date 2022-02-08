@@ -9,6 +9,12 @@
   ],
   "license": "MIT",
   "author": "Stuart Jones <stuart@savvywombat.com.au>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/savvywombat/accessible-web-components.git"
+  },
+  "bugs": "https://github.com/savvywombat/accessible-web-components/issues",
+  "homepage": "https://github.com/savvywombat/accessible-web-components#readme",
   "type": "module",
   "main": "src/index.js",
   "module": "src/index.js",

@@ -1,6 +1,9 @@
 .github/
 coverage/
+demo/
 test/
 .*.json
 jestconfig.coverage.json
 .idea
+*.config.js
+*.config.mjs

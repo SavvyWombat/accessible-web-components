@@ -261,15 +261,22 @@ export class DropdownSelector extends HTMLElement {
   }
 
   typing(key) {
-    console.log(key);
       if (this.typeAhead.timer) {
         window.clearTimeout(this.typeAhead.timer);
       }
 
-      this.typeAhead.keys += key;
+      this.typeAhead.keys += key.toLowerCase();
 
       this.typeAhead.timer = window.setTimeout(() => {
+        const index = this.options.findIndex((option) => {
+            const match = option.label.toLowerCase();
+            return match.startsWith(this.typeAhead.keys);
+        });
 
+        if (index >= 0) {
+          this.currentIndex = index;
+          this.refreshList();
+        }
 
         this.typeAhead.keys = '';
       }, 500);

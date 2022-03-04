@@ -5,9 +5,10 @@
   <style>
     body {
       background: #fafafa;
-      max-width: 480px;
+      max-width: 600px;
       margin: 0 auto;
-      text-align: center;
+      font-size: 20px;
+      line-height: 28px;
     }
 
     label {
@@ -21,6 +22,10 @@
 
     a {
       white-space: nowrap;
+    }
+
+    form {
+      text-align: center;
     }
   </style>
 </head>
@@ -39,8 +44,25 @@
     The dropdown for selecting the month should work according to the pattern and behaviour laid out in
     <a href="https://w3c.github.io/aria-practices/examples/combobox/combobox-select-only.html">
       Select-Only Combobox Example | WAI-ARIA Authoring Practices 1.2
-    </a> except that typeahead has not been implemented yet.
+    </a>.
   </p>
+
+  <ul>
+    <li>The dropdown is focusable with &lt;tab&gt;</li>
+    <li>The menu will open when &lt;up&gt;, &lt;down&gt;, &lt;enter&gt; or &lt;space&gt; are pressed when focused</li>
+  </ul>
+
+  <p>
+    When open:
+  </p>
+
+  <ul>
+    <li>Pressing the &lt;home&gt; and &lt;end&gt; keys will highlight the first or last item respectively</li>
+    <li>Pressing the &lt;up&gt; or &lt;down&gt; keys will move the highlight accordingly</li>
+    <li>Pressing the &lt;&gt; or &lt;&gt; will close the menu, change the selected value to the current highlighted value, but keep focus on the dropdown</li>
+    <li>Pressing the &lt;tab&gt; key will </li>
+    <li>Pressing the &lt;escape&gt; key will close the dropdown without changing its value</li>
+  </ul>
 
   <hr />
 

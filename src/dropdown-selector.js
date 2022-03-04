@@ -138,6 +138,7 @@ export class DropdownSelector extends HTMLElement {
         return;
       case Actions.Typing:
         event.preventDefault();
+        this.openList();
         this.typing(event.key);
         return;
     }
@@ -163,6 +164,11 @@ export class DropdownSelector extends HTMLElement {
       return Actions.Last;
     }
 
+    // if the user starts typing
+    if (key === 'Backspace' || key === 'Clear' || (key.length === 1 && !(altKey || ctrlKey || metaKey))) {
+      return Actions.Typing;
+    }
+
     if (this.open) {
       if (key === 'ArrowUp' && altKey) {
         return Actions.SelectAndClose;
@@ -178,9 +184,6 @@ export class DropdownSelector extends HTMLElement {
         return Actions.Close;
       } else if (key === 'Enter' || key === ' ') {
         return Actions.SelectAndClose;
-      } else if (key === 'Backspace' || key === 'Clear'
-                  || (key.length === 1 && !(altKey || ctrlKey || metaKey))) {
-        return Actions.Typing;
       }
     }
   }
@@ -250,6 +253,7 @@ export class DropdownSelector extends HTMLElement {
   }
 
   openList() {
+    console.log('open');
     this.open = true;
     this.__combobox.setAttribute('aria-expanded', 'true');
 

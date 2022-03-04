@@ -11,6 +11,10 @@ export class DropdownSelector extends HTMLElement {
     this.currentIndex = null;
     this.selectedIndex = null;
     this.value = null;
+    this.typeAhead = {
+      timer: null,
+      keys: '',
+    }
 
     this.__parentLabel = document.getElementById(this.getAttribute('aria-labelledby'));
     this.__label = this.shadowRoot.getElementById('label');
@@ -132,6 +136,10 @@ export class DropdownSelector extends HTMLElement {
         event.preventDefault();
         this.openList();
         return;
+      case Actions.Typing:
+        event.preventDefault();
+        this.typing(event.key);
+        return;
     }
   }
 
@@ -168,8 +176,11 @@ export class DropdownSelector extends HTMLElement {
         return Actions.PageDown;
       } else if (key === 'Escape') {
         return Actions.Close;
-      } else  if (key === 'Enter' || key === ' ') {
+      } else if (key === 'Enter' || key === ' ') {
         return Actions.SelectAndClose;
+      } else if (key === 'Backspace' || key === 'Clear'
+                  || (key.length === 1 && !(altKey || ctrlKey || metaKey))) {
+        return Actions.Typing;
       }
     }
   }
@@ -248,6 +259,21 @@ export class DropdownSelector extends HTMLElement {
 
     this.__combobox.focus();
   }
+
+  typing(key) {
+    console.log(key);
+      if (this.typeAhead.timer) {
+        window.clearTimeout(this.typeAhead.timer);
+      }
+
+      this.typeAhead.keys += key;
+
+      this.typeAhead.timer = window.setTimeout(() => {
+
+
+        this.typeAhead.keys = '';
+      }, 500);
+  }
 }
 
 const Actions = {
@@ -257,10 +283,11 @@ const Actions = {
   Down: 3,
   PageUp: 4,
   PageDown: 5,
-  First: 7,
-  Last: 8,
-  Select: 9,
-  SelectAndClose: 10,
+  First: 6,
+  Last: 7,
+  Select: 8,
+  SelectAndClose: 9,
+  Typing: 10,
 };
 
 const html = `<label id="label"></label>

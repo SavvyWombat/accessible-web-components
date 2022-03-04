@@ -7,17 +7,17 @@
       background: #fafafa;
       max-width: 600px;
       margin: 0 auto;
-      font-size: 20px;
-      line-height: 28px;
+      font-size: 16px;
+      line-height: 24px;
     }
 
     label {
       display: block;
-      margin: 1em 0;
+      margin: 1rem 0;
     }
 
     hr {
-      margin: 2em 0 1em;
+      margin: 4rem 0;
     }
 
     a {
@@ -25,7 +25,17 @@
     }
 
     form {
+      margin: 2rem auto;
       text-align: center;
+    }
+
+    pre {
+      margin: 4rem auto;
+      padding: 0.5rem;
+      background-color: #122436;
+      border: 3px solid #647280;
+      color: #e0e0e0;
+      overflow: auto;
     }
   </style>
 </head>
@@ -50,6 +60,7 @@
   <ul>
     <li>The dropdown is focusable with &lt;tab&gt;</li>
     <li>The menu will open when &lt;up&gt;, &lt;down&gt;, &lt;enter&gt; or &lt;space&gt; are pressed when focused</li>
+    <li>The menu will open if the user starts typing</li>
   </ul>
 
   <p>
@@ -59,8 +70,8 @@
   <ul>
     <li>Pressing the &lt;home&gt; and &lt;end&gt; keys will highlight the first or last item respectively</li>
     <li>Pressing the &lt;up&gt; or &lt;down&gt; keys will move the highlight accordingly</li>
-    <li>Pressing the &lt;&gt; or &lt;&gt; will close the menu, change the selected value to the current highlighted value, but keep focus on the dropdown</li>
-    <li>Pressing the &lt;tab&gt; key will </li>
+    <li>Pressing &lt;enter&gt; or &lt;space&gt; will close the menu, change the selected value to the current highlighted value, but keep focus on the dropdown</li>
+    <li>Pressing the &lt;tab&gt; key will close the menu, change the selected value, and move focus to the next element</li>
     <li>Pressing the &lt;escape&gt; key will close the dropdown without changing its value</li>
   </ul>
 
@@ -83,5 +94,25 @@
       <option value="11">December</option>
     </dropdown-selector>
   </form>
+
+  <hr />
+
+  <pre><code>&lt;form id="form">
+    &lt;label id="label-for-dropdown">Choose a month&lt;/label>
+    &lt;dropdown-selector aria-labelledby="label-for-dropdown">
+        &lt;option value="0">January&lt;/option>
+        &lt;option value="1">February&lt;/option>
+        &lt;option value="2">March&lt;/option>
+        &lt;option value="3">April&lt;/option>
+        &lt;option value="4">May&lt;/option>
+        &lt;option value="5" selected>June&lt;/option>
+        &lt;option value="6">July&lt;/option>
+        &lt;option value="7">August&lt;/option>
+        &lt;option value="8">September&lt;/option>
+        &lt;option value="9">October&lt;/option>
+        &lt;option value="10">November&lt;/option>
+        &lt;option value="11">December&lt;/option>
+    &lt;/dropdown-selector>
+&lt;/form></code></pre>
 </body>
 </html>

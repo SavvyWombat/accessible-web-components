@@ -165,7 +165,7 @@ export class DropdownSelector extends HTMLElement {
     }
 
     // if the user starts typing
-    if (key === 'Backspace' || key === 'Clear' || (key.length === 1 && !(altKey || ctrlKey || metaKey))) {
+    if (key === 'Backspace' || key === 'Clear' || (key.length === 1 && !(key === ' ' || altKey || ctrlKey || metaKey))) {
       return Actions.Typing;
     }
 
@@ -253,15 +253,16 @@ export class DropdownSelector extends HTMLElement {
   }
 
   openList() {
-    console.log('open');
-    this.open = true;
-    this.__combobox.setAttribute('aria-expanded', 'true');
+    if (!this.open) {
+      this.open = true;
+      this.__combobox.setAttribute('aria-expanded', 'true');
 
-    this.currentIndex = this.selectedIndex;
+      this.currentIndex = this.selectedIndex;
 
-    this.refreshList();
+      this.refreshList();
 
-    this.__combobox.focus();
+      this.__combobox.focus();
+    }
   }
 
   typing(key) {

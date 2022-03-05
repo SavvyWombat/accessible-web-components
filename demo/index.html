@@ -38,6 +38,20 @@
       overflow: auto;
     }
   </style>
+
+  <style media="dropdown-selector">
+    * {
+      background-color: #ccffcc;
+    }
+  </style>
+
+  <style>
+    @media dropdown-selector {
+      #combobox {
+        outline-color: #009900;
+      }
+    }
+  </style>
 </head>
 <body>
   <script type="module">
@@ -93,20 +107,6 @@
       <option value="10">November</option>
       <option value="11">December</option>
     </dropdown-selector>
-
-    <style media="dropdown-selector">
-      * {
-        background-color: #ccffcc;
-      }
-    </style>
-
-    <style>
-      @media dropdown-selector {
-        #combobox {
-          outline-color: #009900;
-        }
-      }
-    </style>
   </form>
 
   <hr />

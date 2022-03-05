@@ -6,10 +6,32 @@ export class DropdownSelector extends HTMLElement {
 
     this.shadowRoot.innerHTML = html;
 
-    document.querySelectorAll('style[media=dropdown-selector]').forEach((outerStyle) => {
-      const style = outerStyle.cloneNode(true);
-      style.removeAttribute('media');
-      this.shadowRoot.appendChild(style);
+    Array.from(document.styleSheets).forEach((outerStyleSheet) => {
+      if (Array.from(outerStyleSheet.media).includes('dropdown-selector')) {
+        const styleSheet = document.createElement('style');
+        this.shadowRoot.appendChild(styleSheet);
+
+        Array.from(outerStyleSheet.cssRules).forEach((cssRule) => {
+          styleSheet.sheet.insertRule(cssRule.cssText);
+        });
+
+        return;
+      }
+
+      if (Array.from(outerStyleSheet.cssRules).find((cssRule) => {
+          return cssRule.media && Array.from(cssRule.media).includes('dropdown-selector');
+      })) {
+        const styleSheet = document.createElement('style');
+        this.shadowRoot.appendChild(styleSheet);
+
+        Array.from(outerStyleSheet.cssRules).forEach((cssRule) => {
+          if (cssRule.media && Array.from(cssRule.media).includes('dropdown-selector')) {
+            Array.from(cssRule.cssRules).forEach((cssRule) => {
+              styleSheet.sheet.insertRule(cssRule.cssText);
+            });
+          }
+        });
+      }
     });
 
     this.ignoreBlur = false;

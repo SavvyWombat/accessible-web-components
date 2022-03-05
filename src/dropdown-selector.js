@@ -2,9 +2,15 @@ export class DropdownSelector extends HTMLElement {
   constructor() {
     super();
 
-    this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: 'open' })
 
     this.shadowRoot.innerHTML = html;
+
+    document.querySelectorAll('style[media=dropdown-selector]').forEach((outerStyle) => {
+      const style = outerStyle.cloneNode(true);
+      style.removeAttribute('media');
+      this.shadowRoot.appendChild(style);
+    });
 
     this.ignoreBlur = false;
     this.open = false;

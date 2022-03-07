@@ -12,9 +12,13 @@ export class DropdownSelector extends HTMLElement {
     Array.from(document.styleSheets).forEach((outerStyleSheet) => {
       Array.from(outerStyleSheet.cssRules).forEach((cssRule) => {
         if (cssRule.selectorText && cssRule.selectorText.startsWith('dropdown-selector')) {
-          console.log(cssRule);
-
           const rule = cssRule.cssText.replace('dropdown-selector ', '');
+
+          styleSheet.sheet.insertRule(rule);
+        }
+
+        if (this.id && cssRule.selectorText.startsWith(`#${this.id}`)) {
+          const rule = cssRule.cssText.replace(`#${this.id} `, '#root ');
 
           styleSheet.sheet.insertRule(rule);
         }

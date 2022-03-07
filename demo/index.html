@@ -47,6 +47,10 @@
     dropdown-selector #combobox {
       outline-color: #009900;
     }
+
+    #example * {
+      background-color: #ccccff;
+    }
   </style>
 </head>
 <body>
@@ -90,6 +94,22 @@
   <form id="form" class="display: flex; justify-content: space-around">
     <label id="label-for-dropdown">Choose a month</label>
     <dropdown-selector aria-labelledby="label-for-dropdown">
+      <option value="0">January</option>
+      <option value="1">February</option>
+      <option value="2">March</option>
+      <option value="3">April</option>
+      <option value="4">May</option>
+      <option value="5" selected>June</option>
+      <option value="6">July</option>
+      <option value="7">August</option>
+      <option value="8">September</option>
+      <option value="9">October</option>
+      <option value="10">November</option>
+      <option value="11">December</option>
+    </dropdown-selector>
+
+    <label id="label-for-dropdown2">Choose a month</label>
+    <dropdown-selector id="example" aria-labelledby="label-for-dropdown2">
       <option value="0">January</option>
       <option value="1">February</option>
       <option value="2">March</option>

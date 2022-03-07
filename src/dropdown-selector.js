@@ -6,8 +6,18 @@ export class DropdownSelector extends HTMLElement {
 
     this.shadowRoot.innerHTML = html;
 
+    this.__parentLabel = document.getElementById(this.getAttribute('aria-labelledby'));
+    this.__label = this.shadowRoot.getElementById('label');
+    this.__root = this.shadowRoot.getElementById('root');
+    this.__combobox = this.shadowRoot.getElementById('combobox');
+    this.__listbox = this.shadowRoot.getElementById('listbox');
+
     const styleSheet = document.createElement('style');
     this.shadowRoot.appendChild(styleSheet);
+
+    Array.from(this.classList).forEach((cssClass) => {
+      this.__root.classList.add(cssClass);
+    });
 
     Array.from(document.styleSheets).forEach((outerStyleSheet) => {
       Array.from(outerStyleSheet.cssRules).forEach((cssRule) => {
@@ -22,6 +32,13 @@ export class DropdownSelector extends HTMLElement {
 
           styleSheet.sheet.insertRule(rule);
         }
+
+        Array.from(this.classList).forEach((cssClass) => {
+          console.log(cssClass);
+          if (cssRule.selectorText.includes(`.${cssClass}`)) {
+            styleSheet.sheet.insertRule(cssRule.cssText);
+          }
+        });
       });
     });
 
@@ -34,11 +51,6 @@ export class DropdownSelector extends HTMLElement {
       timer: null,
       keys: '',
     }
-
-    this.__parentLabel = document.getElementById(this.getAttribute('aria-labelledby'));
-    this.__label = this.shadowRoot.getElementById('label');
-    this.__combobox = this.shadowRoot.getElementById('combobox');
-    this.__listbox = this.shadowRoot.getElementById('listbox');
 
     this.options = [...this.querySelectorAll('option')].map((option, index) => {
       return {

@@ -109,7 +109,7 @@
     </dropdown-selector>
 
     <label id="label-for-dropdown2">Choose a month</label>
-    <dropdown-selector id="example" aria-labelledby="label-for-dropdown2">
+    <dropdown-selector class="example zoomy" aria-labelledby="label-for-dropdown2">
       <option value="0">January</option>
       <option value="1">February</option>
       <option value="2">March</option>
@@ -123,6 +123,16 @@
       <option value="10">November</option>
       <option value="11">December</option>
     </dropdown-selector>
+
+    <style>
+      .example * {
+        background-color: #ffcccc;
+      }
+
+      .example.zoomy #combobox {
+        outline-color: #990000;
+      }
+    </style>
   </form>
 
   <hr />

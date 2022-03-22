@@ -24,12 +24,12 @@
                     <option value="10">November</option>
                     <option value="11">December</option>
                 </dropdown-selector>
-            </form>
 
-            <p class="output">
-                <span id="output-label">Current selection</span>:
-                <output aria-labelledby="output-label">June</output>
-            </p>
+                <p class="output">
+                    <span id="output-label">Current selection</span>:
+                    <output aria-labelledby="output-label">June</output>
+                </p>
+            </form>
         </section>
 
         <section class="explanation">
@@ -44,7 +44,7 @@
 
             <ul>
                 <li>The dropdown is focusable with <kbd>tab</kbd></li>
-                <li>The menu will open when <kbd>up</kbd>, <kbd>down</kbd>, <kbd>enter</kbd>, or <kbd>space</kbd> are pressed when focused</li>
+                <li>The menu will open when <kbd>up</kbd>, <kbd>down</kbd>, <kbd>enter</kbd>, or <kbd>space</kbd> are pressed while focused</li>
                 <li>The menu will open if the user starts typing</li>
             </ul>
 
@@ -53,15 +53,11 @@
             </p>
 
             <ul>
-                <li>Pressing the <kbd>home</kbd> and <kbd>end</kbd> keys will highlight the first or last item respectively</li>
-                <li>Pressing the <kbd>up</kbd> or <kbd>down</kbd> keys will move the highlight accordingly</li>
-                <li>Pressing <kbd>enter</kbd> or <kbd>space</kbd> will close the menu, change the selected value to the current
-                    highlighted value, but keep focus on the dropdown
-                </li>
-                <li>Pressing the <kbd>tab</kbd> key will close the menu, change the selected value, and move focus to the next
-                    element
-                </li>
-                <li>Pressing the <kbd>escape</kbd> key will close the dropdown without changing its value</li>
+                <li><kbd>home</kbd> or <kbd>end</kbd> will highlight the first or last item respectively</li>
+                <li><kbd>up</kbd> or <kbd>down</kbd> will move the highlight accordingly</li>
+                <li><kbd>enter</kbd> or <kbd>space</kbd> will change the selected value to the current highlighted value, close the menu, but keep focus on the dropdown</li>
+                <li><kbd>tab</kbd> will change the selected value to the current highlighted value, close the menu, and then move focus to the next element</li>
+                <li><kbd>escape</kbd> will close the dropdown without changing its value</li>
             </ul>
         </section>
 

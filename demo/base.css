@@ -1,0 +1,150 @@
+:root {
+  box-sizing: border-box;
+
+  background-color: #292636;
+
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+:root * {
+  box-sizing: inherit;
+
+  line-height: 150%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  padding: 2rem;
+  color: #e0e0e0;
+}
+
+main {
+  margin: 0 auto;
+  max-width: 49rem;
+}
+
+@media (max-device-width: 800px), (max-width: 800px) {
+  main {
+    max-width: 100%;
+  }
+}
+
+footer {
+  margin: 3rem auto 0;
+  max-width: 59rem;
+  box-shadow: inset 0 0.25rem 1rem #292636;
+  border-radius: 1rem 1rem 0 0;
+  padding: 2rem 2rem 1rem;
+  background-color: #fcfeff;
+}
+
+@media (max-device-width: 960px), (max-width: 960px) {
+  footer {
+    max-width: 100%;
+    border-radius: 0;
+  }
+}
+
+h1, h2, h3 {
+  margin: 0;
+  text-align: center;
+}
+
+h1, h2, h3 {
+  margin-bottom: 2rem;
+}
+
+label {
+  display: block;
+  margin: 1rem 0;
+}
+
+hr {
+  margin: 4rem 0;
+}
+
+a {
+  white-space: nowrap;
+}
+
+form {
+  margin: 1rem auto;
+
+  border: 3px solid #122436;
+  border-radius: 0.5rem;
+
+  padding: 3rem;
+}
+
+label {
+  display: block;
+}
+
+p {
+  margin: 0;
+  margin-top: 1rem;
+}
+
+ul + p {
+  margin-top: 2rem;
+}
+
+p.output {
+  border: 3px solid #122436;
+  border-radius: 0.5rem;
+
+  padding: 1rem;
+}
+
+output {
+  margin-left: 1rem;
+}
+
+pre {
+  padding: 0.5rem;
+
+  border-radius: 0.5rem;
+
+  overflow: auto;
+
+  background-color: #292636;
+  color: #f0f0f0;
+
+  text-align: left;
+}
+
+section {
+  box-shadow: inset 0 0.25rem 1rem #292636;
+  border-radius: 1rem;
+  padding: 2rem;
+  background-color: #fcfeff;
+}
+
+@media (max-device-width: 800px), (max-width: 800px) {
+  section {
+    border-radius: 0;
+  }
+}
+
+section.explanation {
+  margin-top: 4rem;
+
+  text-align: left;
+}
+
+kbd {
+  box-shadow: 0 0 3px #292636;
+  border-radius: 0.25rem;
+
+  padding: 0 0.25rem;
+
+  background-color: #e0e0e0;
+}

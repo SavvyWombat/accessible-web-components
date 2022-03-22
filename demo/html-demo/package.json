@@ -1,0 +1,11 @@
+{
+  "name": "accessible-web-components-html-demo",
+  "private": true,
+  "scripts": {
+    "start": "web-dev-server",
+    "watch": "web-dev-server --watch"
+  },
+  "devDependencies": {
+    "@web/dev-server": "^0.1.29"
+  }
+}

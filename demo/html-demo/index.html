@@ -3,9 +3,9 @@
 <head>
     <title>HTML Demo | Accessible Web Components | Savvy Wombat</title>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="module">
-      import sheet from '../base.css' assert {type: 'css'};
-      document.adoptedStyleSheets = [sheet];
+      import '../base.css';
 
       import {DropdownSelector} from '../../src/index.js';
       customElements.define('dropdown-selector', DropdownSelector);
@@ -40,7 +40,7 @@
 
             <p class="output">
                 <span id="output-label">Current selection</span>:
-                <span aria-labelledby="output-label">June</span>
+                <output aria-labelledby="output-label">June</output>
             </p>
         </form>
     </section>
@@ -103,8 +103,15 @@
 </main>
 
 <footer>
-    Accessible Web Components created by
-    <a href="https://savvywombat.com.au">Savvy Wombat</a> &copy; 2022
+    <p>
+        Accessible Web Components created by
+        <a href="https://savvywombat.com.au">Savvy Wombat</a> &copy; 2022
+    </p>
+
+    <p>
+        Source code available on
+        <a href="https://github.com/SavvyWombat/accessible-web-components">GitHub</a>
+    </p>
 </footer>
 </body>
 </html>

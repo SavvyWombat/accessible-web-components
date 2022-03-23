@@ -90,7 +90,14 @@
     </main>
 
     <footer>
-        Accessible Web Components created by
-        <a href="https://savvywombat.com.au">Savvy Wombat</a> &copy; 2022
+        <p>
+            Accessible Web Components created by
+            <a href="https://savvywombat.com.au">Savvy Wombat</a> &copy; 2022
+        </p>
+
+        <p>
+            Source code available on
+            <a href="https://github.com/SavvyWombat/accessible-web-components">GitHub</a>
+        </p>
     </footer>
 </template>

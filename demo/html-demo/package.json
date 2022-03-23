@@ -2,10 +2,11 @@
   "name": "accessible-web-components-html-demo",
   "private": true,
   "scripts": {
-    "start": "web-dev-server",
-    "watch": "web-dev-server --watch"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "devDependencies": {
-    "@web/dev-server": "^0.1.29"
+    "vite": "^2.8.0"
   }
 }

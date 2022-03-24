@@ -8,6 +8,7 @@
       import '../base.css';
 
       import {DropdownSelector} from '../../src/index.js';
+
       customElements.define('dropdown-selector', DropdownSelector);
     </script>
 </head>
@@ -23,7 +24,7 @@
 
         <form id="form">
             <label id="label-for-dropdown">Choose a month</label>
-            <dropdown-selector aria-labelledby="label-for-dropdown">
+            <dropdown-selector id="dropdown-selector" aria-labelledby="label-for-dropdown">
                 <option value="0">January</option>
                 <option value="1">February</option>
                 <option value="2">March</option>
@@ -40,10 +41,20 @@
 
             <p class="output">
                 <span id="output-label">Current selection</span>:
-                <output aria-labelledby="output-label">June</output>
+                <output id="output" aria-labelledby="output-label">June</output>
             </p>
         </form>
     </section>
+
+    <script>
+      const months = [
+        'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',
+      ];
+
+      document.getElementById('dropdown-selector').addEventListener('change', (event) => {
+        document.getElementById('output').innerText = months[event.target.value];
+      });
+    </script>
 
     <section class="explanation">
         <h2>User Experience</h2>
@@ -57,7 +68,9 @@
 
         <ul>
             <li>The dropdown is focusable with <kbd>tab</kbd></li>
-            <li>The menu will open when <kbd>up</kbd>, <kbd>down</kbd>, <kbd>enter</kbd>, or <kbd>space</kbd> are pressed while focused</li>
+            <li>The menu will open when <kbd>up</kbd>, <kbd>down</kbd>, <kbd>enter</kbd>, or <kbd>space</kbd> are
+                pressed while focused
+            </li>
             <li>The menu will open if the user starts typing</li>
         </ul>
 
@@ -68,8 +81,12 @@
         <ul>
             <li><kbd>home</kbd> or <kbd>end</kbd> will highlight the first or last item respectively</li>
             <li><kbd>up</kbd> or <kbd>down</kbd> will move the highlight accordingly</li>
-            <li><kbd>enter</kbd> or <kbd>space</kbd> will change the selected value to the current highlighted value, close the menu, but keep focus on the dropdown</li>
-            <li><kbd>tab</kbd> will change the selected value to the current highlighted value, close the menu, and then move focus to the next element</li>
+            <li><kbd>enter</kbd> or <kbd>space</kbd> will change the selected value to the current highlighted value,
+                close the menu, but keep focus on the dropdown
+            </li>
+            <li><kbd>tab</kbd> will change the selected value to the current highlighted value, close the menu, and then
+                move focus to the next element
+            </li>
             <li><kbd>escape</kbd> will close the dropdown without changing its value</li>
         </ul>
     </section>

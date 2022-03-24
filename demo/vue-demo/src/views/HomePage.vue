@@ -10,7 +10,7 @@
 
             <form id="form">
                 <label id="label-for-dropdown">Choose a month</label>
-                <dropdown-selector aria-labelledby="label-for-dropdown">
+                <dropdown-selector ref="dropdown" aria-labelledby="label-for-dropdown" @change="(event) => { output = months[event.target.value] }">
                     <option value="0">January</option>
                     <option value="1">February</option>
                     <option value="2">March</option>
@@ -27,7 +27,7 @@
 
                 <p class="output">
                     <span id="output-label">Current selection</span>:
-                    <output aria-labelledby="output-label">June</output>
+                    <output aria-labelledby="output-label">{{ output }}</output>
                 </p>
             </form>
         </section>
@@ -101,3 +101,19 @@
         </p>
     </footer>
 </template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+
+const months = [
+  'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',
+];
+
+const dropdown = ref(null);
+const output = ref(null);
+
+onMounted(() => {
+  console.log (dropdown.value.value);
+  output.value = months[dropdown.value.value];
+});
+</script>

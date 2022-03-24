@@ -46,6 +46,7 @@ export class DropdownSelector extends HTMLElement {
     this.currentIndex = null;
     this.selectedIndex = null;
     this.value = null;
+    this.__initialValue = null;
     this.typeAhead = {
       timer: null,
       keys: '',
@@ -262,6 +263,18 @@ export class DropdownSelector extends HTMLElement {
       option.setAttribute('aria-selected', 'false');
     });
     options[index].setAttribute('aria-selected', 'true');
+
+    if (this.value !== this.__initialValue) {
+      this.dispatchEvent(
+        new CustomEvent('change')
+      );
+
+      this.dispatchEvent(
+        new CustomEvent('input')
+      );
+
+      this.__initialValue = this.value;
+    }
   }
 
   refreshList() {
@@ -287,6 +300,7 @@ export class DropdownSelector extends HTMLElement {
       this.open = true;
       this.__combobox.setAttribute('aria-expanded', 'true');
 
+      this.__initialValue = this.value;
       this.currentIndex = this.selectedIndex;
 
       this.refreshList();

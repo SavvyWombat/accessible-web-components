@@ -5,7 +5,7 @@ export class DropdownSelector extends HTMLElement {
     this.attachShadow({ mode: 'open' })
 
     this.shadowRoot.innerHTML = html;
-
+    
     this.__parentLabel = document.getElementById(this.getAttribute('aria-labelledby'));
     this.__label = this.shadowRoot.getElementById('label');
     this.__root = this.shadowRoot.getElementById('root');
@@ -27,14 +27,13 @@ export class DropdownSelector extends HTMLElement {
           styleSheet.sheet.insertRule(rule);
         }
 
-        if (this.id && cssRule.selectorText.startsWith(`#${this.id}`)) {
+        if (this.id && cssRule.selectorText && cssRule.selectorText.startsWith(`#${this.id}`)) {
           const rule = cssRule.cssText.replace(`#${this.id} `, '#root ');
 
           styleSheet.sheet.insertRule(rule);
         }
 
         Array.from(this.classList).forEach((cssClass) => {
-          console.log(cssClass);
           if (cssRule.selectorText.includes(`.${cssClass}`)) {
             styleSheet.sheet.insertRule(cssRule.cssText);
           }

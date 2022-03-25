@@ -131,14 +131,10 @@ dropdown-selector #combobox:focus {
 }
 
 dropdown-selector #listbox {
-  height: 0;
-  overflow-y: hidden;
-  position: relative;
   background-color: #fafafa;
 }
 
 dropdown-selector #combobox[aria-expanded=true] ~ #listbox {
-  height: auto;
   border: 3px solid #122436;
   border-radius: 0.25em;
 }

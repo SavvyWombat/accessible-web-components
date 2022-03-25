@@ -37,7 +37,8 @@ export class BaseComponent extends HTMLElement {
     Array.from(document.styleSheets).forEach((outerStyleSheet) => {
       Array.from(outerStyleSheet.cssRules).forEach((cssRule) => {
         if (cssRule.selectorText && cssRule.selectorText.startsWith(nodeName)) {
-          const rule = cssRule.cssText.replace(`${nodeName} `, '');
+          const rule = cssRule.cssText.replace(nodeName, ':host > *:first-child');
+          console.log(rule);
           styleSheet.sheet.insertRule(rule);
         }
 

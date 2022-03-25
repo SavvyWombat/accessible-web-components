@@ -338,4 +338,20 @@ const html = `<div id="root">
          role="listbox"
          tabindex="-1"
     ></div>
-</div>`;
+</div>
+
+<style>
+:host > *:first-child {
+  display: inline-block;
+}
+
+#listbox {
+  height: 0;
+  overflow-y: hidden;
+  position: relative;
+}
+
+#combobox[aria-expanded=true] ~ #listbox {
+  height: auto;
+}
+</style>`;

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+    <script type="module">
+      class TestComponent extends HTMLElement {
+        constructor() {
+          super()
+            .attachShadow({mode: 'open'})
+            .innerHTML = '<div id="root">Test Component</div>';
+        }
+
+        connectedCallback() {
+          console.log('super');
+          this.value = 10;
+          this.setAttribute('value', '10');
+        }
+
+        set value (newValue) {
+          console.log('setValue');
+          this.setAttribute('value', newValue);
+        }
+
+        get value () {
+          return this.getAttribute('value');
+        }
+      }
+
+      customElements.define('test-component', TestComponent);
+    </script>
+</head>
+<body>
+<select id="html-select">
+    <option value="75">HTML Option</option>
+</select>
+
+<test-component id="test-component"></test-component>
+</body>
+<script type="module">
+  console.log(document.getElementById('html-select').selectedIndex);
+</script>
+</html>

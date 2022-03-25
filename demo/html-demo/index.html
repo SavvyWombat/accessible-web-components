@@ -4,13 +4,26 @@
     <title>HTML Demo | Accessible Web Components | Savvy Wombat</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <script type="module">
       import '../base.css';
 
-      import {DropdownSelector} from '../../src/index.js';
+      import {DropdownSelector} from '../../src/dropdown-selector.js';
 
       customElements.define('dropdown-selector', DropdownSelector);
     </script>
+
+    <style>
+      dropdown-selector #combobox {
+        border: 3px solid #999999;
+        border-radius: 0.25em;
+        padding: 1em;
+      }
+
+      dropdown-selector #combobox:focus {
+        border: 3px solid #9999ff;
+      }
+    </style>
 </head>
 <body>
 <header>
@@ -23,8 +36,8 @@
         <h1>Dropdown Selector</h1>
 
         <form id="form">
-            <label id="label-for-dropdown">Choose a month</label>
-            <dropdown-selector id="dropdown-selector" aria-labelledby="label-for-dropdown">
+            <label for="dropdown-selector">Choose a month</label>
+            <dropdown-selector id="dropdown-selector">
                 <option value="0">January</option>
                 <option value="1">February</option>
                 <option value="2">March</option>

@@ -9,8 +9,8 @@
             <h1>Dropdown Selector</h1>
 
             <form id="form">
-                <label id="label-for-dropdown">Choose a month</label>
-                <dropdown-selector ref="dropdown" aria-labelledby="label-for-dropdown" @change="(event) => { output = months[event.target.value] }">
+                <label for="dropdown-selector">Choose a month</label>
+                <dropdown-selector id="dropdown-selector" ref="dropdown" @change="(event) => output = months[event.target.value]">
                     <option value="0">January</option>
                     <option value="1">February</option>
                     <option value="2">March</option>
@@ -103,7 +103,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { nextTick, ref, onMounted } from 'vue';
 
 const months = [
   'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',
@@ -113,7 +113,46 @@ const dropdown = ref(null);
 const output = ref(null);
 
 onMounted(() => {
-  console.log (dropdown.value.value);
-  output.value = months[dropdown.value.value];
+  nextTick(() => {
+    output.value = months[dropdown.value.value];
+  });
 });
 </script>
+
+<style>
+dropdown-selector #combobox {
+  border: 3px solid #122436;
+  border-radius: 0.25em;
+  padding: 1em;
+}
+
+dropdown-selector #combobox:focus {
+  border: 3px solid #9999ff;
+}
+
+dropdown-selector #listbox {
+  height: 0;
+  overflow-y: hidden;
+  position: relative;
+  background-color: #fafafa;
+}
+
+dropdown-selector #combobox[aria-expanded=true] ~ #listbox {
+  height: auto;
+  border: 3px solid #122436;
+  border-radius: 0.25em;
+}
+
+dropdown-selector .option {
+  padding: 1em;
+}
+
+dropdown-selector .option.current {
+  outline: 2px solid #acdcfc;
+  background-color: #f0f0f0;
+}
+
+dropdown-selector .option:hover {
+  background-color: #acdcfc;
+}
+</style>

@@ -131,7 +131,7 @@ dropdown-selector {
 
 dropdown-selector #combobox {
   border: 3px solid #122436;
-  border-radius: 0.25em;
+  border-radius: 0.5em;
   padding: 1em;
 }
 
@@ -145,7 +145,7 @@ dropdown-selector #listbox {
 
 dropdown-selector #combobox[aria-expanded=true] ~ #listbox {
   border: 3px solid #122436;
-  border-radius: 0.25em;
+  border-radius: 0.5em;
 }
 
 dropdown-selector .option {

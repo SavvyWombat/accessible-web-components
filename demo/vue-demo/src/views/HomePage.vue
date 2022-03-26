@@ -12,20 +12,12 @@
                 <label for="edit-dropdown-label">Edit the dropdown's label</label>
                 <input id="edit-dropdown-label" type="text" v-model="labelText" />
 
+                <label for="number-of-options">Edit the dropdown's label</label>
+                <input id="number-of-options" type="number" min="1" max="12" v-model="numberOfOptions" />
+
                 <label for="dropdown-selector">{{ labelText }}</label>
                 <dropdown-selector id="dropdown-selector" ref="dropdown" @change="(event) => output = months[event.target.value]">
-                    <option value="0">January</option>
-                    <option value="1">February</option>
-                    <option value="2">March</option>
-                    <option value="3">April</option>
-                    <option value="4">May</option>
-                    <option value="5" selected>June</option>
-                    <option value="6">July</option>
-                    <option value="7">August</option>
-                    <option value="8">September</option>
-                    <option value="9">October</option>
-                    <option value="10">November</option>
-                    <option value="11">December</option>
+                    <option v-for="(month) in monthList" :value="month" :key="month">{{ months[month] }}</option>
                 </dropdown-selector>
 
                 <p class="output">
@@ -106,7 +98,7 @@
 </template>
 
 <script setup>
-import { nextTick, ref, onMounted } from 'vue';
+import { computed, nextTick, ref, onMounted } from 'vue';
 
 const months = [
   'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',
@@ -116,6 +108,10 @@ const dropdown = ref(null);
 const output = ref(null);
 
 const labelText = ref('Choose a month');
+const numberOfOptions = ref(12);
+const monthList = computed(() => {
+  return [...Array(numberOfOptions.value).keys()];
+});
 
 onMounted(() => {
   nextTick(() => {

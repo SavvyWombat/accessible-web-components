@@ -38,6 +38,11 @@ export class DropdownSelector extends BaseComponent {
 
       this.extractOptions();
 
+      this.__optionsObserver = new MutationObserver((changes) => {
+        this.extractOptions();
+      });
+      this.__optionsObserver.observe(this, { childList: true });
+
       this.__root.style.height = this.__root.clientHeight + 'px';
     }
   }
@@ -155,6 +160,11 @@ export class DropdownSelector extends BaseComponent {
   }
 
   extractOptions() {
+    this.__selectedIndex = 0;
+    [...this.__listbox.children].forEach((element) => {
+      element.remove();
+    });
+
     this.__options = [...this.querySelectorAll('option')].map((option, index) => {
       if (option.hasAttribute('selected')) {
         this.__selectedIndex = index;

@@ -23,6 +23,13 @@ export class BaseComponent extends HTMLElement {
 
       this.shadowRoot.appendChild(style);
     }
+
+    this.__labelObserver = new MutationObserver((changes, ) => {
+      if (changes[0]?.target === this.__parentLabel) {
+        this.__label.textContent = this.__parentLabel.textContent;
+      }
+    });
+    this.__labelObserver.observe(this.__parentLabel, { childList: true });
   }
 
   applyStyles() {

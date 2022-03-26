@@ -9,7 +9,10 @@
             <h1>Dropdown Selector</h1>
 
             <form id="form">
-                <label for="dropdown-selector">Choose a month</label>
+                <label for="edit-dropdown-label">Edit the dropdown's label</label>
+                <input id="edit-dropdown-label" type="text" v-model="labelText" />
+
+                <label for="dropdown-selector">{{ labelText }}</label>
                 <dropdown-selector id="dropdown-selector" ref="dropdown" @change="(event) => output = months[event.target.value]">
                     <option value="0">January</option>
                     <option value="1">February</option>
@@ -111,6 +114,8 @@ const months = [
 
 const dropdown = ref(null);
 const output = ref(null);
+
+const labelText = ref('Choose a month');
 
 onMounted(() => {
   nextTick(() => {

@@ -120,6 +120,10 @@ onMounted(() => {
 </script>
 
 <style>
+dropdown-selector {
+  display: block;
+}
+
 dropdown-selector #combobox {
   border: 3px solid #122436;
   border-radius: 0.25em;

@@ -14,14 +14,40 @@
     </script>
 
     <style>
+      dropdown-selector {
+        display: block;
+      }
+
       dropdown-selector #combobox {
-        border: 3px solid #999999;
+        border: 3px solid #122436;
         border-radius: 0.25em;
         padding: 1em;
       }
 
       dropdown-selector #combobox:focus {
         border: 3px solid #9999ff;
+      }
+
+      dropdown-selector #listbox {
+        background-color: #fafafa;
+      }
+
+      dropdown-selector #combobox[aria-expanded=true] ~ #listbox {
+        border: 3px solid #122436;
+        border-radius: 0.25em;
+      }
+
+      dropdown-selector .option {
+        padding: 1em;
+      }
+
+      dropdown-selector .option.current {
+        outline: 2px solid #acdcfc;
+        background-color: #f0f0f0;
+      }
+
+      dropdown-selector .option:hover {
+        background-color: #acdcfc;
       }
     </style>
 </head>

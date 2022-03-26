@@ -62,7 +62,7 @@ export class DropdownSelector extends BaseComponent {
 
     if (this.open) {
       this.select(this.currentIndex);
-      this.closeList();
+      this.closeList(false);
     }
   }
 
@@ -146,12 +146,12 @@ export class DropdownSelector extends BaseComponent {
     }
   }
 
-  closeList() {
+  closeList(keepFocus = true) {
     this.open = false;
     this.combobox.setAttribute('aria-expanded', 'false');
     this.combobox.setAttribute('aria-activedescendant', '');
 
-    this.combobox.focus();
+    keepFocus && this.combobox.focus();
   }
 
   extractOptions() {

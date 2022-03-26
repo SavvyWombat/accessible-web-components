@@ -4,19 +4,19 @@ export class BaseComponent extends HTMLElement {
       return;
     }
 
-    this.parentLabel = document.querySelector(`[for=${this.id}]`);
-    if (this.parentLabel) {
-      this.label = document.createElement('label');
-      this.label.setAttribute('id', 'label');
-      this.label.textContent = this.parentLabel.textContent;
+    this.__parentLabel = document.querySelector(`[for=${this.id}]`);
+    if (this.__parentLabel) {
+      this.__label = document.createElement('label');
+      this.__label.setAttribute('id', 'label');
+      this.__label.textContent = this.__parentLabel.textContent;
 
-      this.shadowRoot.appendChild(this.label);
+      this.shadowRoot.appendChild(this.__label);
 
       labelledElements.forEach((element) => {
         element.setAttribute('aria-labelledby', 'label');
       });
 
-      this.parentLabel.addEventListener('click', this.click.bind(this));
+      this.__parentLabel.addEventListener('click', this.click.bind(this));
 
       const style = document.createElement('style');
       style.textContent = '#label { position: absolute; left: -1000px}';
@@ -31,7 +31,7 @@ export class BaseComponent extends HTMLElement {
     this.shadowRoot.appendChild(styleSheet);
 
     Array.from(this.classList).forEach((cssClass) => {
-      this.root.classList.add(cssClass);
+      this.__root.classList.add(cssClass);
     });
 
     Array.from(document.styleSheets).forEach((outerStyleSheet) => {
@@ -57,15 +57,15 @@ export class BaseComponent extends HTMLElement {
   }
 
   disconnectedCallback() {
-    if (this.parentLabel) {
+    if (this.__parentLabel) {
       this.shadowRoot.querySelectorAll(`[aria-labelledby]`).forEach((element) => {
         element.removeAttribute('aria-labelledby');
       });
 
-      this.label.remove();
+      this.__label.remove();
 
       if (this.click !== undefined) {
-        this.parentLabel.removeEventListener('click', this.click.bind(this));
+        this.__parentLabel.removeEventListener('click', this.click.bind(this));
       }
     }
 

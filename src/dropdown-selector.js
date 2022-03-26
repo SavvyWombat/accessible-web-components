@@ -9,65 +9,65 @@ export class DropdownSelector extends BaseComponent {
 
   connectedCallback() {
     if (this.isConnected) {
-      this.root = this.shadowRoot.getElementById('root');
-      this.combobox = this.shadowRoot.getElementById('combobox');
-      this.listbox = this.shadowRoot.getElementById('listbox');
+      this.__root = this.shadowRoot.getElementById('root');
+      this.__combobox = this.shadowRoot.getElementById('combobox');
+      this.__listbox = this.shadowRoot.getElementById('listbox');
 
-      this.selectedIndex = 0;
-      this.value = '';
+      this.__selectedIndex = 0;
+      this.__value = '';
 
-      this.currentIndex = null;
-      this.ignoreBlur = false;
-      this.initialValue = null;
-      this.open = false;
-      this.typeAhead = {
+      this.__currentIndex = null;
+      this.__ignoreBlur = false;
+      this.__initialValue = null;
+      this.__open = false;
+      this.__typeAhead = {
         timer: null,
         keys: '',
       }
 
-      this.combobox.addEventListener('blur', this.blur.bind(this));
-      this.combobox.addEventListener('click', this.click.bind(this));
-      this.combobox.addEventListener('keydown', this.keydown.bind(this));
+      this.__combobox.addEventListener('blur', this.blur.bind(this));
+      this.__combobox.addEventListener('click', this.click.bind(this));
+      this.__combobox.addEventListener('keydown', this.keydown.bind(this));
 
       this.attachLabelForAria([
-        this.combobox,
-        this.listbox,
+        this.__combobox,
+        this.__listbox,
       ])
 
       this.applyStyles();
 
       this.extractOptions();
 
-      this.root.style.height = this.root.clientHeight + 'px';
+      this.__root.style.height = this.__root.clientHeight + 'px';
     }
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
 
-    this.combobox.removeEventListener('blur', this.blur.bind(this));
-    this.combobox.removeEventListener('click', this.click.bind(this));
-    this.combobox.addEventListener('keydown', this.keydown.bind(this));
+    this.__combobox.removeEventListener('blur', this.blur.bind(this));
+    this.__combobox.removeEventListener('click', this.click.bind(this));
+    this.__combobox.addEventListener('keydown', this.keydown.bind(this));
 
-    [...this.listbox.children].forEach((element, index) => {
+    [...this.__listbox.children].forEach((element, index) => {
       element.remove();
     });
   }
 
   blur(event) {
-    if (this.ignoreBlur) {
-      this.ignoreBlur = false;
+    if (this.__ignoreBlur) {
+      this.__ignoreBlur = false;
       return;
     }
 
-    if (this.open) {
-      this.select(this.currentIndex);
+    if (this.__open) {
+      this.select(this.__currentIndex);
       this.closeList(false);
     }
   }
 
   click(event) {
-    this.open ? this.closeList() : this.openList();
+    this.__open ? this.closeList() : this.openList();
   }
 
   keydown(event) {
@@ -88,7 +88,7 @@ export class DropdownSelector extends BaseComponent {
         break;
       case Actions.SelectAndClose:
         event.preventDefault();
-        this.select(this.currentIndex);
+        this.select(this.__currentIndex);
       // intentional fallthrough
       case Actions.Close:
         event.preventDefault();
@@ -110,7 +110,7 @@ export class DropdownSelector extends BaseComponent {
     const {key, altKey, ctrlKey, metaKey} = event;
     const openKeys = ['ArrowDown', 'ArrowUp', 'Enter', ' ']; // all keys that will do the default open action
     // handle opening when closed
-    if (!this.open && openKeys.includes(key)) {
+    if (!this.__open && openKeys.includes(key)) {
       return Actions.Open;
     }
 
@@ -127,7 +127,7 @@ export class DropdownSelector extends BaseComponent {
       return Actions.Typing;
     }
 
-    if (this.open) {
+    if (this.__open) {
       if (key === 'ArrowUp' && altKey) {
         return Actions.SelectAndClose;
       } else if (key === 'ArrowDown' && !altKey) {
@@ -147,17 +147,17 @@ export class DropdownSelector extends BaseComponent {
   }
 
   closeList(keepFocus = true) {
-    this.open = false;
-    this.combobox.setAttribute('aria-expanded', 'false');
-    this.combobox.setAttribute('aria-activedescendant', '');
+    this.__open = false;
+    this.__combobox.setAttribute('aria-expanded', 'false');
+    this.__combobox.setAttribute('aria-activedescendant', '');
 
-    keepFocus && this.combobox.focus();
+    keepFocus && this.__combobox.focus();
   }
 
   extractOptions() {
-    this.options = [...this.querySelectorAll('option')].map((option, index) => {
+    this.__options = [...this.querySelectorAll('option')].map((option, index) => {
       if (option.hasAttribute('selected')) {
-        this.selectedIndex = index;
+        this.__selectedIndex = index;
       }
 
       const element = document.createElement('div');
@@ -170,7 +170,7 @@ export class DropdownSelector extends BaseComponent {
         element.setAttribute('aria-selected', 'true');
       }
 
-      this.listbox.appendChild(element);
+      this.__listbox.appendChild(element);
 
       return {
         label: option.textContent,
@@ -179,12 +179,12 @@ export class DropdownSelector extends BaseComponent {
       }
     });
 
-    if (this.options[0]) {
-      this.combobox.textContent = this.options[this.selectedIndex].label
-      this.value = this.options[this.selectedIndex].value;
+    if (this.__options[0]) {
+      this.__combobox.textContent = this.__options[this.__selectedIndex].label
+      this.__value = this.__options[this.__selectedIndex].value;
     }
 
-    [...this.listbox.children].forEach((element, index) => {
+    [...this.__listbox.children].forEach((element, index) => {
       element.addEventListener('click', (event) => {
         event.stopPropagation();
         this.select(index);
@@ -195,43 +195,43 @@ export class DropdownSelector extends BaseComponent {
   }
 
   openList() {
-    if (!this.open) {
-      this.open = true;
-      this.combobox.setAttribute('aria-expanded', 'true');
+    if (!this.__open) {
+      this.__open = true;
+      this.__combobox.setAttribute('aria-expanded', 'true');
 
-      this.initialValue = this.value;
-      this.currentIndex = this.selectedIndex;
+      this.__initialValue = this.__value;
+      this.__currentIndex = this.__selectedIndex;
 
       this.refreshList();
 
-      this.combobox.focus();
+      this.__combobox.focus();
     }
   }
 
   refreshList() {
-    this.combobox.setAttribute('aria-activedescendant', `option-${this.currentIndex}`);
+    this.__combobox.setAttribute('aria-activedescendant', `option-${this.__currentIndex}`);
 
-    const options = this.listbox.querySelectorAll('[role=option]');
+    const options = this.__listbox.querySelectorAll('[role=option]');
     [...options].forEach((option) => {
       option.classList.remove('current');
     });
-    options[this.currentIndex].classList.add('current');
+    options[this.__currentIndex].classList.add('current');
   }
 
   select(index) {
-    this.currentIndex = index;
-    this.selectedIndex = index;
+    this.__currentIndex = index;
+    this.__selectedIndex = index;
 
-    this.value = this.options[index].value;
-    this.combobox.textContent = this.options[index].label;
+    this.__value = this.__options[index].value;
+    this.__combobox.textContent = this.__options[index].label;
 
-    const options = this.listbox.querySelectorAll('[role=option]');
+    const options = this.__listbox.querySelectorAll('[role=option]');
     [...options].forEach((option) => {
       option.setAttribute('aria-selected', 'false');
     });
     options[index].setAttribute('aria-selected', 'true');
 
-    if (this.value !== this.initialValue) {
+    if (this.__value !== this.__initialValue) {
       this.dispatchEvent(
         new CustomEvent('change')
       );
@@ -240,73 +240,157 @@ export class DropdownSelector extends BaseComponent {
         new CustomEvent('input')
       );
 
-      this.initialValue = this.value;
+      this.__initialValue = this.__value;
     }
   }
 
   setIgnoreBlur() {
-    this.ignoreBlur = true;
+    this.__ignoreBlur = true;
   }
 
   typing(key) {
-    if (this.typeAhead.timer) {
-      window.clearTimeout(this.typeAhead.timer);
+    if (this.__typeAhead.timer) {
+      window.clearTimeout(this.__typeAhead.timer);
     }
 
-    this.typeAhead.keys += key.toLowerCase();
+    this.__typeAhead.keys += key.toLowerCase();
 
-    this.typeAhead.timer = window.setTimeout(() => {
-      let index = this.options.findIndex((option, i) => {
+    this.__typeAhead.timer = window.setTimeout(() => {
+      let index = this.__options.findIndex((option, i) => {
         const match = option.label.toLowerCase();
-        return (i > this.currentIndex && match.startsWith(this.typeAhead.keys));
+        return (i > this.__currentIndex && match.startsWith(this.__typeAhead.keys));
       });
 
       if (index < 0) {
-        index = this.options.findIndex((option) => {
+        index = this.__options.findIndex((option) => {
           const match = option.label.toLowerCase();
-          return match.startsWith(this.typeAhead.keys);
+          return match.startsWith(this.__typeAhead.keys);
         });
       }
 
       if (index >= 0) {
-        this.currentIndex = index;
+        this.__currentIndex = index;
         this.refreshList();
       }
 
-      this.typeAhead.keys = '';
+      this.__typeAhead.keys = '';
     }, 500);
   }
 
   updateCurrentIndex(action) {
-    const max = this.options.length - 1;
+    const max = this.__options.length - 1;
 
     switch (action) {
       case Actions.Up:
-        this.currentIndex -= 1;
+        this.__currentIndex -= 1;
         break;
       case Actions.Down:
-        this.currentIndex += 1;
+        this.__currentIndex += 1;
         break;
       case Actions.PageUp:
-        this.currentIndex -= 10;
+        this.__currentIndex -= 10;
         break;
       case Actions.PageDown:
-        this.currentIndex += 10;
+        this.__currentIndex += 10;
         break;
       case Actions.First:
-        this.currentIndex = 0;
+        this.__currentIndex = 0;
         break;
       case Actions.Last:
-        this.currentIndex = max;
+        this.__currentIndex = max;
         break;
     }
 
-    if (this.currentIndex > max) {
-      this.currentIndex = max;
+    if (this.__currentIndex > max) {
+      this.__currentIndex = max;
     }
-    if (this.currentIndex < 0) {
-      this.currentIndex = 0;
+    if (this.__currentIndex < 0) {
+      this.__currentIndex = 0;
     }
+  }
+
+  get autofocus() {
+    return this.getAttribute('autofocus');
+  }
+
+  set autofocus(newValue) {
+    if (newValue) {
+      this.setAttribute('autofocus', '');
+    } else {
+      this.removeAttribute('autofocus');
+    }
+  }
+
+  get disabled() {
+    return this.getAttribute('disabled');
+  }
+
+  set disabled(newValue) {
+    if (newValue) {
+      this.setAttribute('disabled', '');
+    } else {
+      this.removeAttribute('disabled');
+    }
+  }
+
+  get form() {
+    return this.getAttribute('form');
+  }
+
+  get labels() {
+    return document.querySelectorAll(`[for=${this.id}]`);
+  }
+
+  get length() {
+    return this.__options.length;
+  }
+
+  get name() {
+    return this.getAttribute('name');
+  }
+
+  set name(newValue) {
+    if (newValue) {
+      this.setAttribute('name', newValue);
+    } else {
+      this.removeAttribute('name');
+    }
+  }
+
+  get options() {
+    return this.__listbox.children;
+  }
+
+  get required() {
+    return this.getAttribute('required');
+  }
+
+  set required(newValue) {
+    if (newValue) {
+      this.setAttribute('required', '');
+    } else {
+      this.removeAttribute('required');
+    }
+  }
+
+  get selectedIndex() {
+    return this.__selectedIndex;
+  }
+
+  get selectedOptions() {
+    return this.__listbox.querySelectorAll('[current]');
+  }
+
+  get size() {
+    return 1;
+  }
+
+  get type() {
+    return 'select-one';
+  }
+
+  get value() {
+    return this.__value;
   }
 }
 

@@ -57,6 +57,8 @@ export class DropdownSelector extends BaseComponent {
     [...this.__listbox.children].forEach((element, index) => {
       element.remove();
     });
+
+    this.__optionsObserver.disconnect();
   }
 
   blur(event) {

@@ -70,6 +70,7 @@ export class BaseComponent extends HTMLElement {
       });
 
       this.__label.remove();
+      this.__labelObserver.disconnect();
 
       if (this.click !== undefined) {
         this.__parentLabel.removeEventListener('click', this.click.bind(this));

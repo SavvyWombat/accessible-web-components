@@ -2,6 +2,10 @@
 <html lang="en-GB">
 <head>
     <script type="module">
+      import { DropdownSelector } from "../../src";
+
+      customElements.define('dropdown-selector', DropdownSelector);
+
       class TestComponent extends HTMLElement {
         constructor() {
           super()
@@ -34,6 +38,10 @@
 </select>
 
 <test-component id="test-component"></test-component>
+
+<dropdown-selector id="hello">
+    <option>First</option>
+</dropdown-selector>
 </body>
 <script type="module">
   console.log(document.getElementById('html-select').selectedIndex);

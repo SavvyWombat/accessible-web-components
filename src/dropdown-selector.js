@@ -61,6 +61,10 @@ export class DropdownSelector extends BaseComponent {
     this.__optionsObserver.disconnect();
   }
 
+  add(item, before = null) {
+    this.appendChild(item);
+  }
+
   blur(event) {
     if (this.__ignoreBlur) {
       this.__ignoreBlur = false;

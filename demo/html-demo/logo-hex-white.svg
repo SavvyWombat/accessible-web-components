@@ -1,15 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 590 512" fill="#182846">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 590 512" fill="#4878d2">
     <mask id="outer">
         <rect width="100%" height="100%" fill="white"/>
-        <path d="M 295 48
-            l 114.875 0
-              114.875 208
-              -114.875 208
-              -229.75 0
-              -114.875 -208
-              114.875 -208
-            z"
-            fill="black"/>
+        <circle cx="295" cy="256" r="208" fill="black"/>
     </mask>
 
     <mask id="center">

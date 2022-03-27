@@ -350,6 +350,14 @@ export class DropdownSelector extends BaseComponent {
     return element;
   }
 
+  remove(index = null) {
+    if (isNaN(index)) {
+      this.parentNode.removeChild(this);
+    }
+
+    this.item(index)?.remove();
+  }
+
   get autofocus() {
     return this.getAttribute('autofocus');
   }

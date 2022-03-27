@@ -42,6 +42,10 @@
 </dropdown-selector>
 </body>
 <script type="module">
+  document.getElementById('html-select').remove(0);
+  document.getElementById('html-select').remove();
+
+
   const secondOption = document.createElement('option');
   secondOption.textContent = 'Second';
   secondOption.setAttribute('name', 'second');
@@ -52,15 +56,16 @@
   document.getElementById('hello').add(thirdOption, secondOption);
 
   setTimeout(() => {
+    console.log(document.getElementById('hello'))
+    document.getElementById('hello').remove(0);
+  });
+
+  setTimeout(() => {
     const fourthOption = document.createElement('option');
     fourthOption.textContent = 'Fourth';
     document.getElementById('hello').add(fourthOption, 1);
   })
 
-  console.log(document.getElementById('hello').item(1));
 
-  console.log(document.getElementById('hello').namedItem('first'));
-  console.log(document.getElementById('hello').namedItem('second'));
-  console.log(document.getElementById('hello').namedItem('third'));
 </script>
 </html>

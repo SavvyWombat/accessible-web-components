@@ -62,7 +62,20 @@ export class DropdownSelector extends BaseComponent {
   }
 
   add(item, before = null) {
-    this.appendChild(item);
+    if (before === null) {
+      this.appendChild(item);
+      return;
+    }
+
+    if (before instanceof HTMLElement) {
+      this.insertBefore(item, before);
+      return;
+    }
+
+    if (typeof before === 'number' && before >= 0 && before < this.length) {
+      const beforeOption = this.options.item(before);
+      this.insertBefore(item, beforeOption);
+    }
   }
 
   blur(event) {
@@ -374,7 +387,7 @@ export class DropdownSelector extends BaseComponent {
   }
 
   get options() {
-    return this.__listbox.children;
+    return this.querySelectorAll('option');
   }
 
   get required() {

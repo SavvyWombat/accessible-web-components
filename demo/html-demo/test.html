@@ -14,13 +14,11 @@
         }
 
         connectedCallback() {
-          console.log('super');
           this.value = 10;
           this.setAttribute('value', '10');
         }
 
         set value (newValue) {
-          console.log('setValue');
           this.setAttribute('value', newValue);
         }
 
@@ -44,6 +42,18 @@
 </dropdown-selector>
 </body>
 <script type="module">
-  console.log(document.getElementById('html-select').selectedIndex);
+  const secondOption = document.createElement('option');
+  secondOption.textContent = 'Second';
+  document.getElementById('hello').add(secondOption);
+
+  const thirdOption = document.createElement('option');
+  thirdOption.textContent = 'Third';
+  document.getElementById('hello').add(thirdOption, secondOption);
+
+  setTimeout(() => {
+    const fourthOption = document.createElement('option');
+    fourthOption.textContent = 'Fourth';
+    document.getElementById('hello').add(fourthOption, 1);
+  })
 </script>
 </html>

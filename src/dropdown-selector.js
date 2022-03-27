@@ -427,7 +427,9 @@ export class DropdownSelector extends BaseComponent {
   }
 
   get selectedOptions() {
-    return this.__listbox.querySelectorAll('[current]');
+    return [...this.querySelectorAll('option')].filter((element, index) => {
+      return index === this.selectedIndex;
+    });
   }
 
   get size() {

@@ -342,6 +342,14 @@ export class DropdownSelector extends BaseComponent {
     return this.querySelectorAll('option').item(index);
   }
 
+  namedItem(name) {
+    let element = this.querySelector(`option[name=${name}]`);
+    if (!element) {
+      element = this.querySelector(`option[id=${name}]`);
+    }
+    return element;
+  }
+
   get autofocus() {
     return this.getAttribute('autofocus');
   }

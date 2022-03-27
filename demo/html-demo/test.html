@@ -38,12 +38,13 @@
 <test-component id="test-component"></test-component>
 
 <dropdown-selector id="hello">
-    <option>First</option>
+    <option id="first">First</option>
 </dropdown-selector>
 </body>
 <script type="module">
   const secondOption = document.createElement('option');
   secondOption.textContent = 'Second';
+  secondOption.setAttribute('name', 'second');
   document.getElementById('hello').add(secondOption);
 
   const thirdOption = document.createElement('option');
@@ -57,5 +58,9 @@
   })
 
   console.log(document.getElementById('hello').item(1));
+
+  console.log(document.getElementById('hello').namedItem('first'));
+  console.log(document.getElementById('hello').namedItem('second'));
+  console.log(document.getElementById('hello').namedItem('third'));
 </script>
 </html>

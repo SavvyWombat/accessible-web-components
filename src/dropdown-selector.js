@@ -36,10 +36,10 @@ export class DropdownSelector extends BaseComponent {
 
       this.applyStyles();
 
-      this.extractOptions();
+      this.__extractOptions();
 
       this.__optionsObserver = new MutationObserver((changes) => {
-        this.extractOptions();
+        this.__extractOptions();
       });
       this.__optionsObserver.observe(this, { childList: true });
 
@@ -61,23 +61,6 @@ export class DropdownSelector extends BaseComponent {
     this.__optionsObserver.disconnect();
   }
 
-  add(item, before = null) {
-    if (before === null) {
-      this.appendChild(item);
-      return;
-    }
-
-    if (before instanceof HTMLElement) {
-      this.insertBefore(item, before);
-      return;
-    }
-
-    if (typeof before === 'number' && before >= 0 && before < this.length) {
-      const beforeOption = this.options.item(before);
-      this.insertBefore(item, beforeOption);
-    }
-  }
-
   blur(event) {
     if (this.__ignoreBlur) {
       this.__ignoreBlur = false;
@@ -95,7 +78,7 @@ export class DropdownSelector extends BaseComponent {
   }
 
   keydown(event) {
-    const action = this.actionFromKey(event);
+    const action = this.__actionFromKey(event);
 
     switch (action) {
       case Actions.First:
@@ -107,8 +90,8 @@ export class DropdownSelector extends BaseComponent {
       case Actions.PageUp:
       case Actions.PageDown:
         event.preventDefault();
-        this.updateCurrentIndex(action);
-        this.refreshList();
+        __this.updateCurrentIndex(action);
+        this.__refreshList();
         break;
       case Actions.SelectAndClose:
         event.preventDefault();
@@ -125,12 +108,12 @@ export class DropdownSelector extends BaseComponent {
       case Actions.Typing:
         event.preventDefault();
         this.openList();
-        this.typing(event.key);
+        this.__typing(event.key);
         return;
     }
   }
 
-  actionFromKey(event) {
+  __actionFromKey(event) {
     const {key, altKey, ctrlKey, metaKey} = event;
     const openKeys = ['ArrowDown', 'ArrowUp', 'Enter', ' ']; // all keys that will do the default open action
     // handle opening when closed
@@ -178,7 +161,7 @@ export class DropdownSelector extends BaseComponent {
     keepFocus && this.__combobox.focus();
   }
 
-  extractOptions() {
+  __extractOptions() {
     this.__selectedIndex = 0;
     [...this.__listbox.children].forEach((element) => {
       element.remove();
@@ -219,7 +202,7 @@ export class DropdownSelector extends BaseComponent {
         this.select(index);
         this.click(event);
       });
-      element.addEventListener('mousedown', this.setIgnoreBlur.bind(this));
+      element.addEventListener('mousedown', this.__setIgnoreBlur.bind(this));
     });
   }
 
@@ -231,13 +214,13 @@ export class DropdownSelector extends BaseComponent {
       this.__initialValue = this.__value;
       this.__currentIndex = this.__selectedIndex;
 
-      this.refreshList();
+      this.__refreshList();
 
       this.__combobox.focus();
     }
   }
 
-  refreshList() {
+  __refreshList() {
     this.__combobox.setAttribute('aria-activedescendant', `option-${this.__currentIndex}`);
 
     const options = this.__listbox.querySelectorAll('[role=option]');
@@ -273,11 +256,11 @@ export class DropdownSelector extends BaseComponent {
     }
   }
 
-  setIgnoreBlur() {
+  __setIgnoreBlur() {
     this.__ignoreBlur = true;
   }
 
-  typing(key) {
+  __typing(key) {
     if (this.__typeAhead.timer) {
       window.clearTimeout(this.__typeAhead.timer);
     }
@@ -299,14 +282,14 @@ export class DropdownSelector extends BaseComponent {
 
       if (index >= 0) {
         this.__currentIndex = index;
-        this.refreshList();
+        this.__refreshList();
       }
 
       this.__typeAhead.keys = '';
     }, 500);
   }
 
-  updateCurrentIndex(action) {
+  __updateCurrentIndex(action) {
     const max = this.__options.length - 1;
 
     switch (action) {
@@ -336,6 +319,27 @@ export class DropdownSelector extends BaseComponent {
     if (this.__currentIndex < 0) {
       this.__currentIndex = 0;
     }
+  }
+
+  add(item, before = null) {
+    if (before === null) {
+      this.appendChild(item);
+      return;
+    }
+
+    if (before instanceof HTMLElement) {
+      this.insertBefore(item, before);
+      return;
+    }
+
+    if (typeof before === 'number' && before >= 0 && before < this.length) {
+      const beforeOption = this.options.item(before);
+      this.insertBefore(item, beforeOption);
+    }
+  }
+
+  item(index) {
+    return this.querySelectorAll('option').item(index);
   }
 
   get autofocus() {

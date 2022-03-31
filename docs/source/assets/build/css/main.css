@@ -525,12 +525,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pt-8 {
   padding-top: 2rem;
 }
-.pb-6 {
-  padding-bottom: 1.5rem;
-}
-.pt-6 {
-  padding-top: 1.5rem;
-}
 .text-right {
   text-align: right;
 }
@@ -592,10 +586,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-shadow-colored: inset 0 2rem 1rem -1rem var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
-.outline-none {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-}
 .outline-offset-0 {
   outline-offset: 0px;
 }
@@ -617,6 +607,32 @@ Ensure the default browser behavior of the `hidden` attribute.
 .grid-in-footer {
   grid-area: footer;
 }
+nav a {
+  display: block;
+  border-radius: 0.25rem;
+  outline-offset: 0px;
+}
+nav a:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(145 174 228 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(19 38 75 / var(--tw-text-opacity));
+  -webkit-text-decoration-line: none;
+          text-decoration-line: none;
+  outline-style: solid;
+  outline-width: 4px;
+  outline-color: #91aee4;
+}
+nav a:focus {
+  -webkit-text-decoration-line: none;
+          text-decoration-line: none;
+  outline-style: solid;
+  outline-width: 4px;
+  outline-color: #91aee4;
+}
+nav a.in-page {
+  padding-left: 1rem;
+}
 .focus-within\:no-underline:focus-within {
   -webkit-text-decoration-line: none;
           text-decoration-line: none;
@@ -624,14 +640,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 .focus-within\:outline:focus-within {
   outline-style: solid;
 }
-.focus-within\:outline-2:focus-within {
-  outline-width: 2px;
-}
 .focus-within\:outline-4:focus-within {
   outline-width: 4px;
-}
-.focus-within\:outline-blue-700:focus-within {
-  outline-color: #254d97;
 }
 .focus-within\:outline-blue-300:focus-within {
   outline-color: #91aee4;
@@ -679,4 +689,3 @@ Ensure the default browser behavior of the `hidden` attribute.
 .focus\:outline-blue-300:focus {
   outline-color: #91aee4;
 }
-

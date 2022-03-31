@@ -50,17 +50,8 @@
         </header>
 
         <nav class="grid-in-nav sticky top-0 flex flex-col gap-6 text-gray-100 p-4 pt-8">
-            <a href="/" class="block rounded
-                          outline-offset-0
-                          focus:no-underline focus:outline focus:outline-4 focus:outline-blue-300
-                          hover:no-underline hover:outline hover:outline-4 hover:outline-blue-300 hover:bg-blue-300 hover:text-blue-900"
-            >Accessible Web Components</a>
-
-            <a href="/getting-started" class="block rounded
-                          outline-offset-0
-                          focus:no-underline focus:outline focus:outline-4 focus:outline-blue-300
-                          hover:no-underline hover:outline hover:outline-4 hover:outline-blue-300 hover:bg-blue-300 hover:text-blue-900"
-            >Getting Started</a>
+            <a href="/">Accessible Web Components</a>
+            <a href="/getting-started">Getting Started</a>
         </nav>
 
         <main class="grid-in-main">

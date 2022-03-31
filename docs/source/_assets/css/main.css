@@ -1,3 +1,14 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+
+nav a {
+  @apply block rounded outline-offset-0
+    focus:no-underline focus:outline focus:outline-4 focus:outline-blue-300
+    hover:no-underline hover:outline hover:outline-4 hover:outline-blue-300 hover:bg-blue-300 hover:text-blue-900;
+}
+
+nav a.in-page {
+  @apply pl-4;
+}

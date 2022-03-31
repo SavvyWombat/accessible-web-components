@@ -7,7 +7,26 @@
   \***********************************/
 /***/ (() => {
 
+var inPageLinks = function inPageLinks() {
+  var pathname = window.location.pathname === '/' ? '/' : window.location.pathname.replace(/\/$/, '');
+  var pageLink = document.querySelector("nav a[href=\"".concat(pathname, "\"]"));
+  var headings = document.querySelectorAll('main h2');
 
+  if (headings.length > 0) {
+    var template = new DOMParser().parseFromString("<a class=\"in-page\"/>", 'text/html').body.firstChild;
+    var previousNode = pageLink;
+    headings.forEach(function (heading) {
+      var link = document.importNode(template);
+      heading.id = heading.textContent.toLowerCase().replace(/\W+/g, '-');
+      link.href = "#".concat(heading.id);
+      link.textContent = heading.textContent;
+      previousNode.after(link);
+      previousNode = link;
+    });
+  }
+};
+
+inPageLinks();
 
 /***/ }),
 

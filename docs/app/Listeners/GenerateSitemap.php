@@ -14,7 +14,7 @@ class GenerateSitemap
         $sitemap = new Sitemap($jigsaw->getDestinationPath() . '/sitemap.xml');
 
         collect($jigsaw->getOutputPaths())->each(function ($path) use ($baseUrl, $sitemap) {
-            if (! $this->isAsset($path) && $path !== '/site.webmanifest') {
+            if (! $this->isAsset($path)) {
                 $sitemap->addItem($baseUrl . $path, time(), Sitemap::WEEKLY);
             }
         });

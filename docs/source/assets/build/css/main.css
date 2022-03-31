@@ -650,10 +650,6 @@ nav a.in-page {
   --tw-bg-opacity: 1;
   background-color: rgb(145 174 228 / var(--tw-bg-opacity));
 }
-.hover\:text-blue-900:hover {
-  --tw-text-opacity: 1;
-  color: rgb(19 38 75 / var(--tw-text-opacity));
-}
 .hover\:no-underline:hover {
   -webkit-text-decoration-line: none;
           text-decoration-line: none;

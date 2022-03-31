@@ -1,7 +1,3 @@
----
-description: A free and open source library of Web Components built for accessibility and stylability.
----
-
 @extends('_layouts.default')
 
 @section('content')
@@ -10,18 +6,18 @@ description: A free and open source library of Web Components built for accessib
             <h1 class="text-3xl font-bold text-blue-500">Accessible Web Components</h1>
 
             <p class="mt-4">
-                Web Components is a powerful toolset available in all modern browsers without the need for frameworks.
-                They provide developers the ability to create complex and reusable custom elements.
-            </p>
-
-            <p class="mt-4">
-                Accessible Web Components is a free and open source library of Web Components that have been built for accessibility and stylability.
+                The Web Components API is a powerful toolset built into all modern browsers, and is available without the need for frameworks.
+                It provides developers the ability to create complex and reusable custom elements, which can be used in HTML much like any standard element.
             </p>
 
             <p class="mt-4">
                 The classic example is to replace the native HTML Select element.
                 Notoriously difficult to style, there have been many attempts to replace this extremely useful and accessible element.
                 Unfortunately, far too many solutions are themselves difficult to restyle, or have a severe lack in accessibility.
+            </p>
+
+            <p class="mt-4">
+                Accessible Web Components is a free and open source library of Web Components that have been built specifically for accessibility, stylability, and reusability, whether you are using a front–end framework or not.
             </p>
         </section>
 

@@ -5,9 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="canonical" href="{{ $page->getUrl() }}">
 
-        @if ($page->description)
-            <meta name="description" content="{{ $page->description }}">
-        @endif
+        <meta name="description" content="{{ $page->description }}">
 
         @if ($page->title)
             <title>{{ $page->title }} / Accessible Web Components</title>
@@ -27,6 +25,8 @@
         <meta name="application-name" content="Accessible Web Components">
         <meta name="msapplication-TileColor" content="#13264b">
         <meta name="theme-color" content="#13264b">
+
+        @include('_partials.social-card')
     </head>
     <body class="grid grid-areas-layout-default grid-cols-layout-default grid-rows-layout-default
                 min-h-full

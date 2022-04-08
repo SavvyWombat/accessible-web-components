@@ -65,22 +65,22 @@
             </p>
 
             <pre><code>&lt;form id="form">
-    &lt;label id="label-for-dropdown">Choose a month&lt;/label>
-    &lt;dropdown-selector aria-labelledby="label-for-dropdown">
-        &lt;option value="0">January&lt;/option>
-        &lt;option value="1">February&lt;/option>
-        &lt;option value="2">March&lt;/option>
-        &lt;option value="3">April&lt;/option>
-        &lt;option value="4">May&lt;/option>
-        &lt;option value="5" selected>June&lt;/option>
-        &lt;option value="6">July&lt;/option>
-        &lt;option value="7">August&lt;/option>
-        &lt;option value="8">September&lt;/option>
-        &lt;option value="9">October&lt;/option>
-        &lt;option value="10">November&lt;/option>
-        &lt;option value="11">December&lt;/option>
+    &lt;label for="edit-dropdown-label">Edit the dropdown's label&lt;/label>
+    &lt;input id="edit-dropdown-label" type="text" v-model="labelText" />
+
+    &lt;label for="number-of-options">Edit the dropdown's label&lt;/label>
+    &lt;input id="number-of-options" type="number" min="1" max="12" v-model="numberOfOptions" />
+
+    &lt;label for="dropdown-selector">{{ labelText }}&lt;/label>
+    &lt;dropdown-selector id="dropdown-selector" ref="dropdown" @change="(event) => output = months[event.target.value]">
+        &lt;option v-for="(month) in monthList" :value="month" :key="month">{{ months[month] }}&lt;/option>
     &lt;/dropdown-selector>
-&lt;/form></code></pre>
+
+    &lt;p class="output">
+        &lt;span id="output-label">Current selection&lt;/span>:
+        &lt;output aria-labelledby="output-label">{{ output }}&lt;/output>
+    &lt;/p>
+    &lt;/form></code></pre>
         </section>
     </main>
 

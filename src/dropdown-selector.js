@@ -90,7 +90,7 @@ export class DropdownSelector extends BaseComponent {
       case Actions.PageUp:
       case Actions.PageDown:
         event.preventDefault();
-        __this.updateCurrentIndex(action);
+        this.__updateCurrentIndex(action);
         this.__refreshList();
         break;
       case Actions.SelectAndClose:

@@ -1,13 +1,35 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+dropdown-selector {
+  display: block;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+dropdown-selector #combobox {
+  border: 3px solid #122436;
+  border-radius: 0.5em;
+  padding: 1em;
+}
+
+dropdown-selector #combobox:focus {
+  border: 3px solid #9999ff;
+}
+
+dropdown-selector #listbox {
+  background-color: #fafafa;
+}
+
+dropdown-selector #combobox[aria-expanded=true] ~ #listbox {
+  border: 3px solid #122436;
+  border-radius: 0.5em;
+}
+
+dropdown-selector .option {
+  padding: 1em;
+}
+
+dropdown-selector .option.current {
+  outline: 2px solid #acdcfc;
+  background-color: #f0f0f0;
+}
+
+dropdown-selector .option:hover {
+  background-color: #acdcfc;
 }

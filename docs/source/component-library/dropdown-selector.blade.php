@@ -11,10 +11,10 @@ title: Dropdown Selector
             <pre class="mt-4"><code class="html-tag">dropdown-selector</code></pre>
         </section>
 
-        <section class="p-6 bg-gray-100 shadow-inner shadow-red-300 rounded-2xl bg-red-100">
-            <p class="font-bold">
+        <section class="warning">
+            <strong>
                 Work in progress
-            </p>
+            </strong>
 
             <p class="mt-4">
                 I'm currently working on the design of the documentation and how to include demonstrations and code examples for the components.

@@ -43,3 +43,7 @@ em {
 kbd {
   @apply rounded shadow shadow-blue-700 border border-blue-700 px-1 pt-[2px] pb-px bg-gray-100 text-blue-700;
 }
+
+section.warning {
+  @apply p-6 bg-gray-100 shadow-inner shadow-red-300 rounded-2xl bg-red-100;
+}

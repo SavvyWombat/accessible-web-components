@@ -498,18 +498,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 .rounded {
   border-radius: 0.25rem;
 }
-.border-2 {
-  border-width: 2px;
-}
-.border-4 {
-  border-width: 4px;
-}
 .border-t-2 {
   border-top-width: 2px;
-}
-.border-gray-300 {
-  --tw-border-opacity: 1;
-  border-color: rgb(179 179 179 / var(--tw-border-opacity));
 }
 .border-gray-100 {
   --tw-border-opacity: 1;
@@ -530,20 +520,17 @@ Ensure the default browser behavior of the `hidden` attribute.
 .p-8 {
   padding: 2rem;
 }
+.p-6 {
+  padding: 1.5rem;
+}
 .p-4 {
   padding: 1rem;
 }
 .p-2 {
   padding: 0.5rem;
 }
-.p-6 {
-  padding: 1.5rem;
-}
 .pb-8 {
   padding-bottom: 2rem;
-}
-.pb-12 {
-  padding-bottom: 3rem;
 }
 .pt-8 {
   padding-top: 2rem;
@@ -553,9 +540,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .pt-4 {
   padding-top: 1rem;
-}
-.pb-10 {
-  padding-bottom: 2.5rem;
 }
 .text-right {
   text-align: right;
@@ -735,6 +719,18 @@ kbd {
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   --tw-shadow-color: #254d97;
+  --tw-shadow: var(--tw-shadow-colored);
+}
+section.warning {
+  border-radius: 1rem;
+  background-color: rgb(230 230 230 / var(--tw-bg-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(250 195 199 / var(--tw-bg-opacity));
+  padding: 1.5rem;
+  --tw-shadow: inset 0 0 1rem #13264b;
+  --tw-shadow-colored: inset 0 0 1rem var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  --tw-shadow-color: #ef4a58;
   --tw-shadow: var(--tw-shadow-colored);
 }
 .focus-within\:no-underline:focus-within {

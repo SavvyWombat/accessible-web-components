@@ -536,6 +536,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .p-2 {
   padding: 0.5rem;
 }
+.p-6 {
+  padding: 1.5rem;
+}
 .pb-8 {
   padding-bottom: 2rem;
 }
@@ -550,6 +553,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .pt-4 {
   padding-top: 1rem;
+}
+.pb-10 {
+  padding-bottom: 2.5rem;
 }
 .text-right {
   text-align: right;
@@ -572,10 +578,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-text-opacity: 1;
   color: rgb(72 120 210 / var(--tw-text-opacity));
 }
-.text-red-600 {
-  --tw-text-opacity: 1;
-  color: rgb(138 13 23 / var(--tw-text-opacity));
-}
 .text-gray-900 {
   --tw-text-opacity: 1;
   color: rgb(43 43 43 / var(--tw-text-opacity));
@@ -597,8 +599,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   -moz-osx-font-smoothing: grayscale;
 }
 .shadow-inner {
-  --tw-shadow: inset 0 0 1rem .5rem #13264b;
-  --tw-shadow-colored: inset 0 0 1rem .5rem var(--tw-shadow-color);
+  --tw-shadow: inset 0 0 1rem #13264b;
+  --tw-shadow-colored: inset 0 0 1rem var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 .shadow-code {
@@ -711,9 +713,10 @@ code.html-tag::after {
   content: '>';
 }
 em {
+  font-weight: 700;
   font-style: normal;
   --tw-text-opacity: 1;
-  color: rgb(37 77 151 / var(--tw-text-opacity));
+  color: rgb(72 120 210 / var(--tw-text-opacity));
 }
 kbd {
   border-radius: 0.25rem;

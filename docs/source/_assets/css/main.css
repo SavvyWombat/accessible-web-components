@@ -37,7 +37,7 @@ code.html-tag::after {
 }
 
 em {
-  @apply not-italic text-blue-700;
+  @apply not-italic font-bold text-blue-500;
 }
 
 kbd {

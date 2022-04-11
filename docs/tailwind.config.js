@@ -43,7 +43,7 @@ module.exports = {
 
       boxShadow: {
         'code': 'inset 0 0 0.5rem 0.1rem #b3b3b3',
-        'inner': 'inset 0 0 1rem .5rem #13264b',
+        'inner': 'inset 0 0 1rem #13264b',
         'inner-bottom': 'inset 0 -2rem 1rem -1rem #13264b',
         'inner-top': 'inset 0 2rem 1rem -1rem #13264b',
       },

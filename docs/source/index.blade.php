@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="flex flex-col gap-16 mt-8 my-16">
-        <section class="p-8 pb-12 bg-gray-100 shadow-inner rounded-2xl border-2 border-gray-300">
+        <section class="p-6 bg-gray-100 shadow-inner rounded-2xl">
             <h1 class="text-3xl font-bold text-blue-500">Accessible Web Components</h1>
 
             <p class="mt-4">
@@ -21,7 +21,7 @@
             </p>
         </section>
 
-        <section class="p-8 pb-12 bg-gray-100 shadow-inner rounded-2xl border-2 border-gray-300">
+        <section class="p-6 bg-gray-100 shadow-inner rounded-2xl">
             <h2 class="text-3xl font-bold text-blue-500">Accessibility</h2>
 
             <p class="mt-4">
@@ -40,7 +40,7 @@
             </p>
         </section>
 
-        <section class="p-8 pb-12 bg-gray-100 shadow-inner rounded-2xl border-2 border-gray-300">
+        <section class="p-6 bg-gray-100 shadow-inner rounded-2xl">
             <h2 class="text-3xl font-bold text-blue-500">Stylability</h2>
 
             <p class="mt-4">
@@ -48,7 +48,7 @@
             </p>
         </section>
 
-        <section class="p-8 pb-12 bg-gray-100 shadow-inner rounded-2xl border-2 border-gray-300">
+        <section class="p-6 bg-gray-100 shadow-inner rounded-2xl">
             <h2 class="text-3xl font-bold text-blue-500">No special tooling required</h2>
 
             <p class="mt-4">
@@ -60,7 +60,7 @@
             </p>
         </section>
 
-        <section class="p-8 pb-12 bg-gray-100 shadow-inner rounded-2xl border-2 border-gray-300">
+        <section class="p-6 bg-gray-100 shadow-inner rounded-2xl">
             <h2 class="text-3xl font-bold text-blue-500">Framework friendly</h2>
 
             <p class="mt-4">

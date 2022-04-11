@@ -444,6 +444,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mt-4 {
   margin-top: 1rem;
 }
+.ml-4 {
+  margin-left: 1rem;
+}
+.ml-6 {
+  margin-left: 1.5rem;
+}
 .block {
   display: block;
 }
@@ -468,6 +474,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-16 {
   width: 4rem;
 }
+.list-disc {
+  list-style-type: disc;
+}
 .grid-cols-layout-default {
   grid-template-columns: 30ch 80ch 1fr;
 }
@@ -479,6 +488,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .gap-6 {
   gap: 1.5rem;
+}
+.gap-2 {
+  gap: 0.5rem;
 }
 .rounded-2xl {
   border-radius: 1rem;
@@ -549,6 +561,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 1.875rem;
   line-height: 2.25rem;
 }
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
 .font-bold {
   font-weight: 700;
 }
@@ -560,10 +576,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-text-opacity: 1;
   color: rgb(138 13 23 / var(--tw-text-opacity));
 }
-.text-blue-700 {
-  --tw-text-opacity: 1;
-  color: rgb(37 77 151 / var(--tw-text-opacity));
-}
 .text-gray-900 {
   --tw-text-opacity: 1;
   color: rgb(43 43 43 / var(--tw-text-opacity));
@@ -571,6 +583,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-gray-100 {
   --tw-text-opacity: 1;
   color: rgb(230 230 230 / var(--tw-text-opacity));
+}
+.text-blue-700 {
+  --tw-text-opacity: 1;
+  color: rgb(37 77 151 / var(--tw-text-opacity));
 }
 .underline {
   -webkit-text-decoration-line: underline;
@@ -625,9 +641,37 @@ Ensure the default browser behavior of the `hidden` attribute.
 .grid-in-footer {
   grid-area: footer;
 }
+a {
+  border-radius: 0.25rem;
+  --tw-text-opacity: 1;
+  color: rgb(37 77 151 / var(--tw-text-opacity));
+  -webkit-text-decoration-line: underline;
+          text-decoration-line: underline;
+  outline-offset: 0px;
+}
+a:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(145 174 228 / var(--tw-bg-opacity));
+  -webkit-text-decoration-line: none;
+          text-decoration-line: none;
+  outline-style: solid;
+  outline-width: 2px;
+  outline-color: #91aee4;
+}
+a:focus {
+  -webkit-text-decoration-line: none;
+          text-decoration-line: none;
+  outline-style: solid;
+  outline-width: 2px;
+  outline-color: #254d97;
+}
 nav a {
   display: block;
   border-radius: 0.25rem;
+  --tw-text-opacity: 1;
+  color: rgb(230 230 230 / var(--tw-text-opacity));
+  -webkit-text-decoration-line: none;
+          text-decoration-line: none;
   outline-offset: 0px;
 }
 nav a:hover {
@@ -655,6 +699,41 @@ nav span {
 nav a.in-page {
   padding-left: 1rem;
 }
+code.html-tag {
+  font-weight: 700;
+  --tw-text-opacity: 1;
+  color: rgb(72 120 210 / var(--tw-text-opacity));
+}
+code.html-tag::before {
+  content: '<';
+}
+code.html-tag::after {
+  content: '>';
+}
+em {
+  font-style: normal;
+  --tw-text-opacity: 1;
+  color: rgb(37 77 151 / var(--tw-text-opacity));
+}
+kbd {
+  border-radius: 0.25rem;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(37 77 151 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(230 230 230 / var(--tw-bg-opacity));
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  padding-top: 2px;
+  padding-bottom: 1px;
+  --tw-text-opacity: 1;
+  color: rgb(37 77 151 / var(--tw-text-opacity));
+  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  --tw-shadow-color: #254d97;
+  --tw-shadow: var(--tw-shadow-colored);
+}
 .focus-within\:no-underline:focus-within {
   -webkit-text-decoration-line: none;
           text-decoration-line: none;
@@ -679,11 +758,11 @@ nav a.in-page {
 .hover\:outline:hover {
   outline-style: solid;
 }
-.hover\:outline-2:hover {
-  outline-width: 2px;
-}
 .hover\:outline-4:hover {
   outline-width: 4px;
+}
+.hover\:outline-2:hover {
+  outline-width: 2px;
 }
 .hover\:outline-blue-300:hover {
   outline-color: #91aee4;
@@ -695,15 +774,15 @@ nav a.in-page {
 .focus\:outline:focus {
   outline-style: solid;
 }
-.focus\:outline-2:focus {
-  outline-width: 2px;
-}
 .focus\:outline-4:focus {
   outline-width: 4px;
 }
-.focus\:outline-blue-700:focus {
-  outline-color: #254d97;
+.focus\:outline-2:focus {
+  outline-width: 2px;
 }
 .focus\:outline-blue-300:focus {
   outline-color: #91aee4;
+}
+.focus\:outline-blue-700:focus {
+  outline-color: #254d97;
 }

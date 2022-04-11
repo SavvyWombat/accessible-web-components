@@ -2,9 +2,16 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+a {
+  @apply underline text-blue-700 rounded
+    outline-offset-0
+    focus:no-underline focus:outline focus:outline-2 focus:outline-blue-700
+    hover:no-underline hover:outline hover:outline-2 hover:outline-blue-300 hover:bg-blue-300;
+}
 
 nav a {
-  @apply block rounded outline-offset-0
+  @apply block no-underline text-gray-100 rounded
+    outline-offset-0
     focus:no-underline focus:outline focus:outline-4 focus:outline-blue-300
     hover:no-underline hover:outline hover:outline-4 hover:outline-blue-300 hover:bg-blue-300 hover:text-blue-900;
 }
@@ -15,4 +22,24 @@ nav span {
 
 nav a.in-page {
   @apply pl-4;
+}
+
+code.html-tag {
+  @apply text-blue-500 font-bold;
+}
+
+code.html-tag::before {
+  content: '<';
+}
+
+code.html-tag::after {
+  content: '>';
+}
+
+em {
+  @apply not-italic text-blue-700;
+}
+
+kbd {
+  @apply rounded shadow shadow-blue-700 border border-blue-700 px-1 pt-[2px] pb-px bg-gray-100 text-blue-700;
 }

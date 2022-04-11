@@ -25,12 +25,7 @@
             <h2 class="text-3xl font-bold text-blue-500">Accessibility</h2>
 
             <p class="mt-4">
-                <a href="https://www.gov.uk/government/statistics/family-resources-survey-financial-year-2019-to-2020/family-resources-survey-financial-year-2019-to-2020?s=03#disability-1"
-                   class="underline text-blue-700 rounded
-                          outline-offset-0
-                          focus:no-underline focus:outline focus:outline-2 focus:outline-blue-700
-                          hover:no-underline hover:outline hover:outline-2 hover:outline-blue-300 hover:bg-blue-300"
-                >Around one in five users have a disability</a>
+                <a href="https://www.gov.uk/government/statistics/family-resources-survey-financial-year-2019-to-2020/family-resources-survey-financial-year-2019-to-2020?s=03#disability-1">Around one in five users have a disability</a>
                 (and if you include people requiring glasses or contact lenses, that goes up to three in four).
                 Then there are people using your website in non-optimal situations - they have an injury like a broken arm, or in a poorly-lit environment.
             </p>

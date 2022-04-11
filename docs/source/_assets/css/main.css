@@ -9,6 +9,10 @@ nav a {
     hover:no-underline hover:outline hover:outline-4 hover:outline-blue-300 hover:bg-blue-300 hover:text-blue-900;
 }
 
+nav span {
+  @apply block font-bold;
+}
+
 nav a.in-page {
   @apply pl-4;
 }

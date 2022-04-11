@@ -49,9 +49,11 @@
             </a>
         </header>
 
-        <nav class="grid-in-nav sticky top-0 flex flex-col gap-6 text-gray-100 p-4 pt-8">
+        <nav class="grid-in-nav sticky top-0 flex flex-col gap-6 text-gray-100 p-4 pt-8 pr-8">
             <a href="/">Accessible Web Components</a>
             <a href="/getting-started">Getting Started</a>
+            <span class="border-t-2 pt-4 border-gray-100">Component Library</span>
+            <a href="/component-library/dropdown-selector">Dropdown Selector</a>
         </nav>
 
         <main class="grid-in-main">

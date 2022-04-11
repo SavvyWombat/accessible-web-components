@@ -495,13 +495,24 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-4 {
   border-width: 4px;
 }
+.border-t-2 {
+  border-top-width: 2px;
+}
 .border-gray-300 {
   --tw-border-opacity: 1;
   border-color: rgb(179 179 179 / var(--tw-border-opacity));
 }
+.border-gray-100 {
+  --tw-border-opacity: 1;
+  border-color: rgb(230 230 230 / var(--tw-border-opacity));
+}
 .bg-gray-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(230 230 230 / var(--tw-bg-opacity));
+}
+.bg-red-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(250 195 199 / var(--tw-bg-opacity));
 }
 .bg-blue-900 {
   --tw-bg-opacity: 1;
@@ -525,6 +536,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pt-8 {
   padding-top: 2rem;
 }
+.pr-8 {
+  padding-right: 2rem;
+}
+.pt-4 {
+  padding-top: 1rem;
+}
 .text-right {
   text-align: right;
 }
@@ -535,16 +552,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 1.875rem;
   line-height: 2.25rem;
 }
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
-}
 .font-bold {
   font-weight: 700;
 }
 .text-blue-500 {
   --tw-text-opacity: 1;
   color: rgb(72 120 210 / var(--tw-text-opacity));
+}
+.text-red-600 {
+  --tw-text-opacity: 1;
+  color: rgb(138 13 23 / var(--tw-text-opacity));
 }
 .text-blue-700 {
   --tw-text-opacity: 1;
@@ -585,6 +602,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-shadow: inset 0 2rem 1rem -1rem #13264b;
   --tw-shadow-colored: inset 0 2rem 1rem -1rem var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.shadow-red-300 {
+  --tw-shadow-color: #ef4a58;
+  --tw-shadow: var(--tw-shadow-colored);
 }
 .outline-offset-0 {
   outline-offset: 0px;
@@ -629,6 +650,10 @@ nav a:focus {
   outline-style: solid;
   outline-width: 4px;
   outline-color: #91aee4;
+}
+nav span {
+  display: block;
+  font-weight: 700;
 }
 nav a.in-page {
   padding-left: 1rem;

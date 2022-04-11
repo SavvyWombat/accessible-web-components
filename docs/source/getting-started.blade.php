@@ -1,9 +1,27 @@
+---
+title: Getting Started
+---
+
 @extends('_layouts.default')
 
 @section('content')
     <div class="flex flex-col gap-16 mt-8 my-16">
         <section class="p-8 pb-8 bg-gray-100 shadow-inner rounded-2xl border-2 border-gray-300">
             <h1 class="text-3xl font-bold text-blue-500">Getting Started</h1>
+        </section>
+
+        <section class="p-8 pb-12 bg-gray-100 shadow-inner shadow-red-300 rounded-2xl border-2 bg-red-100">
+            <p class="text-red-600 font-bold">
+                Work in progress
+            </p>
+
+            <p class="mt-4">
+                This library is currently in development, and has not yet been released as a package.
+            </p>
+
+            <p class="mt-4">
+                This page is a placeholder.
+            </p>
         </section>
 
         <section class="p-8 pb-12 bg-gray-100 shadow-inner rounded-2xl border-2 border-gray-300">
@@ -24,27 +42,6 @@
 
         <section class="p-8 pb-12 bg-gray-100 shadow-inner rounded-2xl border-2 border-gray-300">
             <h2 class="text-3xl font-bold text-blue-500">Vanilla JavaScript</h2>
-
-
-            <section class="pt-8">
-                <h3 class="text-2xl font-bold text-blue-500">Usage Without any Tooling</h3>
-
-                <p class="mt-4">
-                    Download as a zip?
-                </p>
-
-                <p class="mt-4">
-                    It is possible to use Accessible Web Components with any JavaScript tooling at all.
-                </p>
-
-                <p class="mt-4">
-                    Download the zip from _download_link_ and extract the files to a directory that can be accessed using a <code>&lt;script></code> tag in your HTML.
-                </p>
-            </section>
-
-            <section class="pt-8">
-                <h3 class="text-2xl font-bold text-blue-500">Vite</h3>
-            </section>
         </section>
 
         <section class="p-8 pb-12 bg-gray-100 shadow-inner rounded-2xl border-2 border-gray-300">
@@ -52,11 +49,11 @@
         </section>
 
         <section class="p-8 pb-12 bg-gray-100 shadow-inner rounded-2xl border-2 border-gray-300">
-            <h2 class="text-3xl font-bold text-blue-500">Other Frameworks</h2>
+            <h2 class="text-3xl font-bold text-blue-500">React</h2>
+        </section>
 
-            <p class="mt-4">
-                If we haven't covered your framework of choice, let us know at _discussion_link_.
-            </p>
+        <section class="p-8 pb-12 bg-gray-100 shadow-inner rounded-2xl border-2 border-gray-300">
+            <h2 class="text-3xl font-bold text-blue-500">Other Frameworks</h2>
         </section>
     </div>
 @endsection

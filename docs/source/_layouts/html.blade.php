@@ -28,7 +28,7 @@
 
         @include('_partials.social-card')
     </head>
-    <body class="grid grid-areas-layout-default grid-cols-layout-default grid-rows-layout-default
+    <body class="grid grid-areas-layout-default grid-cols-layout-default
                 min-h-full
                 text-gray-900 bg-blue-900
                 font-sans antialiased"

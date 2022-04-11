@@ -471,9 +471,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .grid-cols-layout-default {
   grid-template-columns: 30ch 80ch 1fr;
 }
-.grid-rows-layout-default {
-  grid-template-rows: auto auto 1fr auto;
-}
 .flex-col {
   flex-direction: column;
 }

@@ -60,10 +60,6 @@ module.exports = {
       gridTemplateColumns: {
         'layout-default': '30ch 80ch 1fr',
       },
-
-      gridTemplateRows: {
-        'layout-default': 'auto auto 1fr auto',
-      }
     },
   },
   plugins: [

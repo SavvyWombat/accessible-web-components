@@ -8,6 +8,8 @@ title: Dropdown Selector
     <div class="flex flex-col gap-16 mt-8 my-16">
         <section class="p-8 pb-8 bg-gray-100 shadow-inner rounded-2xl border-2 border-gray-300">
             <h1 class="text-3xl font-bold text-blue-500">Dropdown Selector</h1>
+
+            <pre class="mt-4"><code>&lt;dropdown-selector></code></pre>
         </section>
 
         <section class="p-8 pb-12 bg-gray-100 shadow-inner shadow-red-300 rounded-2xl border-2 bg-red-100">
@@ -26,6 +28,14 @@ title: Dropdown Selector
 
         <section class="p-8 pb-12 bg-gray-100 shadow-inner rounded-2xl border-2 border-gray-300">
             <h2 class="text-3xl font-bold text-blue-500">Accessibility</h2>
+
+            <p class="mt-4">
+                If a <code>&lt;label></code> has been associated to the <code>&lt;dropdown-selector></code>, then clicking on the label will open the list of options for the selector.
+            </p>
+
+            <p class="mt-4">
+                Users can also use keyboard navigation to reach the element and use it.
+            </p>
         </section>
 
         <section class="p-8 pb-12 bg-gray-100 shadow-inner rounded-2xl border-2 border-gray-300">

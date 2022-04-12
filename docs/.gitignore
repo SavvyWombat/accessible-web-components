@@ -1,6 +1,7 @@
 /build_local/
 /cache/
 /node_modules/
+/source/assets/build/
 /vendor/
 /.idea/
 /.vscode/

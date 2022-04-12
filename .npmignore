@@ -1,6 +1,7 @@
 .github/
 coverage/
 demo/
+docs/
 test/
 .*.json
 jestconfig.coverage.json

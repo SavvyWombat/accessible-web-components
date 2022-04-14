@@ -73,21 +73,25 @@ title: Dropdown Selector
 <section>
     <h2>Example code</h2>
 
-    <pre><code>&lt;label for="dropdown-selector">Choose a month&lt;/label>
-&lt;dropdown-selector id="dropdown-selector">
-    &lt;option value="0">January&lt;/option>
-    &lt;option value="1">February&lt;/option>
-    &lt;option value="2">March&lt;/option>
-    &lt;option value="3">April&lt;/option>
-    &lt;option value="4">May&lt;/option>
-    &lt;option value="5" selected>June&lt;/option>
-    &lt;option value="6">July&lt;/option>
-    &lt;option value="7">August&lt;/option>
-    &lt;option value="8">September&lt;/option>
-    &lt;option value="9">October&lt;/option>
-    &lt;option value="10">November&lt;/option>
-    &lt;option value="11">December&lt;/option>
-&lt;/dropdown-selector></code></pre>
+    <pre>
+        <x-torchlight-code language="html">
+<label for="dropdown-selector">Choose a month</label>
+<dropdown-selector id="dropdown-selector">
+    <option value="0">January</option>
+    <option value="1">February</option>
+    <option value="2">March</option>
+    <option value="3">April</option>
+    <option value="4">May</option>
+    <option value="5" selected>June</option>
+    <option value="6">July</option>
+    <option value="7">August</option>
+    <option value="8">September</option>
+    <option value="9">October</option>
+    <option value="10">November</option>
+    <option value="11">December</option>
+</dropdown-selector>
+        </x-torchlight-code>
+    </pre>
 </section>
 
 <section>

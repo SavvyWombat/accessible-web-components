@@ -30,9 +30,13 @@ title: Getting Started
             To install as a package from NPM, use the appropriate command for your package management tool:
         </p>
 
-        <pre><code>npm require @savvywombat/accessible-web-components</code></pre>
+        <pre>
+            <x-torchlight-code language="bash">npm require @savvywombat/accessible-web-components</x-torchlight-code>
+        </pre>
 
-        <pre><code>yarn add @savvywombat/accessible-web-components</code></pre>
+        <pre>
+            <x-torchlight-code language="bash">yarn add @savvywombat/accessible-web-components</x-torchlight-code>
+        </pre>
     </section>
 
     <section>

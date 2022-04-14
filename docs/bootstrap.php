@@ -2,6 +2,7 @@
 
 use App\Listeners\GenerateSitemap;
 use TightenCo\Jigsaw\Jigsaw;
+use Torchlight\Jigsaw\TorchlightExtension;
 
 /** @var $container \Illuminate\Container\Container */
 /** @var $events \TightenCo\Jigsaw\Events\EventBus */
@@ -18,3 +19,4 @@ use TightenCo\Jigsaw\Jigsaw;
  */
 
 $events->afterBuild(GenerateSitemap::class);
+TorchlightExtension::make($container, $events)->boot();

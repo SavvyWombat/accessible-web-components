@@ -2,9 +2,12 @@
 /cache/
 /node_modules/
 /source/assets/build/
+/torchlight_cache/
 /vendor/
 /.idea/
 /.vscode/
+
+.env
 npm-debug.log
 
 # Optional ignores

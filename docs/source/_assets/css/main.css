@@ -1,27 +1,13 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+
+
+
 
 a {
-  @apply underline text-blue-700 rounded
+  @apply underline rounded
     outline-offset-0
+    text-blue-700 hover:text-blue-900
     focus:no-underline focus:outline focus:outline-2 focus:outline-blue-700
     hover:no-underline hover:outline hover:outline-2 hover:outline-blue-300 hover:bg-blue-300;
-}
-
-nav a {
-  @apply block no-underline text-gray-100 rounded
-    outline-offset-0
-    focus:no-underline focus:outline focus:outline-4 focus:outline-blue-300
-    hover:no-underline hover:outline hover:outline-4 hover:outline-blue-300 hover:bg-blue-300 hover:text-blue-900;
-}
-
-nav span {
-  @apply block font-bold;
-}
-
-nav a.in-page {
-  @apply pl-4;
 }
 
 code.html-tag {

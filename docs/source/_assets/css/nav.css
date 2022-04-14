@@ -1,0 +1,14 @@
+nav a {
+  @apply block no-underline text-gray-100 rounded
+  outline-offset-0
+  focus:no-underline focus:outline focus:outline-4 focus:outline-blue-300
+  hover:no-underline hover:outline hover:outline-4 hover:outline-blue-300 hover:bg-blue-300 hover:text-blue-900;
+}
+
+nav span {
+  @apply block font-bold;
+}
+
+nav a.in-page {
+  @apply pl-4;
+}

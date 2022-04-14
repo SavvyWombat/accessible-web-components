@@ -13,7 +13,7 @@
             <title>Accessible Web Components</title>
         @endif
 
-        <link rel="stylesheet" href="{{ mix('css/main.css', 'assets/build') }}">
+        <link rel="stylesheet" href="{{ mix('css/base.css', 'assets/build') }}">
         <script defer src="{{ mix('js/main.js', 'assets/build') }}"></script>
 
         <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">

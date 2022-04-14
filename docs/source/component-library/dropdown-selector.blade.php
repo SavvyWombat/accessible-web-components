@@ -73,10 +73,13 @@ title: Dropdown Selector
 <section>
     <h2>Example code</h2>
 
-    <pre>
-        <x-torchlight-code language="html">
-<label for="dropdown-selector">Choose a month</label>
-<dropdown-selector id="dropdown-selector">
+    <section>
+        <h3>Vanilla</h3>
+
+        <pre>
+            <x-torchlight-code language="html">
+<label for="choose-month">Choose a month</label>
+<dropdown-selector id="choose-month">
     <option value="0">January</option>
     <option value="1">February</option>
     <option value="2">March</option>
@@ -90,8 +93,66 @@ title: Dropdown Selector
     <option value="10">November</option>
     <option value="11">December</option>
 </dropdown-selector>
-        </x-torchlight-code>
-    </pre>
+            </x-torchlight-code>
+        </pre>
+    </section>
+
+    <section>
+        <h3>Vue.js</h3>
+
+        <pre>
+            <x-torchlight-code language="vue">
+<script setup>
+const months = [
+    'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',
+]
+
+const month = ref(5);
+</script>
+
+<template>
+    <label for="choose-month">Choose a month</label>
+    <dropdown-selector id="choose-month" v-model="month">
+        <option v-for="(month, m) in months" :key="m" :value="m">{{ month }}</option>
+    </dropdown-selector>
+</template>
+            </x-torchlight-code>
+        </pre>
+    </section>
+
+    <section>
+        <h3>React</h3>
+
+        <pre>
+            <x-torchlight-code language="jsx">
+const months = [
+    'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',
+]
+
+const [month, setMonth] = useState(5);
+
+useLayoutEffect(() => {
+    const {current} = selectorRef;
+
+    const handleChange = (event) => {
+      setOutput(event.target.value)
+    };
+    current.addEventListener('change', handleChange);
+
+    return () => current.removeEventListener('change', handleChange);
+  }, [selectorRef]);
+
+return (
+    <label htmlFor="choose-month" value="{month}">Choose a month</label>
+    <dropdown-selector id="choose-month">
+        { months.map((month, m) => (
+            <option key={m} value="{m}">{month}</option>
+        ))}
+    </dropdown-selector>
+)
+            </x-torchlight-code>
+        </pre>
+    </section>
 </section>
 
 <section>

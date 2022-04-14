@@ -1,13 +1,18 @@
+main > header,
+section {
+  @apply p-6 bg-gray-100 shadow-inner rounded-2xl
+}
 
+section.warning {
+  @apply p-6 bg-gray-100 shadow-inner shadow-red-300 rounded-2xl bg-red-100;
+}
 
+h1, h2 {
+  @apply text-3xl font-bold text-blue-500
+}
 
-
-a {
-  @apply underline rounded
-    outline-offset-0
-    text-blue-700 hover:text-blue-900
-    focus:no-underline focus:outline focus:outline-2 focus:outline-blue-700
-    hover:no-underline hover:outline hover:outline-2 hover:outline-blue-300 hover:bg-blue-300;
+h3 {
+  @apply mt-4 text-2xl text-blue-500;
 }
 
 code.html-tag {
@@ -22,14 +27,20 @@ code.html-tag::after {
   content: '>';
 }
 
-em {
-  @apply not-italic font-bold text-blue-500;
+header > code {
+  @apply block mt-4;
 }
 
-kbd {
-  @apply rounded shadow shadow-blue-700 border border-blue-700 px-1 pt-[2px] pb-px bg-gray-100 text-blue-700;
+p {
+  @apply mt-4;
 }
 
-section.warning {
-  @apply p-6 bg-gray-100 shadow-inner shadow-red-300 rounded-2xl bg-red-100;
+pre {
+  @apply mt-4 p-4 border border-blue-500 rounded-2xl;
+  box-shadow: inset 0 0 0.5rem 0.1rem #b3b3b3;
+}
+
+
+ul {
+  @apply flex flex-col gap-2 mt-4 ml-4 list-disc;
 }

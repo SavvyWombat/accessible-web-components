@@ -29,19 +29,14 @@
         <a href="/component-library/dropdown-selector">Dropdown Selector</a>
     </nav>
 
-    <main class="grid-in-main">
+    <main class="grid-in-main flex flex-col gap-16 mt-8 my-16">
         @yield('content')
     </main>
 
     <footer class="grid-in-footer bg-gray-100 text-blue-500 p-2 pt-8 text-right shadow-inner-top">
         <p>
             <span class="font-bold">Accessible Web Components</span> created by
-            <a href="https://savvywombat.com.au"
-               class="underline text-blue-700 rounded
-                          outline-offset-0
-                          focus:no-underline focus:outline focus:outline-4 focus:outline-blue-300
-                          hover:no-underline hover:outline hover:outline-4 hover:outline-blue-300 hover:bg-blue-300"
-            >Savvy Wombat</a>
+            <a href="https://savvywombat.com.au">Savvy Wombat</a>
             © 2022
         </p>
 

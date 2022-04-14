@@ -18,5 +18,5 @@ em {
 }
 
 kbd {
-  @apply rounded shadow shadow-blue-700 border border-blue-700 px-1 pt-[2px] pb-px bg-gray-100 text-blue-700;
+  @apply rounded shadow shadow-blue-500 border border-blue-500 px-1 pt-[2px] pb-px bg-zinc-200 text-blue-700;
 }

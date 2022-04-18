@@ -16,6 +16,16 @@ title: Tab Group
         </p>
     </header>
 
+    <section class="warning">
+        <strong>
+            Work in progress
+        </strong>
+
+        <p>
+            I'm currently working on the design of the documentation and how to include demonstrations and code examples for the components.
+        </p>
+    </section>
+
     <section>
         <h2>Demonstration</h2>
 

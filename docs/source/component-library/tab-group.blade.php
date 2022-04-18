@@ -55,6 +55,32 @@ title: Tab Group
 
     <section>
         <h2>Accessibility</h2>
+
+        <p>
+            Keyboard navigation is available. The element is focusable with
+            <kbd>tab</kbd>.
+        </p>
+
+        <h3>When focused</h3>
+
+        <ul>
+            <li><kbd>tab</kbd> will focus the next focusable element</li>
+            <li><kbd>left</kbd> will highlight the previous tab</li>
+            <li><kbd>right</kbd> will highlight the next tab</li>
+            <li><kbd>home</kbd> will highlight the first tab</li>
+            <li><kbd>end</kbd> will highlight the last tab</li>
+            <li><kbd>space</kbd> and <kbd>enter</kbd> will open the highlighted tab</li>
+        </ul>
+
+        <h3>Screen readers</h3>
+
+        <p>
+            Screen reader users will be informed that they have focused a <em>page tab</em>.
+        </p>
+
+        <p>
+            When activating a tab, the user will be informed that they have selected that tab.
+        </p>
     </section>
 
     <section>

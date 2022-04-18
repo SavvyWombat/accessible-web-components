@@ -8,6 +8,10 @@ title: Dropdown Selector
     <h1>Dropdown Selector</h1>
 
     <code class="html-tag">dropdown-selector</code>
+
+    <p>
+        The dropdown selector is a form input that can be used to in place of a native select element in single mode.
+    </p>
 </header>
 
 <section class="warning">
@@ -164,7 +168,10 @@ return (
 
     <ul>
         <li>
-            <a href="https://w3c.github.io/aria-practices/examples/combobox/combobox-select-only.html">WAI-ARIA Authoring Practices: Select-Only Combobox Example</a>
+            <a href="https://w3c.github.io/aria-practices/#combobox">WAI-ARIA Authoring Practices 1.2: <wbr/>Combobox</a>
+        </li>
+        <li>
+            <a href="https://w3c.github.io/aria-practices/examples/combobox/combobox-select-only.html">WAI-ARIA Authoring Practices 1.2: <wbr/>Select-Only Combobox Example</a>
         </li>
     </ul>
 </section>

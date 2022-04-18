@@ -1,10 +1,16 @@
 import {BaseComponent} from './base-component.js';
 
 export class DropdownSelector extends BaseComponent {
+  static get observedAttributes() {
+    return ['disabled', 'value'];
+  }
+
   constructor() {
     super()
       .attachShadow({mode: 'open'})
       .innerHTML = html;
+
+    this.__options = [];
   }
 
   connectedCallback() {
@@ -14,6 +20,8 @@ export class DropdownSelector extends BaseComponent {
       this.__listbox = this.shadowRoot.getElementById('listbox');
 
       this.__selectedIndex = 0;
+      // we need to store whether the user has defined a tabIndex for later use
+      this.__userTabIndex = this.tabIndex;
       this.__value = '';
 
       this.__currentIndex = null;
@@ -28,6 +36,8 @@ export class DropdownSelector extends BaseComponent {
       this.__combobox.addEventListener('blur', this.blur.bind(this));
       this.__combobox.addEventListener('click', this.click.bind(this));
       this.__combobox.addEventListener('keydown', this.keydown.bind(this));
+      // we need to store whether the user has defined a tabIndex for later use
+      this.__combobox.addEventListener('mousedown', this.mousedown.bind(this));
 
       this.attachLabelForAria([
         this.__combobox,
@@ -47,12 +57,30 @@ export class DropdownSelector extends BaseComponent {
     }
   }
 
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name === 'disabled') {
+      if (newValue !== null) {
+        // prevent focus from keyboard navigation
+        this.tabIndex = '-1';
+      } else {
+        // restore the original tabIndex as set by the user
+        // if the user didn't set a tabIndex, this will remove the tabIndex
+        this.tabIndex = this.__userTabIndex;
+      }
+    }
+
+    if (name === 'value') {
+      this.value = newValue;
+    }
+  }
+
   disconnectedCallback() {
     super.disconnectedCallback();
 
     this.__combobox.removeEventListener('blur', this.blur.bind(this));
     this.__combobox.removeEventListener('click', this.click.bind(this));
     this.__combobox.addEventListener('keydown', this.keydown.bind(this));
+    this.__combobox.addEventListener('mousedown', this.mousedown.bind(this));
 
     [...this.__listbox.children].forEach((element, index) => {
       element.remove();
@@ -74,6 +102,10 @@ export class DropdownSelector extends BaseComponent {
   }
 
   click(event) {
+    if (this.disabled) {
+      return;
+    }
+
     this.__open ? this.closeList() : this.openList();
   }
 
@@ -110,6 +142,14 @@ export class DropdownSelector extends BaseComponent {
         this.openList();
         this.__typing(event.key);
         return;
+    }
+  }
+
+  mousedown(event) {
+    if (this.disabled) {
+      // stops the element getting focus when clicked
+      event.stopImmediatePropagation();
+      event.preventDefault();
     }
   }
 
@@ -231,28 +271,30 @@ export class DropdownSelector extends BaseComponent {
   }
 
   select(index) {
-    this.__currentIndex = index;
-    this.__selectedIndex = index;
+    if (this.__options[index]) {
+      this.__currentIndex = index;
+      this.__selectedIndex = index;
 
-    this.__value = this.__options[index].value;
-    this.__combobox.textContent = this.__options[index].label;
+      this.__value = this.__options[index].value;
+      this.__combobox.textContent = this.__options[index].label;
 
-    const options = this.__listbox.querySelectorAll('[role=option]');
-    [...options].forEach((option) => {
-      option.setAttribute('aria-selected', 'false');
-    });
-    options[index].setAttribute('aria-selected', 'true');
+      const options = this.__listbox.querySelectorAll('[role=option]');
+      [...options].forEach((option) => {
+        option.setAttribute('aria-selected', 'false');
+      });
+      options[index].setAttribute('aria-selected', 'true');
 
-    if (this.__value !== this.__initialValue) {
-      this.dispatchEvent(
-        new CustomEvent('change')
-      );
+      if (this.__value !== this.__initialValue) {
+        this.dispatchEvent(
+          new Event('change')
+        );
 
-      this.dispatchEvent(
-        new CustomEvent('input')
-      );
+        this.dispatchEvent(
+          new Event('input')
+        );
 
-      this.__initialValue = this.__value;
+        this.__initialValue = this.__value;
+      }
     }
   }
 
@@ -371,11 +413,13 @@ export class DropdownSelector extends BaseComponent {
   }
 
   get disabled() {
-    return this.getAttribute('disabled');
+    // boolean attributes have no value - they either exist or they don't
+    return this.hasAttribute('disabled');
   }
 
   set disabled(newValue) {
     if (newValue) {
+      // boolean attributes have no value - they either exist or they don't
       this.setAttribute('disabled', '');
     } else {
       this.removeAttribute('disabled');
@@ -432,8 +476,16 @@ export class DropdownSelector extends BaseComponent {
     });
   }
 
-  get size() {
-    return 1;
+  get tabIndex() {
+    return this.getAttribute('tabIndex');
+  }
+
+  set tabIndex(newValue) {
+    if (newValue || newValue === '0') {
+      this.setAttribute('tabIndex', newValue);
+    } else {
+      this.removeAttribute('tabIndex');
+    }
   }
 
   get type() {
@@ -442,6 +494,10 @@ export class DropdownSelector extends BaseComponent {
 
   get value() {
     return this.__value;
+  }
+
+  set value(newValue) {
+    this.select(this.__options?.findIndex((option) => option.value == newValue));
   }
 }
 

@@ -27,6 +27,7 @@
         <a href="/getting-started">Getting Started</a>
         <span class="border-t-2 pt-4 border-gray-100">Component Library</span>
         <a href="/component-library/dropdown-selector">Dropdown Selector</a>
+        <a href="/component-library/tab-group">Tab Group</a>
     </nav>
 
     <main class="grid-in-main flex flex-col gap-16 mt-8 my-16">

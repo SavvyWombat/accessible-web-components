@@ -9,6 +9,6 @@ nav span {
   @apply block font-bold;
 }
 
-nav a.in-page {
-  @apply pl-4;
+nav a.in-page::before {
+  content: ' > ';
 }

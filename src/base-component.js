@@ -32,8 +32,6 @@ export class BaseComponent extends HTMLElement {
     }
   }
 
-
-
   disconnectedCallback() {
     if (this.__parentLabel) {
       this.shadowRoot.querySelectorAll(`[aria-labelledby]`).forEach((element) => {

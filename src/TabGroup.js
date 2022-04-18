@@ -1,4 +1,4 @@
-import {StyledComponent} from "./StyledComponent.js";
+import {StyledComponent} from './StyledComponent.js';
 
 export class TabGroup extends StyledComponent(HTMLElement) {
   constructor() {
@@ -26,6 +26,8 @@ export class TabGroup extends StyledComponent(HTMLElement) {
   }
 
   disconnectedCallback() {
+    super.disconnectedCallback();
+
     [...this.__root.childNodes].forEach((child) => child.remove());
 
     this.removeEventListener('click', this.click.bind(this));

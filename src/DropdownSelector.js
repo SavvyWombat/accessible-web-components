@@ -1,6 +1,7 @@
 import {BaseComponent} from './base-component.js';
+import {StyledComponent} from './StyledComponent.js';
 
-export class DropdownSelector extends BaseComponent {
+export class DropdownSelector extends StyledComponent(BaseComponent) {
   static get observedAttributes() {
     return ['disabled', 'value'];
   }
@@ -15,6 +16,8 @@ export class DropdownSelector extends BaseComponent {
 
   connectedCallback() {
     if (this.isConnected) {
+      super.connectedCallback();
+
       this.__root = this.shadowRoot.getElementById('root');
       this.__combobox = this.shadowRoot.getElementById('combobox');
       this.__listbox = this.shadowRoot.getElementById('listbox');
@@ -43,8 +46,6 @@ export class DropdownSelector extends BaseComponent {
         this.__combobox,
         this.__listbox,
       ])
-
-      this.applyStyles();
 
       this.__extractOptions();
 

@@ -4,7 +4,7 @@ import './index.css'
 import '../../base.css'
 import App from './App'
 
-import {DropdownSelector} from "../../../src/dropdown-selector.js";
+import {DropdownSelector} from "../../../src/DropdownSelector.js";
 
 customElements.define('dropdown-selector', DropdownSelector);
 

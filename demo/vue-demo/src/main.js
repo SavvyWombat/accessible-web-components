@@ -1,10 +1,10 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 
-import '../../base.css';
+import '../../base.css'
 
-import {DropdownSelector} from "../../../src/dropdown-selector.js";
+import {DropdownSelector} from "../../../src/DropdownSelector.js"
+
+customElements.define('dropdown-selector', DropdownSelector)
 
 createApp(App).mount('#app')
-
-customElements.define('dropdown-selector', DropdownSelector);

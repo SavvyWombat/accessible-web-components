@@ -9,15 +9,9 @@
             <h1>Dropdown Selector</h1>
 
             <form id="form">
-                <label for="edit-dropdown-label">Edit the dropdown's label</label>
-                <input id="edit-dropdown-label" type="text" v-model="labelText" />
-
-                <label for="number-of-options">Edit the dropdown's label</label>
-                <input id="number-of-options" type="number" min="1" max="12" v-model="numberOfOptions" />
-
                 <label for="dropdown-selector">{{ labelText }}</label>
-                <dropdown-selector id="dropdown-selector" ref="dropdown" @change="(event) => output = months[event.target.value]">
-                    <option v-for="(month) in monthList" :value="month" :key="month">{{ months[month] }}</option>
+                <dropdown-selector id="dropdown-selector" ref="dropdown" v-model="value"  @change="(event) => output = months[event.target.value]" :disabled="disabled" tabIndex="2">
+                    <option v-for="(month, index) in monthList" :value="month" :key="index">{{ months[month] }}</option>
                 </dropdown-selector>
 
                 <p class="output">
@@ -26,75 +20,7 @@
                 </p>
             </form>
         </section>
-
-        <section class="explanation">
-            <h2>User Experience</h2>
-
-            <p>
-                The dropdown for selecting the month should work according to the pattern and behaviour laid out in the
-                <a href="https://w3c.github.io/aria-practices/examples/combobox/combobox-select-only.html">
-                    Select-Only Combobox Example
-                </a> at WAI-ARIA Authoring Practices 1.2.
-            </p>
-
-            <ul>
-                <li>The dropdown is focusable with <kbd>tab</kbd></li>
-                <li>The menu will open when <kbd>up</kbd>, <kbd>down</kbd>, <kbd>enter</kbd>, or <kbd>space</kbd> are pressed while focused</li>
-                <li>The menu will open if the user starts typing</li>
-            </ul>
-
-            <p>
-                When open:
-            </p>
-
-            <ul>
-                <li><kbd>home</kbd> or <kbd>end</kbd> will highlight the first or last item respectively</li>
-                <li><kbd>up</kbd> or <kbd>down</kbd> will move the highlight accordingly</li>
-                <li><kbd>enter</kbd> or <kbd>space</kbd> will change the selected value to the current highlighted value, close the menu, but keep focus on the dropdown</li>
-                <li><kbd>tab</kbd> will change the selected value to the current highlighted value, close the menu, and then move focus to the next element</li>
-                <li><kbd>escape</kbd> will close the dropdown without changing its value</li>
-            </ul>
-        </section>
-
-        <section class="explanation">
-            <h2>Developer Experience</h2>
-
-            <p>
-                &lt;option&gt; elements work just like regular HTML Option elements.
-                The value attribute is optional, and a selected attribute can be used to set the initial value.
-            </p>
-
-            <pre><code>&lt;form id="form">
-    &lt;label for="edit-dropdown-label">Edit the dropdown's label&lt;/label>
-    &lt;input id="edit-dropdown-label" type="text" v-model="labelText" />
-
-    &lt;label for="number-of-options">Edit the dropdown's label&lt;/label>
-    &lt;input id="number-of-options" type="number" min="1" max="12" v-model="numberOfOptions" />
-
-    &lt;label for="dropdown-selector">{{ labelText }}&lt;/label>
-    &lt;dropdown-selector id="dropdown-selector" ref="dropdown" @change="(event) => output = months[event.target.value]">
-        &lt;option v-for="(month) in monthList" :value="month" :key="month">{{ months[month] }}&lt;/option>
-    &lt;/dropdown-selector>
-
-    &lt;p class="output">
-        &lt;span id="output-label">Current selection&lt;/span>:
-        &lt;output aria-labelledby="output-label">{{ output }}&lt;/output>
-    &lt;/p>
-    &lt;/form></code></pre>
-        </section>
     </main>
-
-    <footer>
-        <p>
-            Accessible Web Components created by
-            <a href="https://savvywombat.com.au">Savvy Wombat</a> &copy; 2022
-        </p>
-
-        <p>
-            Source code available on
-            <a href="https://github.com/SavvyWombat/accessible-web-components">GitHub</a>
-        </p>
-    </footer>
 </template>
 
 <script setup>
@@ -107,6 +33,9 @@ const months = [
 const dropdown = ref(null);
 const output = ref(null);
 
+const value = ref(6);
+
+const disabled = ref(false);
 const labelText = ref('Choose a month');
 const numberOfOptions = ref(12);
 const monthList = computed(() => {
@@ -123,6 +52,10 @@ onMounted(() => {
 <style>
 dropdown-selector {
   display: block;
+}
+
+dropdown-selector[disabled] {
+  opacity: 0.5;
 }
 
 dropdown-selector #combobox {

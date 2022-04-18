@@ -1,5 +1,9 @@
 export const StyledComponent = superclass => class extends superclass {
   connectedCallback() {
+    if (super.connectedCallback) {
+      super.connectedCallback();
+    }
+
     const nodeName = this.nodeName.toLowerCase();
     const styleSheet = document.createElement('style');
     this.shadowRoot.appendChild(styleSheet);
@@ -31,6 +35,10 @@ export const StyledComponent = superclass => class extends superclass {
   }
 
   disconnectedCallback() {
+    if (super.disconnectedCallback) {
+      super.disconnectedCallback();
+    }
+
     this.shadowRoot.querySelectorAll('style').forEach((element) => {
       element.remove();
     });

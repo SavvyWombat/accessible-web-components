@@ -1,5 +1,9 @@
-export class BaseComponent extends HTMLElement {
-  attachLabelForAria(labelledElements) {
+export const LabelledComponent = superclass => class extends superclass {
+  connectedCallback() {
+    if (super.connectedCallback) {
+      super.connectedCallback();
+    }
+
     if (!this.id) {
       return;
     }
@@ -12,8 +16,8 @@ export class BaseComponent extends HTMLElement {
 
       this.shadowRoot.appendChild(this.__label);
 
-      labelledElements.forEach((element) => {
-        element.setAttribute('aria-labelledby', 'label');
+      this.__labelledElementIds.forEach((id) => {
+        this.shadowRoot.getElementById(id)?.setAttribute('aria-labelledby', 'label');
       });
 
       this.__parentLabel.addEventListener('click', this.click.bind(this));
@@ -33,6 +37,10 @@ export class BaseComponent extends HTMLElement {
   }
 
   disconnectedCallback() {
+    if (super.disconnectedCallback) {
+      super.disconnectedCallback();
+    }
+
     if (this.__parentLabel) {
       this.shadowRoot.querySelectorAll(`[aria-labelledby]`).forEach((element) => {
         element.removeAttribute('aria-labelledby');

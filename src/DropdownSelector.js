@@ -1,7 +1,7 @@
-import {BaseComponent} from './base-component.js';
+import {LabelledComponent} from './LabelledComponent.js';
 import {StyledComponent} from './StyledComponent.js';
 
-export class DropdownSelector extends StyledComponent(BaseComponent) {
+export class DropdownSelector extends StyledComponent(LabelledComponent(HTMLElement)) {
   static get observedAttributes() {
     return ['disabled', 'value'];
   }
@@ -11,6 +11,7 @@ export class DropdownSelector extends StyledComponent(BaseComponent) {
       .attachShadow({mode: 'open'})
       .innerHTML = html;
 
+    this.__labelledElementIds =  ['combobox', 'listbox'];
     this.__options = [];
   }
 
@@ -41,11 +42,6 @@ export class DropdownSelector extends StyledComponent(BaseComponent) {
       this.__combobox.addEventListener('keydown', this.keydown.bind(this));
       // we need to store whether the user has defined a tabIndex for later use
       this.__combobox.addEventListener('mousedown', this.mousedown.bind(this));
-
-      this.attachLabelForAria([
-        this.__combobox,
-        this.__listbox,
-      ])
 
       this.__extractOptions();
 

@@ -77,7 +77,7 @@ title: Dropdown Selector
 <section>
     <h2>Example code</h2>
 
-    <section>
+    <tab-group>
         <h3>Vanilla</h3>
 
         <pre>
@@ -99,9 +99,7 @@ title: Dropdown Selector
 </dropdown-selector>
             </x-torchlight-code>
         </pre>
-    </section>
 
-    <section>
         <h3>Vue.js</h3>
 
         <pre>
@@ -122,9 +120,7 @@ const month = ref(5);
 </template>
             </x-torchlight-code>
         </pre>
-    </section>
 
-    <section>
         <h3>React</h3>
 
         <pre>
@@ -156,7 +152,7 @@ return (
 )
             </x-torchlight-code>
         </pre>
-    </section>
+    </tab-group>
 </section>
 
 <section>

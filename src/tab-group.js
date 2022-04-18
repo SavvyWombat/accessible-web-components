@@ -8,18 +8,75 @@ export class TabGroup extends HTMLElement {
   connectedCallback() {
     if (this.isConnected) {
       this.__root = this.shadowRoot.getElementById('root');
+
+      this.__extractTabs();
+
+      this.addEventListener('click', this.click.bind(this));
+      this.addEventListener('keydown', this.keydown.bind(this));
+
+      this.__contentObserver = new MutationObserver((changes) => {
+        this.__extractTabs();
+      });
+      this.__contentObserver.observe(this, {childList: true});
+    }
+  }
+
+  disconnectedCallback() {
+    [...this.__root.childNodes].forEach((child) => child.remove());
+
+    this.removeEventListener('click', this.click.bind(this));
+    this.removeEventListener('keydown', this.keydown.bind(this));
+  }
+
+  click(event) {
+    const tab = event.path.find((element) => {
+      return element.getAttribute && element.getAttribute('role') === 'tab';
+    });
+
+    if (tab) {
+      this.__currentTab = tab;
+      this.__setOpenTab(this.__currentTab);
+    }
+  }
+
+  keydown(event) {
+    let keyCaught = false;
+
+    switch (event.key) {
+      case 'ArrowLeft':
+        this.__moveToPreviousTab();
+        keyCaught = true;
+        break;
+
+      case 'ArrowRight':
+        this.__moveToNextTab();
+        keyCaught = true;
+        break;
+
+      case 'Home':
+        this.__moveTo(this.__firstTab);
+        keyCaught = true;
+        break;
+
+      case 'End':
+        this.__moveTo(this.__lastTab);
+        keyCaught = true;
+        break;
     }
 
-    this.__extractTabs();
-
-    this.__contentObserver = new MutationObserver((changes) => {
-      this.__extractTabs();
-    });
-    this.__contentObserver.observe(this, { childList: true });
+    if (keyCaught) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
   }
 
   __extractTabs() {
-    this.__root.childNodes.forEach((child) => child.remove());
+    this.__firstTab = null;
+    this.__lastTab = null;
+    this.__currentTab = null;
+    this.__openTab = null;
+
+    [...this.__root.childNodes].forEach((child) => child.remove());
 
     this.__tablist = document.createElement('div');
     this.__tablist.setAttribute('id', 'tablist');
@@ -46,11 +103,15 @@ export class TabGroup extends HTMLElement {
       tab.setAttribute('role', 'tab');
       tab.setAttribute('aria-controls', `tab-panel-${index}`);
       tab.setAttribute('aria-selected', 'false');
-      if (!index) {
-        tab.setAttribute('aria-selected', 'true');
-      }
-      this.__tablist.appendChild(tab);
+      tab.setAttribute('tabIndex', '-1');
       tab.appendChild(heading.cloneNode(true));
+      this.__tablist.appendChild(tab);
+
+      if (!this.__firstTab) {
+        this.__firstTab = tab;
+      }
+      this.__lastTab = tab;
+
 
       const panel = document.createElement('section');
       panel.setAttribute('id', `tab-panel-${index}`)
@@ -65,7 +126,42 @@ export class TabGroup extends HTMLElement {
         content = content.nextSibling;
       }
       this.__root.appendChild(panel);
-    })
+    });
+
+    this.__currentTab = this.__firstTab;
+    this.__setOpenTab(this.__firstTab);
+  }
+
+  __moveToNextTab() {
+    if (this.__currentTab !== this.__lastTab) {
+      this.__currentTab = this.__currentTab.nextSibling;
+      this.__currentTab.focus();
+    }
+  }
+
+  __moveToPreviousTab() {
+    if (this.__currentTab !== this.__firstTab) {
+      this.__currentTab = this.__currentTab.previousSibling;
+      this.__currentTab.focus();
+    }
+  }
+
+  __moveTo(tab) {
+    this.__currentTab = tab;
+    this.__currentTab.focus();
+  }
+
+  __setOpenTab(tab) {
+    if (this.__openTab) {
+      this.__openTab.setAttribute('aria-selected', 'false');
+      this.__openTab.setAttribute('tabIndex', '-1');
+      this.shadowRoot.getElementById(this.__openTab.getAttribute('aria-controls')).classList.add('hidden');
+    }
+
+    this.__openTab = tab;
+    this.__openTab.setAttribute('aria-selected', 'true');
+    this.__openTab.removeAttribute('tabIndex');
+    this.shadowRoot.getElementById(this.__openTab.getAttribute('aria-controls')).classList.remove('hidden');
   }
 }
 
@@ -75,5 +171,14 @@ const html = `<div id="root">
 <style>
 .hidden {
   display: none;
+}
+
+[aria-selected=true] {
+  border: 2px solid black;
+}
+
+[role=tab]:focus {
+  border: 2px solid blue;
+  outline: none;
 }
 </style>`;

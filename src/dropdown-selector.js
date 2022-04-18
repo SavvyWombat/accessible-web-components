@@ -82,9 +82,7 @@ export class DropdownSelector extends BaseComponent {
     this.__combobox.addEventListener('keydown', this.keydown.bind(this));
     this.__combobox.addEventListener('mousedown', this.mousedown.bind(this));
 
-    [...this.__listbox.children].forEach((element, index) => {
-      element.remove();
-    });
+    [...this.__listbox.children].forEach((child) => child.remove());
 
     this.__optionsObserver.disconnect();
   }

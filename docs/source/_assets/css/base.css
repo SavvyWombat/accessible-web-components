@@ -20,3 +20,19 @@ em {
 kbd {
   @apply rounded shadow shadow-blue-500 border border-blue-500 px-1 pt-[2px] pb-px bg-zinc-200 text-blue-700;
 }
+
+tab-group {
+  @apply mt-4;
+}
+
+tab-group #tablist {
+  @apply flex;
+}
+
+tab-group #tablist button {
+  @apply block flex-grow;
+}
+
+tab-group [role=tabpanel] {
+  @apply border border-blue-500 rounded-b-xl p-4;
+}

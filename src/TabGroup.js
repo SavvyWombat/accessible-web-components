@@ -1,4 +1,6 @@
-export class TabGroup extends HTMLElement {
+import {StyledComponent} from "./StyledComponent.js";
+
+export class TabGroup extends StyledComponent(HTMLElement) {
   constructor() {
     super()
       .attachShadow({mode: 'open'})
@@ -7,6 +9,8 @@ export class TabGroup extends HTMLElement {
 
   connectedCallback() {
     if (this.isConnected) {
+      super.connectedCallback();
+
       this.__root = this.shadowRoot.getElementById('root');
 
       this.__extractTabs();

@@ -1,7 +1,7 @@
-import {DropdownSelector} from './dropdown-selector.js';
-import {TabGroup} from './tab-group.js';
+import {DropdownSelector} from './DropdownSelector.js';
+import {TabGroup} from './TabGroup.js';
 
-export { DropdownSelector, TabGroup };
+export {DropdownSelector, TabGroup};
 
 export const defineAccessibleWebComponents = () => {
   customElements.define('dropdown-selector', DropdownSelector);

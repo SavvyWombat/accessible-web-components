@@ -10,17 +10,19 @@ nav span {
 }
 
 nav div.in-page {
-  @apply flex flex-col gap-2
-    outline outline-offset-0 outline-4 outline-gray-100
+  @apply flex flex-col flex-shrink-0 gap-2
     p-1
     bg-gray-100
-    rounded;
+    rounded-lg;
+  margin-top: -0.25rem;
+  margin-left: -0.25rem;
+  width: calc(100% + 0.5rem);
 }
 
 nav div.in-page a {
-  @apply text-blue-900;
+  @apply pl-2 text-blue-900;
 }
 
 nav div.in-page a:first-child {
-  @apply font-bold;
+  @apply pl-0 font-bold;
 }

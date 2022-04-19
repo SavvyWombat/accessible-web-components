@@ -9,6 +9,18 @@ nav span {
   @apply block font-bold;
 }
 
-nav a.in-page::before {
-  content: ' > ';
+nav div.in-page {
+  @apply flex flex-col gap-2
+    outline outline-offset-0 outline-4 outline-gray-100
+    p-1
+    bg-gray-100
+    rounded;
+}
+
+nav div.in-page a {
+  @apply text-blue-900;
+}
+
+nav div.in-page a:first-child {
+  @apply font-bold;
 }

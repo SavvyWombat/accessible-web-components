@@ -21,9 +21,9 @@ nav div.in-page {
 }
 
 nav div.in-page a {
-  @apply pl-1 text-blue-900;
+  @apply pl-1 text-gray-900;
 }
 
 nav div.in-page a:first-child {
-  @apply font-bold;
+  @apply font-bold text-blue-500;
 }

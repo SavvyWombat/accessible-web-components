@@ -12,18 +12,18 @@ nav span {
 nav div.in-page {
   @apply flex flex-col flex-shrink-0 gap-2
     p-1
-    bg-gray-100
+    bg-gray-100 shadow-inner-fine
     rounded-lg;
   margin-top: -0.25rem;
-  margin-left: -0.25rem;
+  margin-left: -0.5rem;
   margin-bottom: -0.25rem;
-  width: calc(100% + 0.5rem);
+  width: calc(100% + 1rem);
 }
 
 nav div.in-page a {
-  @apply pl-2 text-blue-900;
+  @apply pl-1 text-blue-900;
 }
 
 nav div.in-page a:first-child {
-  @apply pl-0 font-bold;
+  @apply font-bold;
 }

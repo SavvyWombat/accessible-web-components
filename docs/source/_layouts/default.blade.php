@@ -27,8 +27,8 @@
         <a href="/getting-started/">Getting Started</a>
 
         <span><a href="/component-mixins/">Component Mixins</a></span>
-        <a href="/component-mixins/labelled-component">LabelledComponent</a>
-        <a href="/component-mixins/styled-component">StyledComponent</a>
+        <a href="/component-mixins/labelled-component/">LabelledComponent</a>
+        <a href="/component-mixins/styled-component/">StyledComponent</a>
 
         <span><a href="/component-library/">Component Library</a></span>
         <a href="/component-library/dropdown-selector/">Dropdown Selector</a>

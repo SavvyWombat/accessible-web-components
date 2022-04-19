@@ -1,7 +1,7 @@
 @extends ('_layouts.html')
 
 @section ('body')
-<body class="grid grid-areas-layout-default grid-cols-layout-default
+<body class="grid grid-areas-layout-default grid-cols-layout-default grid-rows-layout-default
             min-h-full
             text-gray-900 bg-blue-900
             font-sans antialiased"
@@ -24,10 +24,15 @@
 
     <nav class="grid-in-nav sticky top-0 flex flex-col gap-6 text-gray-100 p-4 pt-9 pr-8">
         <a href="/">Accessible Web Components</a>
-        <a href="/getting-started">Getting Started</a>
-        <span class="border-t-2 pt-4 border-gray-100">Component Library</span>
-        <a href="/component-library/dropdown-selector">Dropdown Selector</a>
-        <a href="/component-library/tab-group">Tab Group</a>
+        <a href="/getting-started/">Getting Started</a>
+
+        <span><a href="/component-mixins/">Component Mixins</a></span>
+        <a href="/component-mixins/labelled-component">LabelledComponent</a>
+        <a href="/component-mixins/styled-component">StyledComponent</a>
+
+        <span><a href="/component-library/">Component Library</a></span>
+        <a href="/component-library/dropdown-selector/">Dropdown Selector</a>
+        <a href="/component-library/tab-group/">Tab Group</a>
     </nav>
 
     <main class="grid-in-main flex flex-col gap-16 mt-8 my-16">

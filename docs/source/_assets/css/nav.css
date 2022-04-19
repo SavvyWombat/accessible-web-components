@@ -6,7 +6,7 @@ nav a {
 }
 
 nav span {
-  @apply block font-bold;
+  @apply block pt-4 border-t-2 border-gray-100 font-bold;
 }
 
 nav div.in-page {
@@ -16,6 +16,7 @@ nav div.in-page {
     rounded-lg;
   margin-top: -0.25rem;
   margin-left: -0.25rem;
+  margin-bottom: -0.25rem;
   width: calc(100% + 0.5rem);
 }
 

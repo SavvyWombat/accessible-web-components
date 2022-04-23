@@ -9,6 +9,10 @@ export const LabelledComponent = superclass => class extends superclass {
     }
 
     this.__parentLabel = document.querySelector(`[for=${this.id}]`);
+    if (!this.__parentLabel) {
+      this.__parentLabel = document.getElementById(this.getAttribute('aria-labelledby'));
+    }
+
     if (this.__parentLabel) {
       this.__label = document.createElement('label');
       this.__label.setAttribute('id', 'label');

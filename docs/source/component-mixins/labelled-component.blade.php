@@ -121,7 +121,7 @@ class DropdownSelector extends LabelledComponent(HTMLElement) {
         </pre>
 
         <p>
-            One downside to this method is that it's a different pattern of authoring.
+            One downside to either of these approaches is that it's a different pattern of authoring.
             Another is that it makes it harder to style the label.
         </p>
     </section>

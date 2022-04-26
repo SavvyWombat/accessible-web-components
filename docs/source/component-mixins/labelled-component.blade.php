@@ -16,6 +16,8 @@ title: LabelledComponent
     <section>
         <h2>Usage</h2>
 
+        <h3>Extending from LabelledComponent in JavaScript</h3>
+
         <pre>
             <x-torchlight-code language="javascript">
 import {LabelledComponent} from 'accessible-web-components';
@@ -48,6 +50,8 @@ class DropdownSelector extends LabelledComponent(HTMLElement) {
             </x-torchlight-code>
         </pre>
 
+        <h3>Using a LabelledComponent in HTML</h3>
+
         <pre>
             <x-torchlight-code language="html">
 <label for="choose-something">Choose something from the list</label>
@@ -74,6 +78,51 @@ class DropdownSelector extends LabelledComponent(HTMLElement) {
 
         <p>
             The mixin will also set up appropriate listeners on the original label to set focus on the Web Component when the label is clicked.
+        </p>
+    </section>
+
+    <section>
+        <h2>Authoring Experience</h2>
+
+        <p>
+            The <code class="js-class">LabelledComponent</code> mixin was created to mimic the native approach for labelling form inputs when working with Web Components.
+            For example:
+        </p>
+
+        <pre>
+            <x-torchlight-code language="html">
+<label for="type-something">Type in the input</label>
+<input id="type-something" type="text"/>
+
+<label for="choose-something">Choose something from the list</label>
+<dropdown-selector id="choose-something"></dropdown-selector>
+            </x-torchlight-code>
+        </pre>
+
+        <p>
+            This means that the label can be naturally styled the same way as any other label used across the site.
+        </p>
+
+        <p>
+            The common alternatives are to use an attribute - which typically limits the label content to text,
+            or use a slot:
+        </p>
+
+        <pre>
+            <x-torchlight-code language="html">
+<dropdown-selector id="with-attribute" label="Choose something from the list"></dropdown-selector>
+
+<dropdown-selector id="with-slot">
+    <slot name="label">
+        Choose something from the list
+    </slot>
+</dropdown-selector>
+            </x-torchlight-code>
+        </pre>
+
+        <p>
+            One downside to this method is that it's a different pattern of authoring.
+            Another is that it makes it harder to style the label.
         </p>
     </section>
 @endsection

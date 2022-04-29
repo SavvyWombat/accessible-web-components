@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-import '../../base.css'
+import '../common/base.css'
 import App from './App'
 
 import {DropdownSelector} from "../../../src/DropdownSelector.js";

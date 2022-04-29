@@ -1,4 +1,4 @@
-import '../base.css';
+import '../common/base.css';
 
 import favicon from '../../images/logo.svg';
 

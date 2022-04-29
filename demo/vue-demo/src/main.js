@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 
-import '../../base.css'
+import '../common/base.css'
 
 import {DropdownSelector} from "../../../src/DropdownSelector.js"
 

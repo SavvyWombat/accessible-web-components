@@ -6,59 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <script type="module">
-      import 'demo/common/base.css';
-
-      import {DropdownSelector} from '../../src/DropdownSelector.js';
-
-      customElements.define('dropdown-selector', DropdownSelector);
+      import '../common/base.css';
     </script>
-
-    <style>
-      dropdown-selector {
-        display: block;
-      }
-
-      dropdown-selector[disabled] {
-        opacity: 0.5;
-      }
-
-      dropdown-selector #combobox {
-        border: 3px solid #122436;
-        border-radius: 0.5em;
-        padding: 1em;
-      }
-
-      dropdown-selector #combobox:focus {
-        border: 3px solid #9999ff;
-      }
-
-      dropdown-selector #listbox {
-        background-color: #fafafa;
-      }
-
-      dropdown-selector #combobox[aria-expanded=true] ~ #listbox {
-        border: 3px solid #122436;
-        border-radius: 0.5em;
-      }
-
-      dropdown-selector .option {
-        padding: 1em;
-      }
-
-      dropdown-selector .option.current {
-        outline: 2px solid #acdcfc;
-        background-color: #f0f0f0;
-      }
-
-      dropdown-selector .option:hover {
-        background-color: #acdcfc;
-      }
-
-      section.transparent {
-        box-shadow: none;
-        background-color: transparent;
-      }
-    </style>
 </head>
 <body>
 <header>

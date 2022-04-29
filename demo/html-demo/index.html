@@ -68,41 +68,15 @@
 
 <main>
     <section class="demo">
-        <h1>Dropdown Selector</h1>
-
-        <form id="form">
-            <label id="label-for-dropdown-selector">Choose a month</label>
-            <dropdown-selector id="dropdown-selector" aria-labelledby="label-for-dropdown-selector">
-                <option value="0">January</option>
-                <option value="1">February</option>
-                <option value="2">March</option>
-                <option value="3">April</option>
-                <option value="4">May</option>
-                <option value="5" selected>June</option>
-                <option value="6">July</option>
-                <option value="7">August</option>
-                <option value="8">September</option>
-                <option value="9">October</option>
-                <option value="10">November</option>
-                <option value="11">December</option>
-            </dropdown-selector>
-
-            <p class="output">
-                <span id="output-label">Current selection</span>:
-                <output id="output" aria-labelledby="output-label">June</output>
-            </p>
-        </form>
+        <ul>
+            <li>
+                <a href="dropdown-selector.html">Dropdown Selector</a>
+            </li>
+            <li>
+                <a href="tab-group.html">Tab Group</a>
+            </li>
+        </ul>
     </section>
-
-    <script>
-      const months = [
-        'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',
-      ];
-
-      document.getElementById('dropdown-selector').addEventListener('change', (event) => {
-        document.getElementById('output').innerText = months[event.target.value];
-      });
-    </script>
 </main>
 </body>
 </html>

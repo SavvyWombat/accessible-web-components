@@ -97,6 +97,10 @@ ul + p {
   margin-top: 2rem;
 }
 
+ul li {
+  list-style-type: none;
+}
+
 p.output {
   border: 3px solid #122436;
   border-radius: 0.5rem;

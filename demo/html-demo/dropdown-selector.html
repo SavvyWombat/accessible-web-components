@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+    <title>Dropdown Selector | HTML Demo | Accessible Web Components | Savvy Wombat</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script type="module">
+        import './index.js';
+    </script>
+
+    <style>
+      dropdown-selector {
+        display: block;
+      }
+
+      dropdown-selector[disabled] {
+        opacity: 0.5;
+      }
+
+      dropdown-selector #combobox {
+        border: 3px solid #122436;
+        border-radius: 0.5em;
+        padding: 1em;
+      }
+
+      dropdown-selector #combobox:focus {
+        border: 3px solid #9999ff;
+      }
+
+      dropdown-selector #listbox {
+        background-color: #fafafa;
+      }
+
+      dropdown-selector #combobox[aria-expanded=true] ~ #listbox {
+        border: 3px solid #122436;
+        border-radius: 0.5em;
+      }
+
+      dropdown-selector .option {
+        padding: 1em;
+      }
+
+      dropdown-selector .option.current {
+        outline: 2px solid #acdcfc;
+        background-color: #f0f0f0;
+      }
+
+      dropdown-selector .option:hover {
+        background-color: #acdcfc;
+      }
+
+      section.transparent {
+        box-shadow: none;
+        background-color: transparent;
+      }
+    </style>
+</head>
+
+<body>
+<header>
+    <h2>Accessible Web Components</h2>
+    <h3>HTML Demo</h3>
+</header>
+
+<main>
+    <section class="demo">
+        <h1>Dropdown Selector</h1>
+
+        <form id="form">
+            <label id="label-for-dropdown-selector">Choose a month</label>
+            <dropdown-selector id="dropdown-selector" aria-labelledby="label-for-dropdown-selector">
+                <option value="0">January</option>
+                <option value="1">February</option>
+                <option value="2">March</option>
+                <option value="3">April</option>
+                <option value="4">May</option>
+                <option value="5" selected>June</option>
+                <option value="6">July</option>
+                <option value="7">August</option>
+                <option value="8">September</option>
+                <option value="9">October</option>
+                <option value="10">November</option>
+                <option value="11">December</option>
+            </dropdown-selector>
+
+            <p class="output">
+                <span id="output-label">Current selection</span>:
+                <output id="output" aria-labelledby="output-label">June</output>
+            </p>
+        </form>
+    </section>
+
+    <script>
+      const months = [
+        'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',
+      ];
+
+      document.getElementById('dropdown-selector').addEventListener('change', (event) => {
+        document.getElementById('output').innerText = months[event.target.value];
+      });
+    </script>
+</main>
+</body>
+</html>

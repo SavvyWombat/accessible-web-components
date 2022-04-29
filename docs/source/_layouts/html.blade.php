@@ -30,6 +30,8 @@
         <meta name="theme-color" content="#13264b">
 
         @include('_partials.social-card')
+
+        <script src="https://trip.accessible-web-components.dev/script.js" data-site="FLYJVKUK" defer></script>
     </head>
 
     @yield('body')

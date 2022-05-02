@@ -1,10 +1,12 @@
 @extends ('_layouts.html')
 
 @section ('body')
-<body class="grid grid-areas-layout-default grid-cols-layout-default grid-rows-layout-default
-            min-h-full
-            text-gray-900 bg-blue-900
-            font-sans antialiased"
+<body class="grid
+                grid-areas-layout-default grid-cols-layout-default grid-rows-layout-default
+                medium:grid-areas-layout-narrow medium:grid-cols-layout-narrow medium:grid-rows-layout-narrow
+                min-h-full
+                text-gray-900 bg-blue-900
+                font-sans antialiased"
 >
     <header class="grid-in-header bg-gray-100 text-blue-500 font-bold text-3xl p-2 pb-8 shadow-inner-bottom">
         <a href="/"
@@ -22,7 +24,7 @@
         </a>
     </header>
 
-    <nav class="grid-in-nav sticky top-0 flex flex-col gap-6 text-gray-100 p-4 pt-9 pr-8">
+    <nav class="grid-in-nav wide:sticky top-0 flex flex-col gap-6 text-gray-100 p-4 pt-9 pr-8">
         <a href="/">Accessible Web Components</a>
         <a href="/getting-started/">Getting Started</a>
 

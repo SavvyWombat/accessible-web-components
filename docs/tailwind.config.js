@@ -4,6 +4,11 @@ module.exports = {
     '!source/**/_tmp/*'
   ],{ dot: true }),
   theme: {
+    screens: {
+      'narrow': {'max': '530px'},
+      'medium': {'max': '1024px'},
+      'wide': {'min': '1024px'},
+    },
     extend: {
       colors: {
         blue: {
@@ -56,14 +61,22 @@ module.exports = {
           '.      main   .',
           'footer footer footer'
         ],
+        'layout-narrow': [
+          'header header header',
+          'nav    nav    nav',
+          '.      main   .',
+          'footer footer footer',
+        ],
       },
 
       gridTemplateColumns: {
         'layout-default': '30ch 80ch 1fr',
+        'layout-narrow': '1em 1fr 1em',
       },
 
       gridTemplateRows: {
         'layout-default': 'auto auto minmax(max-content, 1fr) auto',
+        'layout-narrow': 'auto auto auto auto',
       },
     },
   },

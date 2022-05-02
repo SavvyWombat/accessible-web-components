@@ -5,10 +5,6 @@ nav a {
   hover:no-underline hover:outline hover:outline-4 hover:outline-blue-300 hover:bg-blue-300 hover:text-blue-900;
 }
 
-nav span {
-  @apply block pt-4 border-t-2 border-gray-100 font-bold;
-}
-
 nav div.in-page {
   @apply flex flex-col flex-shrink-0 gap-2
     p-1;

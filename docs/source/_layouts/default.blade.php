@@ -24,18 +24,7 @@
         </a>
     </header>
 
-    <nav class="grid-in-nav wide:sticky top-0 flex flex-col gap-6 text-gray-100 p-4 pt-9 pr-8">
-        <a href="/">Accessible Web Components</a>
-        <a href="/getting-started/">Getting Started</a>
-
-        <span><a href="/component-mixins/">Component Mixins</a></span>
-        <a href="/component-mixins/labelled-component/">LabelledComponent</a>
-        <a href="/component-mixins/styled-component/">StyledComponent</a>
-
-        <span><a href="/component-library/">Component Library</a></span>
-        <a href="/component-library/dropdown-selector/">Dropdown Selector</a>
-        <a href="/component-library/tab-group/">Tab Group</a>
-    </nav>
+    @include('_partials.navigation')
 
     <main class="grid-in-main flex flex-col gap-16 mt-8 my-16">
         @yield('content')

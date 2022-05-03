@@ -63,7 +63,7 @@ module.exports = {
         ],
         'layout-narrow': [
           'header header header',
-          'nav    nav    nav',
+          '.      nav    .',
           '.      main   .',
           'footer footer footer',
         ],
@@ -71,7 +71,7 @@ module.exports = {
 
       gridTemplateColumns: {
         'layout-default': '30ch 80ch 1fr',
-        'layout-narrow': '1em 1fr 1em',
+        'layout-narrow': '1fr minmax(min-content, 80ch) 1fr',
       },
 
       gridTemplateRows: {

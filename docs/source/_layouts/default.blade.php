@@ -12,12 +12,13 @@
         <a href="/"
            title="Home Page"
            class="rounded
-                      outline-offset-0
-                      focus-within:no-underline focus-within:outline focus-within:outline-4 focus-within:outline-blue-300"
+                  no-underline outline-offset-0
+                  focus-within:no-underline focus-within:outline focus-within:outline-4 focus-within:outline-blue-300"
         >
-            <h2 class="inline-block m-0 rounded
-                          hover:no-underline hover:outline hover:outline-4 hover:outline-blue-300 hover:bg-blue-300">
-
+            <h2 class="flex gap-2 m-0 rounded
+                        items-center
+                        no-underline hover:outline hover:outline-4 hover:outline-blue-300 hover:bg-blue-300"
+            >
                 <img class="inline-block h-16 w-16" src="/assets/images/logo.svg" alt="" />
                 <span>Accessible Web Components</span>
             </h2>

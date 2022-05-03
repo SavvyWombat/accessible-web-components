@@ -1,4 +1,4 @@
-<nav class="grid-in-nav sticky top-0 text-gray-100 bg-blue-900 p-4 pr-8">
+<nav class="grid-in-nav sticky top-0 overscroll-none text-gray-100 bg-blue-900 p-4 pr-8">
     <span id="site-navigation-control"
           class="wide:hidden block no-underline text-gray-100 rounded
               outline-offset-0

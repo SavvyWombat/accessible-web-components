@@ -1,4 +1,4 @@
-<nav class="grid-in-nav wide:sticky top-0 flex flex-col gap-6 text-gray-100 p-4 pt-9 pr-8">
+<nav class="grid-in-nav wide:sticky top-0 text-gray-100 p-4 pr-8">
     <span id="site-navigation-control"
           class="wide:hidden block no-underline text-gray-100 rounded
               outline-offset-0
@@ -11,7 +11,7 @@
         Menu
     </span>
 
-    <div id="site-navigation" class="medium:hidden">
+    <div id="site-navigation" class="flex flex-col gap-6 pt-9 medium:hidden">
         <a href="/">Accessible Web Components</a>
         <a href="/getting-started/">Getting Started</a>
 
@@ -35,7 +35,7 @@
       menu.style.display = 'none';
       menu.setAttribute('aria-expanded', 'false');
     } else {
-      menu.style.display = 'block';
+      menu.style.display = 'flex';
       menu.setAttribute('aria-expanded', 'true');
     }
   });

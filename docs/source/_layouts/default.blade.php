@@ -31,10 +31,10 @@
         @yield('content')
     </main>
 
-    <footer class="grid-in-footer bg-gray-100 text-blue-500 p-2 pt-8 text-right shadow-inner-top">
+    <footer class="grid-in-footer bg-gray-100 text-blue-500 p-4 pt-8 text-right shadow-inner-top">
         <p>
             <span class="font-bold">Accessible Web Components</span> created by
-            <a href="https://savvywombat.com.au">Savvy Wombat</a>
+            <a href="https://savvywombat.com.au" class="whitespace-nowrap">Savvy Wombat</a>
             © 2022
         </p>
 

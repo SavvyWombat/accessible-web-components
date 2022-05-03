@@ -8,8 +8,9 @@
               text-3xl font-bold"
           tabindex="0"
           aria-controls="site-navigation"
+          aria-haspopup="true"
     >
-        Menu
+        Site Navigation
     </span>
 
     <div id="site-navigation" class="flex flex-col gap-6 pt-9 medium:hidden">

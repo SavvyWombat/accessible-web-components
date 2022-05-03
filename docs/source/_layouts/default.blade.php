@@ -27,13 +27,16 @@
 
     @include('_partials.navigation')
 
-    <main class="grid-in-main flex flex-col gap-16 mt-8 my-16">
+    <main class="grid-in-main flex flex-col gap-16 narrow:gap-8
+                    mt-8 my-16 narrow:my-4"
+    >
         @yield('content')
     </main>
 
     <footer class="grid-in-footer bg-gray-100 text-blue-500 p-4 pt-8 text-right shadow-inner-top">
         <p>
-            <span class="font-bold">Accessible Web Components</span> created by
+            <span class="font-bold">Accessible Web Components</span><br/>
+            Created by
             <a href="https://savvywombat.com.au" class="whitespace-nowrap">Savvy Wombat</a>
             © 2022
         </p>

@@ -1,6 +1,6 @@
 main > header,
 main > section {
-  @apply p-6  bg-gray-100 shadow-inner rounded-2xl
+  @apply p-6 narrow:p-4 bg-gray-100 shadow-inner rounded-2xl
 }
 
 section.warning {
@@ -45,7 +45,7 @@ p {
 }
 
 pre {
-  @apply mt-4 px-4 overflow-x-auto border border-blue-500 rounded-2xl bg-zinc-200;
+  @apply mt-4 px-4 overflow-x-auto narrow:text-sm border border-blue-500 rounded-2xl bg-zinc-200;
   box-shadow: inset 0 0 0.5rem 0.1rem #b3b3b3;
   scrollbar-color: #d1d5db #4b5563;
 }

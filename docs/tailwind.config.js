@@ -5,7 +5,7 @@ module.exports = {
   ],{ dot: true }),
   theme: {
     screens: {
-      'narrow': {'max': 'calc(80ch + 2em)'},
+      'narrow': {'max': '780px'},
       'medium': {'max': '1024px'},
       'wide': {'min': '1024px'},
     },
@@ -71,7 +71,7 @@ module.exports = {
 
       gridTemplateColumns: {
         'layout-default': '30ch 80ch 1fr',
-        'layout-medium': 'minmax(1em, 1fr) minmax(auto, 80ch) minmax(1em, 1fr)',
+        'layout-medium': 'minmax(1em, 1fr) minmax(calc(100vw - 2em), 80ch) minmax(1em, 1fr)',
       },
 
       gridTemplateRows: {

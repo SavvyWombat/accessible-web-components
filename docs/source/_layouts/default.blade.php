@@ -3,7 +3,7 @@
 @section ('body')
 <body class="grid
                 grid-areas-layout-default grid-cols-layout-default grid-rows-layout-default
-                medium:grid-areas-layout-narrow medium:grid-cols-layout-narrow medium:grid-rows-layout-narrow
+                medium:grid-areas-layout-medium medium:grid-cols-layout-medium medium:grid-rows-layout-medium
                 min-h-full
                 text-gray-900 bg-blue-900
                 font-sans antialiased"

@@ -1,6 +1,6 @@
 main > header,
 main > section {
-  @apply p-6 bg-gray-100 shadow-inner rounded-2xl
+  @apply p-6  bg-gray-100 shadow-inner rounded-2xl
 }
 
 section.warning {

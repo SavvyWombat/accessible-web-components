@@ -5,7 +5,7 @@ module.exports = {
   ],{ dot: true }),
   theme: {
     screens: {
-      'narrow': {'max': '530px'},
+      'narrow': {'max': 'calc(80ch + 2em)'},
       'medium': {'max': '1024px'},
       'wide': {'min': '1024px'},
     },
@@ -61,7 +61,7 @@ module.exports = {
           '.      main   .',
           'footer footer footer'
         ],
-        'layout-narrow': [
+        'layout-medium': [
           'header header header',
           '.      nav    .',
           '.      main   .',
@@ -71,12 +71,12 @@ module.exports = {
 
       gridTemplateColumns: {
         'layout-default': '30ch 80ch 1fr',
-        'layout-narrow': '1fr minmax(min-content, 80ch) 1fr',
+        'layout-medium': 'minmax(1em, 1fr) minmax(auto, 80ch) minmax(1em, 1fr)',
       },
 
       gridTemplateRows: {
         'layout-default': 'auto auto minmax(max-content, 1fr) auto',
-        'layout-narrow': 'auto auto auto auto',
+        'layout-medium': 'auto auto auto auto',
       },
     },
   },

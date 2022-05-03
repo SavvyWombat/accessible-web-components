@@ -4,7 +4,8 @@
               outline-offset-0
               focus:no-underline focus:outline focus:outline-4 focus:outline-blue-300
               hover:no-underline hover:outline hover:outline-4 hover:outline-blue-300 hover:bg-blue-300 hover:text-blue-900
-              cursor-pointer"
+              cursor-pointer
+              text-3xl font-bold"
           tabindex="0"
           aria-controls="site-navigation"
     >
@@ -30,7 +31,7 @@
   const control = document.getElementById('site-navigation-control');
   const menu = document.getElementById('site-navigation');
 
-  control.addEventListener('click', () => {
+  const toggleMenu = () => {
     if (menu.clientHeight) {
       menu.style.display = 'none';
       menu.setAttribute('aria-expanded', 'false');
@@ -38,7 +39,32 @@
       menu.style.display = 'flex';
       menu.setAttribute('aria-expanded', 'true');
     }
+  }
+
+  const closeMenu = () => {
+    if (control.clientHeight) {
+      menu.style.display = 'none';
+      menu.setAttribute('aria-expanded', 'false');
+    }
+  }
+
+  control.addEventListener('click', toggleMenu);
+
+  control.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      toggleMenu();
+    }
+
+    if (event.key === 'Escape') {
+      closeMenu();
+    }
   });
+
+  menu.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeMenu();
+    }
+  })
 
   const resizeObserver = new ResizeObserver(entries => {
     if (entries[0].target.clientHeight === 0) {

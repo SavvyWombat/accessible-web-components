@@ -12,6 +12,7 @@ export class TabGroup extends StyledComponent(HTMLElement) {
       super.connectedCallback();
 
       this.__root = this.shadowRoot.getElementById('root');
+      this.__tablist = this.shadowRoot.getElementById('tablist');
 
       this.__extractTabs();
 
@@ -28,7 +29,7 @@ export class TabGroup extends StyledComponent(HTMLElement) {
   disconnectedCallback() {
     super.disconnectedCallback();
 
-    [...this.__root.childNodes].forEach((child) => child.remove());
+    [...this.__tablist.children].forEach((child) => child.remove());
 
     this.removeEventListener('click', this.click.bind(this));
     this.removeEventListener('keydown', this.keydown.bind(this));
@@ -82,56 +83,44 @@ export class TabGroup extends StyledComponent(HTMLElement) {
     this.__currentTab = null;
     this.__openTab = null;
 
-    [...this.__root.childNodes].forEach((child) => child.remove());
+    [...this.__tablist.children].forEach((child) => child.remove());
 
-    this.__tablist = document.createElement('div');
-    this.__tablist.setAttribute('id', 'tablist');
-    this.__root.appendChild(this.__tablist);
+    [...this.querySelectorAll('tab-card')].forEach((card, index) => {
+      const label = card.hasAttribute('label') ?
+        card.getAttribute('label') :
+        ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].reduce((label, heading) => {
+          if (label === '') {
+            const headings = card.querySelectorAll(heading);
+            if (headings.length) {
+              headings[0].classList.add('hidden');
+              return headings[0].outerHTML;
+            }
+            return '';
+          }
+          return label;
+        }, '');
 
-    const headings = ['h1','h2','h3','h4','h5','h6'].reduce((nodeList, heading) => {
-      if (!nodeList) {
-        nodeList = this.querySelectorAll(heading);
-        return nodeList.length ? nodeList : undefined;
-      }
-      return nodeList;
-    }, undefined);
+      const cardId = card.hasAttribute('id') ?
+        card.getAttribute('id') :
+        `tab-panel-${index}`;
 
-    if (!headings) {
-      console.error('tab-group must have at least one h1-h6 for tabs to work');
-      this.__root.innerHTML = this.innerHTML;
-      return;
-    }
+      card.setAttribute('id', cardId);
+      card.classList.add('hidden');
 
-    Array.from(headings).forEach((heading, index) => {
       const tab = document.createElement('button');
       tab.setAttribute('id', `tab-${index}`)
       tab.setAttribute('type', 'button');
       tab.setAttribute('role', 'tab');
-      tab.setAttribute('aria-controls', `tab-panel-${index}`);
+      tab.setAttribute('aria-controls', cardId);
       tab.setAttribute('aria-selected', 'false');
       tab.setAttribute('tabIndex', '-1');
-      tab.appendChild(heading.cloneNode(true));
+      tab.insertAdjacentHTML('afterbegin', label);
       this.__tablist.appendChild(tab);
 
       if (!this.__firstTab) {
         this.__firstTab = tab;
       }
       this.__lastTab = tab;
-
-
-      const panel = document.createElement('section');
-      panel.setAttribute('id', `tab-panel-${index}`)
-      panel.setAttribute('role', 'tabpanel');
-      panel.setAttribute('aria-labelledby', `tab-${index}`);
-      if (index) {
-        panel.classList.add('hidden');
-      }
-      let content = heading.nextSibling;
-      while (content && content.nodeName !== heading.nodeName) {
-        panel.appendChild(content.cloneNode(true));
-        content = content.nextSibling;
-      }
-      this.__root.appendChild(panel);
     });
 
     this.__currentTab = this.__firstTab;
@@ -159,24 +148,27 @@ export class TabGroup extends StyledComponent(HTMLElement) {
 
   __setOpenTab(tab) {
     if (this.__openTab) {
+      // closes the currently open tab
       this.__openTab.setAttribute('aria-selected', 'false');
       this.__openTab.setAttribute('tabIndex', '-1');
-      this.shadowRoot.getElementById(this.__openTab.getAttribute('aria-controls')).classList.add('hidden');
+      document.getElementById(this.__openTab.getAttribute('aria-controls')).classList.add('hidden');
     }
 
     this.__openTab = tab;
     this.__openTab.setAttribute('aria-selected', 'true');
     this.__openTab.removeAttribute('tabIndex');
-    this.shadowRoot.getElementById(this.__openTab.getAttribute('aria-controls')).classList.remove('hidden');
+    document.getElementById(this.__openTab.getAttribute('aria-controls')).classList.remove('hidden');
   }
 }
 
 const html = `<div id="root">
+<div id="tablist"></div>
+<slot></slot>
 </div>
 
 <style>
-.hidden {
-  display: none;
+::slotted(.hidden) {
+  display: none !important;
 }
 
 [aria-selected=true] {

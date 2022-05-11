@@ -78,10 +78,11 @@ title: Dropdown Selector
     <h2>Example code</h2>
 
     <tab-group>
-        <h3>Vanilla</h3>
+        <tab-card>
+            <h3>Vanilla</h3>
 
-        <pre>
-            <x-torchlight-code language="html">
+            <pre>
+                <x-torchlight-code language="html">
 <label for="choose-month">Choose a month</label>
 <dropdown-selector id="choose-month">
     <option value="0">January</option>
@@ -97,13 +98,16 @@ title: Dropdown Selector
     <option value="10">November</option>
     <option value="11">December</option>
 </dropdown-selector>
-            </x-torchlight-code>
-        </pre>
+                </x-torchlight-code>
+            </pre>
 
-        <h3>Vue.js</h3>
+        </tab-card>
 
-        <pre>
-            <x-torchlight-code language="vue">
+        <tab-card>
+            <h3>Vue.js</h3>
+
+            <pre>
+                <x-torchlight-code language="vue">
 <script setup>
 const months = [
     'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',
@@ -118,13 +122,15 @@ const month = ref(5);
         <option v-for="(month, m) in months" :key="m" :value="m">{{ month }}</option>
     </dropdown-selector>
 </template>
-            </x-torchlight-code>
-        </pre>
+                </x-torchlight-code>
+            </pre>
+        </tab-card>
 
-        <h3>React</h3>
+        <tab-card>
+            <h3>React</h3>
 
-        <pre>
-            <x-torchlight-code language="jsx">
+            <pre>
+                <x-torchlight-code language="jsx">
 const months = [
     'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',
 ]
@@ -150,8 +156,9 @@ return (
         ))}
     </dropdown-selector>
 )
-            </x-torchlight-code>
-        </pre>
+                </x-torchlight-code>
+            </pre>
+        </tab-card>
     </tab-group>
 </section>
 

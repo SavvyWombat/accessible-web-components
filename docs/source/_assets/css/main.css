@@ -72,3 +72,7 @@ pre::-webkit-scrollbar-thumb {
 ul {
   @apply flex flex-col gap-2 mt-4 ml-4 list-disc;
 }
+
+tab-card {
+  @apply block p-2 bg-gray-100 border border-gray-900 rounded-b-xl;
+}

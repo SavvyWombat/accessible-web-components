@@ -1,7 +1,7 @@
 @extends ('_layouts.html')
 
 @section ('body')
-<body class="grid
+<body class="grid narrow:block
                 grid-areas-layout-default grid-cols-layout-default grid-rows-layout-default
                 medium:grid-areas-layout-medium medium:grid-cols-layout-medium medium:grid-rows-layout-medium
                 min-h-full

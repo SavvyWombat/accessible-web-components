@@ -7,9 +7,9 @@ module.exports = {
   ],{ dot: true }),
   theme: {
     screens: {
-      'narrow': {'max': '780px'},
-      'medium': {'max': '1024px'},
-      'wide': {'min': '1024px'},
+      'narrow': {'max': '840px'},
+      'medium': {'max': '1200px'},
+      'wide': {'min': '1200px'},
     },
     extend: {
       fontFamily: {
@@ -75,8 +75,8 @@ module.exports = {
       },
 
       gridTemplateColumns: {
-        'layout-default': '30ch 80ch 1fr',
-        'layout-medium': 'minmax(1em, 1fr) minmax(calc(100vw - 2em), 80ch) minmax(1em, 1fr)',
+        'layout-default': '30ch 70ch 1fr',
+        'layout-medium': '1fr 70ch 1fr',
       },
 
       gridTemplateRows: {

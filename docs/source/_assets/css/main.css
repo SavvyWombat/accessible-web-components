@@ -1,10 +1,10 @@
 main > header,
 main > section {
-  @apply p-6 narrow:p-4 bg-gray-100 shadow-inner rounded-2xl
+  @apply p-6 narrow:p-3 bg-gray-100 shadow-inner narrow:shadow-inner-fine rounded-2xl narrow:rounded-md
 }
 
 section.warning {
-  @apply p-6 bg-gray-100 shadow-inner shadow-red-300 rounded-2xl bg-red-100;
+  @apply shadow-red-300 bg-red-100;
 }
 
 h1, h2 {

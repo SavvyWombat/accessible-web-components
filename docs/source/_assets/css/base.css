@@ -2,8 +2,14 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+@import './fonts';
+
 @import './nav';
 @import './main';
+
+html {
+  font-size: 18px;
+}
 
 a {
   @apply underline rounded

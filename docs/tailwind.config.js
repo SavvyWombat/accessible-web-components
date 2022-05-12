@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   content: require('fast-glob').sync([
     'source/**/*.{blade.php,md,html,vue}',
@@ -10,6 +12,9 @@ module.exports = {
       'wide': {'min': '1024px'},
     },
     extend: {
+      fontFamily: {
+        'sans': ['"Atkinson Hyperlegible"', ...defaultTheme.fontFamily.sans],
+      },
       colors: {
         blue: {
           100: '#dae4f6',

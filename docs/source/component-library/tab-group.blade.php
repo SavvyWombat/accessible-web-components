@@ -1,7 +1,7 @@
 ---
 title: Tab Group
 ---
-@extends('_layouts.default');
+@extends('_layouts.default')
 
 @section('content')
     <header>

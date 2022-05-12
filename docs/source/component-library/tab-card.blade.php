@@ -2,7 +2,7 @@
 title: Tab Card
 ---
 
-@extends('_layouts.default');
+@extends('_layouts.default')
 
 @section('content')
     <header>

@@ -1,7 +1,7 @@
 ---
 title: Dropdown Selector
 ---
-@extends('_layouts.default');
+@extends('_layouts.default')
 
 @section('content')
 <header>

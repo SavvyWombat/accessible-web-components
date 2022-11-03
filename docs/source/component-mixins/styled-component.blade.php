@@ -20,9 +20,9 @@ title: StyledComponent
 
         <pre>
             <x-torchlight-code language="javascript">
-import {StyleComponent} from 'accessible-web-components';
+import {StyledComponent} from 'accessible-web-components';
 
-class DropdownSelector extends StyleComponent(HTMLElement) {
+class DropdownSelector extends StyledComponent(HTMLElement) {
   constructor() {
     super()
       .attachShadow({mode: 'open'})

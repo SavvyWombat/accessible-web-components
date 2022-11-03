@@ -119,7 +119,7 @@ const month = ref(5);
 <template>
     <label for="choose-month">Choose a month</label>
     <dropdown-selector id="choose-month" v-model="month">
-        <option v-for="(month, m) in months" :key="m" :value="m">{{ month }}</option>
+        <option v-for="(month, m) in months" :key="m" :value="m">@{{ month }}</option>
     </dropdown-selector>
 </template>
                 </x-torchlight-code>

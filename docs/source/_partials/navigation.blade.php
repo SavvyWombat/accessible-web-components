@@ -21,11 +21,11 @@
         <a href="/component-mixins/labelled-component/">LabelledComponent</a>
         <a href="/component-mixins/styled-component/">StyledComponent</a>
 
-        <span class="block pt-4 border-t-2 border-gray-100 font-bold"><a
-                    href="/component-library/">Component Library</a></span>
+        <span class="block pt-4 border-t-2 border-gray-100 font-bold"><a href="/component-library/">Component Library</a></span>
         <a href="/component-library/dropdown-selector/">Dropdown Selector</a>
         <a href="/component-library/tab-card/">Tab Card</a>
         <a href="/component-library/tab-group/">Tab Group</a>
+        <a href="/component-library/vertical-menu/">Vertical Menu</a>
     </div>
 </nav>
 

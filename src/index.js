@@ -1,10 +1,10 @@
-import {DropdownSelector} from './DropdownSelector.js';
-import {TabCard} from './TabCard.js';
-import {TabGroup} from './TabGroup.js';
-import {VerticalMenu} from './VerticalMenu.js';
+import {DropdownSelector} from './components/DropdownSelector.js';
+import {TabCard} from './components/TabCard.js';
+import {TabGroup} from './components/TabGroup.js';
+import {VerticalMenu} from './components/VerticalMenu.js';
 
-export {LabelledComponent} from './LabelledComponent.js';
-export {StyledComponent} from './StyledComponent.js';
+export {LabelledComponent} from './mixins/LabelledComponent.js';
+export {StyledComponent} from './mixins/StyledComponent.js';
 
 export {
   DropdownSelector,

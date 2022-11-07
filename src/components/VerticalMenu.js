@@ -1,28 +1,16 @@
-import {StyledComponent} from "./StyledComponent.js";
-
-export class VerticalMenu extends StyledComponent(HTMLElement) {
+export class VerticalMenu extends HTMLElement {
   constructor() {
-    super()
-      .attachShadow({mode: 'open'})
-      .innerHTML = html;
+    super();
   }
 
   connectedCallback() {
     if (this.isConnected) {
-      super.connectedCallback();
-
-      this.__root = this.shadowRoot.getElementById('root');
-
-      this.__root.innerHTML = this.innerHTML;
-
-      this.__root.addEventListener('keydown', this.keydown.bind(this));
+      this.addEventListener('keydown', this.keydown.bind(this));
     }
   }
 
   disconnectedCallback() {
-    super.disconnectedCallback();
-
-    this.__root.removeEventListener('keydown', this.keydown.bind(this));
+    this.removeEventListener('keydown', this.keydown.bind(this));
   }
 
   keydown(event) {
@@ -43,10 +31,10 @@ export class VerticalMenu extends StyledComponent(HTMLElement) {
         this.__parentLink(event.target)?.focus();
         break;
       case Actions.FirstLink:
-        this.__root.querySelectorAll('a')[0].focus();
+        this.querySelectorAll('a')[0].focus();
         break;
       case Actions.LastLink:
-        this.__root.querySelectorAll('a')[this.__root.querySelectorAll('a').length - 1].focus();
+        this.querySelectorAll('a')[this.querySelectorAll('a').length - 1].focus();
         break;
     }
   }
@@ -76,7 +64,7 @@ export class VerticalMenu extends StyledComponent(HTMLElement) {
   }
 
   __nextLink(target) {
-    const {nextLink} = Array.from(this.__root.querySelectorAll('a')).reduce(({nextLink, previous}, current) => {
+    const {nextLink} = Array.from(this.querySelectorAll('a')).reduce(({nextLink, previous}, current) => {
       if (!nextLink) {
         if (previous === target) {
           nextLink = current;
@@ -95,7 +83,7 @@ export class VerticalMenu extends StyledComponent(HTMLElement) {
   }
 
   __prevLink(target) {
-    const {prevLink} = Array.from(this.__root.querySelectorAll('a')).reduce(({prevLink, previous}, current) => {
+    const {prevLink} = Array.from(this.querySelectorAll('a')).reduce(({prevLink, previous}, current) => {
       if (current === target) {
         prevLink = previous;
       }
@@ -114,7 +102,3 @@ const Actions = {
   FirstLink: 4,
   LastLink: 5,
 }
-
-const html = `<nav id="root">
-
-</nav>`;

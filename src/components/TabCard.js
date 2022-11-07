@@ -1,4 +1,4 @@
-import {StyledComponent} from './StyledComponent.js';
+import {StyledComponent} from '../mixins/StyledComponent.js';
 
 export class TabCard extends StyledComponent(HTMLElement) {
   constructor() {

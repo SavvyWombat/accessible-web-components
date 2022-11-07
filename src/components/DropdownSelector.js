@@ -1,5 +1,5 @@
-import {LabelledComponent} from './LabelledComponent.js';
-import {StyledComponent} from './StyledComponent.js';
+import {LabelledComponent} from '../mixins/LabelledComponent.js';
+import {StyledComponent} from '../mixins/StyledComponent.js';
 
 export class DropdownSelector extends StyledComponent(LabelledComponent(HTMLElement)) {
   static get observedAttributes() {

@@ -2,7 +2,9 @@
 coverage/
 demo/
 docs/
+images/
 test/
+.gitignore
 .*.json
 jestconfig.coverage.json
 .idea

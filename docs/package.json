@@ -4,7 +4,8 @@
         "dev": "mix",
         "watch": "mix watch",
         "staging": "NODE_ENV=staging mix",
-        "prod": "mix --production"
+        "prod": "mix --production",
+        "deploy": "netlify build && netlify deploy --prod --dir build_production"
     },
     "devDependencies": {
         "@savvywombat/tailwindcss-grid-areas": "^2.0.0",

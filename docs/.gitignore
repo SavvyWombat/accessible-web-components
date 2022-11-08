@@ -1,3 +1,4 @@
+/.netlify/
 /build_*/
 /cache/
 /node_modules/

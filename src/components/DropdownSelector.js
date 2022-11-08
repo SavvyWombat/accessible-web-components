@@ -3,7 +3,7 @@ import {StyledComponent} from '../mixins/StyledComponent.js';
 
 export class DropdownSelector extends StyledComponent(LabelledComponent(HTMLElement)) {
   static get observedAttributes() {
-    return ['disabled', 'value'];
+    return ['disabled', 'required', 'value'];
   }
 
   constructor() {
@@ -76,8 +76,8 @@ export class DropdownSelector extends StyledComponent(LabelledComponent(HTMLElem
 
     this.__combobox.removeEventListener('blur', this.blur.bind(this));
     this.__combobox.removeEventListener('click', this.click.bind(this));
-    this.__combobox.addEventListener('keydown', this.keydown.bind(this));
-    this.__combobox.addEventListener('mousedown', this.mousedown.bind(this));
+    this.__combobox.removeEventListener('keydown', this.keydown.bind(this));
+    this.__combobox.removeEventListener('mousedown', this.mousedown.bind(this));
 
     [...this.__listbox.children].forEach((child) => child.remove());
 

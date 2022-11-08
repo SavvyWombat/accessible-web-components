@@ -15,7 +15,7 @@
     "url": "git+https://github.com/savvywombat/accessible-web-components.git"
   },
   "bugs": "https://github.com/savvywombat/accessible-web-components/issues",
-  "homepage": "https://github.com/savvywombat/accessible-web-components#readme",
+  "homepage": "https://accessible-web-components.dev/",
   "type": "module",
   "main": "src/index.js",
   "module": "src/index.js",
@@ -25,7 +25,7 @@
     "test": "web-test-runner test/**/*.test.js --node-resolve --puppeteer"
   },
   "devDependencies": {
-    "@open-wc/testing": "^3.1.6",
+    "@open-wc/testing": "^3.1.7",
     "@web/dev-server": "^0.1.35",
     "@web/test-runner": "^0.15.0",
     "@web/test-runner-commands": "^0.6.5",

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+    <title>Spin Selector | HTML Demo | Accessible Web Components | Savvy Wombat</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script type="module">
+      import './index.js';
+    </script>
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+<header>
+    <h2>Accessible Web Components</h2>
+    <h3>HTML Demo</h3>
+</header>
+
+<main>
+    <section class="demo">
+        <h1>Spin Selector</h1>
+
+        <form id="form">
+            <label id="label-for-spin-selector">Choose a number</label>
+            <spin-selector id="spin-selector"
+                           aria-labelledby="label-for-spin-selector"
+            ></spin-selector>
+
+            <input type="number"
+                   min="0"
+                   max="10"
+                   step="3"
+                   value="-5"
+            />
+        </form>
+    </section>
+</main>
+</body>
+</html>

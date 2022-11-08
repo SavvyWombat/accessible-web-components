@@ -1,11 +1,12 @@
 {
   "name": "@savvywombat/accessible-web-components",
   "version": "0.1.0",
-  "description": "A library of accessible web components",
+  "description": "A light-weight library of accessible and stylable web components",
   "keywords": [
     "accessible",
     "web component",
-    "accessible web component"
+    "accessible web component",
+    "accessibility"
   ],
   "license": "MIT",
   "author": "Stuart Jones <stuart@savvywombat.com.au>",
@@ -24,13 +25,13 @@
     "test": "web-test-runner test/**/*.test.js --node-resolve --puppeteer"
   },
   "devDependencies": {
-    "@open-wc/testing": "^3.0.3",
-    "@web/dev-server": "^0.1.29",
-    "@web/test-runner": "^0.13.26",
-    "@web/test-runner-commands": "^0.6.1",
-    "@web/test-runner-puppeteer": "^0.10.5",
-    "eslint": "^8.7.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^4.0.0"
+    "@open-wc/testing": "^3.1.6",
+    "@web/dev-server": "^0.1.35",
+    "@web/test-runner": "^0.15.0",
+    "@web/test-runner-commands": "^0.6.5",
+    "@web/test-runner-puppeteer": "^0.11.0",
+    "eslint": "^8.27.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1"
   }
 }

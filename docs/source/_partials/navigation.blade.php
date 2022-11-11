@@ -1,5 +1,5 @@
-<vertical-menu>
-    <nav class="grid-in-nav sticky top-0 overscroll-none text-gray-100 bg-blue-900 p-4 pr-8">
+<vertical-menu class="grid-in-nav sticky top-0 overscroll-none text-gray-100 bg-blue-900 p-4 pr-8">
+    <nav>
         <span id="site-navigation-control"
               class="wide:hidden block no-underline text-gray-100 rounded
                   outline-offset-0

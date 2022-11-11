@@ -2,7 +2,12 @@
 
 return [
     'production' => false,
-    'baseUrl' => 'https://accessible-web-components.dev',
-    'description' => 'A free and open source library of Web components built for accessibility and stylability.',
-    'collections' => [],
+    'baseUrl' => 'https://localhost:3000/',
+    'description' => 'A free and open source library of Web Components built for accessibility and stylability.',
+    'collections' => [
+        'blog' => [
+            'path' => 'blog/{date|Y-m-d}/{-title}',
+            'sort' => '-date',
+        ],
+    ],
 ];

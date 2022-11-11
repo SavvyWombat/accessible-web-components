@@ -1,0 +1,23 @@
+
+{!! '<'.'?'.'xml version="1.0" encoding="UTF-8" ?>' !!}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:webfeeds="http://webfeeds.org/rss/1.0" xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>Accessible Web Components - Blog Posts</title>
+    <link>https://accessible-web-components.dev/rss.xml</link>
+    <icon>/assets/images/favicon/favicon-32x32.png</icon>
+    <description><![CDATA[{!! 'A free and open source library of Web Components built for accessibility and stylability.' !!}]]></description>
+    <atom:link href="http://accessible-web-components.dev/rss.xml" rel="self" type="application/rss+xml" />
+    <copyright>Stuart Jones</copyright>
+    <language>en-au</language>
+    <lastBuildDate>{{ date(DATE_RSS) }}</lastBuildDate>
+    @foreach($blog as $post)
+      <item>
+        <title><![CDATA[{!! $post->category !!}: {!! $post->title !!}]]></title>
+        <link>{{ $post->getUrl() }}</link>
+        <guid isPermaLink="true">{{ $post->getUrl() }}</guid>
+        <description><![CDATA[{!! $post->description !!}]]></description>
+        <pubDate>{{ date(DATE_RSS, $post->date) }}</pubDate>
+      </item>
+    @endforeach
+  </channel>
+</rss>

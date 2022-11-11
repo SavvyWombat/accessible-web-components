@@ -1,0 +1,15 @@
+.markdown h3 {
+  @apply mt-4;
+}
+
+.markdown ol {
+  @apply list-decimal ml-8 mt-4;
+}
+
+.markdown ul {
+  @apply list-disc ml-8 mt-4;
+}
+
+.markdown pre {
+  @apply py-4;
+}

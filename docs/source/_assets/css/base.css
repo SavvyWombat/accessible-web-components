@@ -6,6 +6,7 @@
 
 @import './nav';
 @import './main';
+@import './markdown';
 
 html {
   font-size: 18px;

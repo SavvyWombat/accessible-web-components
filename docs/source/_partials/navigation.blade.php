@@ -15,7 +15,7 @@
             Site Navigation
         </span>
 
-        <ul id="site-navigation" class="gap-6 pt-9 medium:hidden list-none">
+        <ul id="site-navigation" class="gap-6 pt-9 medium:hidden list-none bg-blue-900 m-0 p-4">
             <li><a href="/">Accessible Web Components</a></li>
             <li><a href="/getting-started/">Getting Started</a></li>
 

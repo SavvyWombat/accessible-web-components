@@ -3,12 +3,14 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="canonical" href="{{ $page->getUrl() }}">
+
 
         <meta name="description" content="{{ $page->description }}">
 
         @if ($page->canonical)
-            <link rel="canonical" href="{{ $page->canonical->url }}">
+            <link rel="canonical" href="{{ $page->canonical['url'] }}">
+        @else
+            <link rel="canonical" href="{{ $page->getUrl() }}">
         @endif
 
         @if ($page->title)

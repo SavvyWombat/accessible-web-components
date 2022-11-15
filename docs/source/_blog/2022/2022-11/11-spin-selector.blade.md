@@ -14,7 +14,7 @@ There's a couple of things about this that have needed the most thinking about:
 1. Make it behave the same as an `<input type="number"/>`
 2. Allow `<option>` elements to define the choices presented to the user as well.
 
-### Make it behave the same as an `<input type="number"/>`
+## Make it behave the same as an `<input type="number"/>`
 
 In addition to the regular input attributes, `<input type="number"/>` allows the author to specify minimum and maximum values for client side validation, as well as the size of the incremental step.
 
@@ -53,7 +53,7 @@ Trying to decrement the value (-11) will produce no change. Incrementing, howeve
 
 This introduced a bit more handling for the increment/decrement handling.
 
-### Allow `<option>` elements to define the choices presented to the user as well
+## Allow `<option>` elements to define the choices presented to the user as well
 
 As well as the `<input type=number>` style, which allows users to increment/decrement numerical values, I saw a use case where the input is labelled with text values that can be cycled through.
 

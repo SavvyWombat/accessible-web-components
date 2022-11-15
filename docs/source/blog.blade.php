@@ -15,6 +15,7 @@ title: Blog
         <li class="flex flex-col">
           <a href="{{ $post->getPath() }}">{{$post->category}}: {{ $post->title }}</a>
           <span>{{ date("F j, Y", $post->date) }}</span>
+          <span>{{ $post->description }}</span>
         </li>
       @endforeach
     </ul>

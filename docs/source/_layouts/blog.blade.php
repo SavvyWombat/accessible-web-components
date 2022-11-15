@@ -30,9 +30,12 @@
   <main class="grid-in-main flex flex-col gap-16 narrow:gap-8
                     mt-8 my-16 narrow:my-4"
   >
-    <section>
+    <section class="flex flex-col">
       <h1>{{$page->category}}: {{ $page->title }}</h1>
       <span>{{ date("F j, Y", $page->date) }} &mdash; {{ $page->author }}</span>
+      @if ($page->canonical)
+        <span>Originally posted at <a href="{{ $page->canonical['url'] }}">{{ $page->canonical['title'] }}</a></span>
+      @endif
     </section>
 
     <section class="markdown">

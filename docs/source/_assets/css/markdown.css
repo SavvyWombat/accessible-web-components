@@ -1,5 +1,13 @@
+.markdown h2 {
+  @apply mt-8;
+}
+
 .markdown h3 {
   @apply mt-4;
+}
+
+.markdown h2 code {
+  @apply text-xl whitespace-nowrap;
 }
 
 .markdown ol {
@@ -12,4 +20,9 @@
 
 .markdown pre {
   @apply py-4;
+}
+
+.markdown img {
+  max-width: 100%;
+  @apply mx-auto my-8 shadow-2xl;
 }

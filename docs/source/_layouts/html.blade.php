@@ -7,6 +7,10 @@
 
         <meta name="description" content="{{ $page->description }}">
 
+        @if ($page->canonical)
+            <link rel="canonical" href="{{ $page->canonical->url }}">
+        @endif
+
         @if ($page->title)
             <title>{{ $page->title }} / Accessible Web Components</title>
         @else

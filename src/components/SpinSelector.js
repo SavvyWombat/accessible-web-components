@@ -27,10 +27,10 @@ export class SpinSelector extends LabelledComponent(HTMLElement) {
 
     this.__root = this.shadowRoot.getElementById('root');
 
-    this.max = parseFloat(this.getAttribute('max')) || null;
-    this.min = parseFloat(this.getAttribute('min')) || null;
-    this.step = parseFloat(this.getAttribute('step')) || null;
-    this.value = parseFloat(this.getAttribute('value')) || null;
+    this.max = !isNaN(parseFloat(this.getAttribute('max'))) ? parseFloat(this.getAttribute('max')) : null;
+    this.min = !isNaN(parseFloat(this.getAttribute('min'))) ? parseFloat(this.getAttribute('min')) : null;
+    this.step = !isNaN(parseFloat(this.getAttribute('step'))) ? parseFloat(this.getAttribute('step')) : null;
+    this.value = !isNaN(parseFloat(this.getAttribute('value'))) ? parseFloat(this.getAttribute('value')) : null;
 
     this.shadowRoot.addEventListener('keydown', this.keydown.bind(this));
     this.shadowRoot.getElementById('increment').addEventListener('click', this.increment.bind(this));
@@ -40,16 +40,16 @@ export class SpinSelector extends LabelledComponent(HTMLElement) {
   attributeChangedCallback(name, oldValue, newValue) {
     switch (name) {
       case 'max':
-        this.max = parseFloat(newValue);
+        this.max = !isNaN(parseFloat(newValue)) ? parseFloat(newValue) : null;
         break;
       case 'min':
-        this.min = parseFloat(newValue);
+        this.min = !isNaN(parseFloat(newValue)) ? parseFloat(newValue) : null;
         break;
       case 'step':
-        this.step = parseFloat(newValue);
+        this.step = !isNaN(parseFloat(newValue)) ? parseFloat(newValue) : null;
         break;
       case 'value':
-        this.value = parseFloat(newValue);
+        this.value = !isNaN(parseFloat(newValue)) ? parseFloat(newValue) : null;
         break;
     }
   }
@@ -86,10 +86,11 @@ export class SpinSelector extends LabelledComponent(HTMLElement) {
   }
 
   increment() {
-    const baseNumber = this.min === null || isNaN(this.min) ? 0 : this.min;
-    const min = this.min === null || isNaN(this.min) ? Number.NEGATIVE_INFINITY : this.min;
-    const max = this.max === null || isNaN(this.max) ? Number.POSITIVE_INFINITY : this.max;
-    const step = this.step === null || isNaN(this.step) ? 1 : this.step;
+    const baseNumber = this.min ?? 0;
+    const min = this.min ?? Number.NEGATIVE_INFINITY;
+    const max = this.max ?? Number.POSITIVE_INFINITY;
+    const step = this.step ?? 1;
+    const precision = Math.pow(10, (step.toString().split('.')[1] || '').length);
 
     if (this.value === null) {
       this.value = 0;
@@ -100,16 +101,21 @@ export class SpinSelector extends LabelledComponent(HTMLElement) {
       return;
     }
 
-    if (this.value + step <= max) {
-      this.value = this.value + step - ((this.value - baseNumber) % step);
-    }
+    this.value = ((v, s, m, b) => {
+      if (v + s <= m) {
+        return (v + s - ((v - b) % s)) / precision;
+      }
+
+      return v / precision;
+    })(this.value * precision, step * precision, max * precision, baseNumber * precision);
   }
 
   decrement() {
-    const baseNumber = this.min === null || isNaN(this.min) ? 0 : this.min;
-    const min = this.min === null || isNaN(this.min) ? Number.NEGATIVE_INFINITY : this.min;
-    const max = this.max === null || isNaN(this.max) ? Number.POSITIVE_INFINITY : this.max;
-    const step = this.step === null || isNaN(this.step) ? 1 : this.step;
+    const baseNumber = this.min ?? 0;
+    const min = this.min ?? Number.NEGATIVE_INFINITY;
+    const max = this.max ?? Number.POSITIVE_INFINITY;
+    const step = this.step ?? 1;
+    const precision = Math.pow(10, (step.toString().split('.')[1] || '').length);
 
     if (this.value === null) {
       this.value = 0;
@@ -120,14 +126,17 @@ export class SpinSelector extends LabelledComponent(HTMLElement) {
       return;
     }
 
-    if ((this.value - baseNumber) % step) {
-      this.value = this.value - ((this.value - baseNumber) % step);
-      return;
-    }
+    this.value = ((v, s, m, b) => {
+      if ((v - b) % s) {
+        return (v - ((v - b) % s)) / precision;
+      }
 
-    if (this.value - step >= min) {
-      this.value = this.value - step;
-    }
+      if (v - s >= m) {
+        return (v - s) / precision;
+      }
+
+      return v / precision;
+    })(this.value * precision, step * precision, min * precision, baseNumber * precision);
   }
 
   __actionFromKey(event) {

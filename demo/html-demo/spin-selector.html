@@ -28,13 +28,17 @@
             <label id="label-for-spin-selector">Choose a number</label>
             <spin-selector id="spin-selector"
                            aria-labelledby="label-for-spin-selector"
+                           min="0"
+                           max="1"
+                           step="0.1"
+                           value="-1"
             ></spin-selector>
 
             <input type="number"
-                   min="0"
+
+                   step="7"
                    max="10"
-                   step="3"
-                   value="-5"
+                   value="12"
             />
         </form>
     </section>

@@ -115,23 +115,20 @@ describe('SpinSelector', () => {
     expect(spin.value).to.equal(-2);
   });
 
-  it('incrementing sequence tests', async () => {
-    const spin = await fixture(html`
-        <spin-selector min="-2"></spin-selector>
-    `);
-
-    [
-      { min: 0, max: 4, step: 1, value: -5, expected: [0, 1, 2, 3, 4, 4] },
-      { min: 0, max: 10, step: 3, value: -5, expected: [0, 3, 6, 9, 9] },
-      { min: -1, max: 4, step: 1, value: -5, expected: [-1, 0, 1, 2, 3, 4, 4]},
-      { min: -1, max: 10, step: 2, value: -5, expected: [-1, 1, 3, 5, 7, 9, 9]},
-      { min: 1, max: 10, step: 3, value: 2, expected: [4, 7, 10, 10]},
-      { min: -10, max: 10, step: 3, value: -9, expected: [-7, -4, -1, 2, 5, 8, 8]},
-    ].forEach(({min, max, step, value, expected}) => {
-      spin.min = min;
-      spin.max = max;
-      spin.step = step;
-      spin.value = value;
+  [
+    { min: 0, max: 4, step: 1, value: -5, expected: [0, 1, 2, 3, 4, 4] },
+    { min: 0, max: 10, step: 3, value: -5, expected: [0, 3, 6, 9, 9] },
+    { min: -1, max: 4, step: 1, value: -5, expected: [-1, 0, 1, 2, 3, 4, 4]},
+    { min: -1, max: 10, step: 2, value: -5, expected: [-1, 1, 3, 5, 7, 9, 9]},
+    { min: 1, max: 10, step: 3, value: 2, expected: [4, 7, 10, 10]},
+    { min: -10, max: 10, step: 3, value: -9, expected: [-7, -4, -1, 2, 5, 8, 8]},
+    { min: -10, max: 0, step: 3, value: -9, expected: [-7, -4, -1, -1]},
+    { min: 0, max: 1, step: 0.1, value: -1, expected: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1]},
+  ].forEach(({min, max, step, value, expected}) => {
+    it(`incrementing: min="${min}" max="${max}" step="${step}" value="${value}"`, async () => {
+      const spin = await fixture(html`
+          <spin-selector min="${min}" max="${max}" step="${step}" value="${value}"></spin-selector>
+      `);
 
       const result = expected.map((expected) => {
         spin.increment();
@@ -142,21 +139,17 @@ describe('SpinSelector', () => {
     });
   });
 
-  it('incrementing sequence tests', async () => {
-    const spin = await fixture(html`
-        <spin-selector min="-2"></spin-selector>
-    `);
-
-    [
-      { min: 0, max: 4, step: 1, value: 10, expected: [4, 3, 2, 1, 0, 0] },
-      { min: 0, max: 10, step: 3, value: 15, expected: [10, 9, 6, 3, 0, 0] },
-      { min: -10, max: 5, step: 3, value: 15, expected: [5, 2, -1, -4, -7, -10, -10] },
-      { min: -10, max: 5, step: 7, value: 15, expected: [5, 4, -3, -10, -10] },
-    ].forEach(({min, max, step, value, expected}) => {
-      spin.min = min;
-      spin.max = max;
-      spin.step = step;
-      spin.value = value;
+  [
+    { min: 0, max: 4, step: 1, value: 10, expected: [4, 3, 2, 1, 0, 0] },
+    { min: 0, max: 10, step: 3, value: 15, expected: [10, 9, 6, 3, 0, 0] },
+    { min: -10, max: 5, step: 3, value: 15, expected: [5, 2, -1, -4, -7, -10, -10] },
+    { min: -10, max: 5, step: 7, value: 15, expected: [5, 4, -3, -10, -10] },
+    { min: 0, max: 1, step: 0.1, value: 1, expected: [0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 0, 0]},
+  ].forEach(({min, max, step, value, expected}) => {
+    it(`decrementing: min="${min}" max="${max}" step="${step}" value="${value}"`, async () => {
+      const spin = await fixture(html`
+          <spin-selector min="${min}" max="${max}" step="${step}" value="${value}"></spin-selector>
+      `);
 
       const result = expected.map((expected) => {
         spin.decrement();

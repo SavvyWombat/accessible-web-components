@@ -26,6 +26,7 @@ export class SpinSelector extends LabelledComponent(HTMLElement) {
     }
 
     this.__root = this.shadowRoot.getElementById('root');
+    this.__input = this.shadowRoot.getElementById('input');
 
     this.max = !isNaN(parseFloat(this.getAttribute('max'))) ? parseFloat(this.getAttribute('max')) : null;
     this.min = !isNaN(parseFloat(this.getAttribute('min'))) ? parseFloat(this.getAttribute('min')) : null;
@@ -33,8 +34,10 @@ export class SpinSelector extends LabelledComponent(HTMLElement) {
     this.value = !isNaN(parseFloat(this.getAttribute('value'))) ? parseFloat(this.getAttribute('value')) : null;
 
     this.shadowRoot.addEventListener('keydown', this.keydown.bind(this));
-    this.shadowRoot.getElementById('increment').addEventListener('click', this.increment.bind(this));
-    this.shadowRoot.getElementById('decrement').addEventListener('click', this.decrement.bind(this));
+    this.shadowRoot.getElementById('increment').addEventListener('click', this.incrementClicked.bind(this));
+    this.shadowRoot.getElementById('decrement').addEventListener('click', this.decrementClicked.bind(this));
+
+    this.__input.addEventListener('input', this.inputChanged.bind(this));
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -59,8 +62,10 @@ export class SpinSelector extends LabelledComponent(HTMLElement) {
       super.disconnectedCallback();
 
       this.shadowRoot.removeEventListener('keydown', this.keydown.bind(this));
-      this.shadowRoot.getElementById('increment').removeEventListener('click', this.increment.bind(this));
-      this.shadowRoot.getElementById('decrement').removeEventListener('click', this.decrement.bind(this));
+      this.shadowRoot.getElementById('increment').removeEventListener('click', this.incrementClicked.bind(this));
+      this.shadowRoot.getElementById('decrement').removeEventListener('click', this.decrementClicked.bind(this));
+
+      this.__input.removeEventListener('input', this.inputChanged.bind(this));
     }
   }
 
@@ -69,6 +74,16 @@ export class SpinSelector extends LabelledComponent(HTMLElement) {
       return;
     }
 
+    this.__root.focus();
+  }
+
+  incrementClicked(event) {
+    this.increment();
+    this.__root.focus();
+  }
+
+  decrementClicked(event) {
+    this.decrement();
     this.__root.focus();
   }
 
@@ -82,6 +97,14 @@ export class SpinSelector extends LabelledComponent(HTMLElement) {
       case Actions.Decrement:
         this.decrement();
         break;
+    }
+  }
+
+  inputChanged(event) {
+    if (this.__input.value.match(/[+-]?[0-9]*\.?[0-9]*/g)[0]?.length  === this.__input.value.length) {
+      this.value = this.__input.value;
+    } else {
+      this.__input.value = this.value;
     }
   }
 
@@ -143,15 +166,28 @@ export class SpinSelector extends LabelledComponent(HTMLElement) {
     const {key, altKey, ctrlKey, metaKey} = event;
 
     switch (key) {
-      case 'ArrowUp':
       case 'ArrowRight':
+        if (event.target === this.__input) {
+          // we want to be able to move left/right inside the text input part of the component
+          return;
+        }
+      case 'ArrowUp':
       case '+':
         return Actions.Increment;
 
-      case 'ArrowDown':
       case 'ArrowLeft':
+        if (event.target === this.__input) {
+          // we want to be able to move left/right inside the text input part of the component
+          return;
+        }
+      case 'ArrowDown':
       case '-':
         return Actions.Decrement;
+
+      default:
+        if (event.target === this.__input) {
+          return Actions.Typing
+        }
     }
   }
 
@@ -185,30 +221,58 @@ export class SpinSelector extends LabelledComponent(HTMLElement) {
 
   set value(newValue) {
     this.__value = newValue;
-    this.shadowRoot.getElementById('display').textContent = newValue;
+    if (this.__input) {
+      this.__input.value = newValue;
+    }
   }
 }
 
 const html = `
 <div id="root" tabindex="0">
-    <button id="decrement" title="Decrease">&lt;</button>
-    <div id="display"></div>
-    <button id="increment" title="Increase">&gt;</button>
+    <div id="decrement" class="spin-button" title="Decrease">&lt;</div>
+    <input id="input"/>
+    <div id="increment" class="spin-button" title="Increase">&gt;</div>
 </div>
 
 <style>
     :host > *:first-child {
         display: inline-flex;
+        border: 1px solid currentColor;
+        border-radius: 3px;
     }
     
-    :host > *:first-child:focus {
+    :host > *:first-child:focus,
+    :host > *:first-child:focus-within {
         outline: medium auto currentColor;
         outline: medium auto invert;
         outline: 5px auto -webkit-focus-ring-color;
     }
     
-    #display {
-        margin-inline: 1ch;
+    .spin-button {
+        padding-inline: 0.5ch;
+        cursor: default;
+    }
+    
+    .spin-button:hover {
+        background-color: lightgray;
+    }
+    
+    #decrement {
+        margin-inline: 0 0.5ch;
+        border-right: 1px solid currentColor;
+        border-radius: 2px 0 0 2px;
+    }
+    
+    #increment {
+        margin-inline: 0.5ch 0;
+        border-left: 1px solid currentColor;
+        border-radius: 0 2px 2px 0;
+    }
+    
+    #input {
+        border: none;
+        outline: none;
+        text-align: right;
     }
 </style>
 `;
@@ -216,4 +280,5 @@ const html = `
 const Actions = {
   Increment: 0,
   Decrement: 1,
+  Typing: 2,
 }

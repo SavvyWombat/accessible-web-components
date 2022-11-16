@@ -17,9 +17,9 @@ describe('SpinSelector', () => {
     const label = spin.shadowRoot.getElementById('label');
     expect(label).to.be.a('null');
 
-    const display = spin.shadowRoot.getElementById('display');
-    expect(display).to.not.be.a('null');
-    expect(display.innerText).to.equal('');
+    const input = spin.shadowRoot.getElementById('input');
+    expect(input).to.not.be.a('null');
+    expect(input.value).to.equal('');
   });
 
   it('increments by 1 when nothing is set', async () => {
@@ -31,8 +31,8 @@ describe('SpinSelector', () => {
 
     expect(spin.value).to.equal(1);
 
-    const display = spin.shadowRoot.getElementById('display');
-    expect(display.innerText).to.equal('1');
+    const input = spin.shadowRoot.getElementById('input');
+    expect(input.value).to.equal('1');
   });
 
   it('decrements by 1 when nothing is set', async () => {
@@ -44,8 +44,8 @@ describe('SpinSelector', () => {
 
     expect(spin.value).to.equal(-1);
 
-    const display = spin.shadowRoot.getElementById('display');
-    expect(display.innerText).to.equal('-1');
+    const input = spin.shadowRoot.getElementById('input');
+    expect(input.value).to.equal('-1');
   });
 
   it('starts from a value when attribute is set', async() => {
@@ -55,8 +55,8 @@ describe('SpinSelector', () => {
 
     expect(spin.value).to.equal(10);
 
-    const display = spin.shadowRoot.getElementById('display');
-    expect(display.innerText).to.equal('10');
+    const input = spin.shadowRoot.getElementById('input');
+    expect(input.value).to.equal('10');
   });
 
   it('increments by the step attribute', async () => {
@@ -68,8 +68,8 @@ describe('SpinSelector', () => {
 
     expect(spin.value).to.equal(4);
 
-    const display = spin.shadowRoot.getElementById('display');
-    expect(display.innerText).to.equal('4');
+    const input = spin.shadowRoot.getElementById('input');
+    expect(input.value).to.equal('4');
   });
 
   it('decrements by the step attribute', async () => {
@@ -81,8 +81,8 @@ describe('SpinSelector', () => {
 
     expect(spin.value).to.equal(-9);
 
-    const display = spin.shadowRoot.getElementById('display');
-    expect(display.innerText).to.equal('-9');
+    const input = spin.shadowRoot.getElementById('input');
+    expect(input.value).to.equal('-9');
   });
 
   it('cannot step past the max value', async() => {

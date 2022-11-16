@@ -37,9 +37,10 @@
     <section class="demo">
         <h1>Spin Selector</h1>
 
-        <form id="form">
+        <form id="form" method="get">
             <label id="label-for-spin-selector">Choose a number</label>
             <spin-selector id="spin-selector"
+                           name="spin-selector"
                            aria-labelledby="label-for-spin-selector"
                            min="0"
                            max="1"
@@ -49,6 +50,7 @@
 
             <label id="label-for-disabled-spin-selector">Disabled spinner</label>
             <spin-selector id="disabled-spin-selector"
+                           name="disabled-spin-selector"
                            aria-labelledby="label-for-disabled-spin-selector"
                            disabled
                            min="0"
@@ -59,6 +61,7 @@
 
             <label id="label-for-readonly-spin-selector">Readonly spinner</label>
             <spin-selector id="readonly-spin-selector"
+                           name="readonly-spin-selector"
                            aria-labelledby="label-for-readonly-spin-selector"
                            readonly
                            min="0"
@@ -69,12 +72,24 @@
 
             <label for="native-input">Native number input</label>
             <input id="native-input"
+                   name="native-input"
+                   type="number"
+                   step="7"
+                   max="10"
+                   value="12"
+            />
+
+            <label for="disable-input">Disabled number input</label>
+            <input id="disable-input"
+                   name="disable-input"
                    readonly
                    type="number"
                    step="7"
                    max="10"
                    value="12"
             />
+
+            <button type="submit">Submit</button>
         </form>
     </section>
 </main>

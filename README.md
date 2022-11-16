@@ -1,4 +1,4 @@
-# ![Accessible Web Components](https://github.com/SavvyWombat/accessible-web-components/tree/main/images/accessible-web-components-banner.png?raw=true "Banner")
+# ![Accessible Web Components](https://raw.githubusercontent.com/SavvyWombat/accessible-web-components/main/images/accessible-web-components-banner.png "Banner")
 
 An ongoing project to provide a library of accessible, stylable, and lightweight Web Components, and to promote accessible practices in Web Component design.
 

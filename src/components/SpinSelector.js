@@ -6,6 +6,7 @@ export class SpinSelector extends LabelledComponent(HTMLElement) {
       'disabled',
       'min',
       'max',
+      'readonly',
       'required',
       'step',
       'value'
@@ -28,12 +29,17 @@ export class SpinSelector extends LabelledComponent(HTMLElement) {
     this.__root = this.shadowRoot.getElementById('root');
     this.__input = this.shadowRoot.getElementById('input');
 
+    // we need to store whether the user has defined a tabIndex for later use
+    this.__userTabIndex = this.tabIndex;
+
     this.max = !isNaN(parseFloat(this.getAttribute('max'))) ? parseFloat(this.getAttribute('max')) : null;
     this.min = !isNaN(parseFloat(this.getAttribute('min'))) ? parseFloat(this.getAttribute('min')) : null;
     this.step = !isNaN(parseFloat(this.getAttribute('step'))) ? parseFloat(this.getAttribute('step')) : null;
     this.value = !isNaN(parseFloat(this.getAttribute('value'))) ? parseFloat(this.getAttribute('value')) : null;
 
+    this.shadowRoot.addEventListener('click', this.click.bind(this));
     this.shadowRoot.addEventListener('keydown', this.keydown.bind(this));
+    this.shadowRoot.addEventListener('mousedown', this.mousedown.bind(this));
     this.shadowRoot.getElementById('increment').addEventListener('click', this.incrementClicked.bind(this));
     this.shadowRoot.getElementById('decrement').addEventListener('click', this.decrementClicked.bind(this));
 
@@ -42,6 +48,16 @@ export class SpinSelector extends LabelledComponent(HTMLElement) {
 
   attributeChangedCallback(name, oldValue, newValue) {
     switch (name) {
+      case 'disabled':
+        if (newValue !== null) {
+          // prevent focus from keyboard navigation
+          this.tabIndex = '-1';
+        } else {
+          // restore the original tabIndex as set by the user
+          // if the user didn't set a tabIndex, this will remove the tabIndex
+          this.tabIndex = this.__userTabIndex;
+        }
+        break;
       case 'max':
         this.max = !isNaN(parseFloat(newValue)) ? parseFloat(newValue) : null;
         break;
@@ -61,7 +77,9 @@ export class SpinSelector extends LabelledComponent(HTMLElement) {
     if (this.isConnected) {
       super.disconnectedCallback();
 
+      this.shadowRoot.removeEventListener('click', this.click.bind(this));
       this.shadowRoot.removeEventListener('keydown', this.keydown.bind(this));
+      this.shadowRoot.removeEventListener('mousedown', this.mousedown.bind(this));
       this.shadowRoot.getElementById('increment').removeEventListener('click', this.incrementClicked.bind(this));
       this.shadowRoot.getElementById('decrement').removeEventListener('click', this.decrementClicked.bind(this));
 
@@ -70,19 +88,32 @@ export class SpinSelector extends LabelledComponent(HTMLElement) {
   }
 
   click(event) {
-    if (this.disabled) {
+    if (this.disabled || this.readonly) {
+      event.preventDefault();
       return;
     }
 
-    this.__root.focus();
+    if (event.target !== this.__input) {
+      this.__root.focus();
+    }
   }
 
   incrementClicked(event) {
+    if (this.disabled || this.readonly) {
+      event.preventDefault();
+      return;
+    }
+
     this.increment();
     this.__root.focus();
   }
 
   decrementClicked(event) {
+    if (this.disabled || this.readonly) {
+      event.preventDefault();
+      return;
+    }
+
     this.decrement();
     this.__root.focus();
   }
@@ -100,8 +131,16 @@ export class SpinSelector extends LabelledComponent(HTMLElement) {
     }
   }
 
+  mousedown(event) {
+    if (this.disabled || this.readonly) {
+      // stops the element getting focus when clicked
+      event.stopImmediatePropagation();
+      event.preventDefault();
+    }
+  }
+
   inputChanged(event) {
-    if (this.__input.value.match(/[+-]?[0-9]*\.?[0-9]*/g)[0]?.length  === this.__input.value.length) {
+    if (this.__input.value.match(/[+-]?[0-9]*\.?[0-9]*/g)[0]?.length === this.__input.value.length) {
       this.value = this.__input.value;
     } else {
       this.__input.value = this.value;
@@ -183,12 +222,45 @@ export class SpinSelector extends LabelledComponent(HTMLElement) {
       case 'ArrowDown':
       case '-':
         return Actions.Decrement;
-
-      default:
-        if (event.target === this.__input) {
-          return Actions.Typing
-        }
     }
+  }
+
+  get autofocus() {
+    // boolean attributes have no value - they either exist or they don't
+    return this.hasAttribute('autofocus');
+  }
+
+  set autofocus(newValue) {
+    if (newValue) {
+      // boolean attributes have no value - they either exist or they don't
+      this.setAttribute('autofocus', '');
+    } else {
+      this.removeAttribute('autofocus');
+    }
+  }
+
+  get disabled() {
+    // boolean attributes have no value - they either exist or they don't
+    return this.hasAttribute('disabled');
+  }
+
+  set disabled(newValue) {
+    if (newValue) {
+      // boolean attributes have no value - they either exist or they don't
+      this.setAttribute('disabled', '');
+      this.__input.setAttribute('disabled', '');
+    } else {
+      this.removeAttribute('disabled');
+      this.__input.removeAttribute('disabled');
+    }
+  }
+
+  get form() {
+    return this.getAttribute('form');
+  }
+
+  get labels() {
+    return document.querySelectorAll(`[for=${this.id}]`);
   }
 
   get max() {
@@ -207,12 +279,70 @@ export class SpinSelector extends LabelledComponent(HTMLElement) {
     this.__min = newMin;
   }
 
+  get name() {
+    return this.getAttribute('name');
+  }
+
+  set name(newValue) {
+    if (newValue) {
+      this.setAttribute('name', newValue);
+    } else {
+      this.removeAttribute('name');
+    }
+  }
+
+  get required() {
+    // boolean attributes have no value - they either exist or they don't
+    return this.hasAttribute('required');
+  }
+
+  set required(newValue) {
+    if (newValue) {
+      // boolean attributes have no value - they either exist or they don't
+      this.setAttribute('required', '');
+    } else {
+      this.removeAttribute('required');
+    }
+  }
+
+  get readonly() {
+    // boolean attributes have no value - they either exist or they don't
+    return this.hasAttribute('readonly');
+  }
+
+  set readonly(newValue) {
+    if (newValue) {
+      // boolean attributes have no value - they either exist or they don't
+      this.setAttribute('readonly', '');
+      this.__input.setAttribute('readonly', '');
+    } else {
+      this.removeAttribute('readonly');
+      this.__input.removeAttribute('readonly');
+    }
+  }
+
   get step() {
     return this.__step;
   }
 
   set step(newStep) {
     this.__step = newStep;
+  }
+
+  get tabIndex() {
+    return this.getAttribute('tabIndex');
+  }
+
+  set tabIndex(newValue) {
+    if (newValue || newValue === '0') {
+      this.setAttribute('tabIndex', newValue);
+    } else {
+      this.removeAttribute('tabIndex');
+    }
+  }
+
+  get type() {
+    return 'spin-selector';
   }
 
   get value() {
@@ -239,6 +369,12 @@ const html = `
         display: inline-flex;
         border: 1px solid currentColor;
         border-radius: 3px;
+        gap: 0.5ch;
+    }
+    
+    :host[disabled] > *:first-child {
+        opacity: 0.5;
+        border: 1px solid red;
     }
     
     :host > *:first-child:focus,
@@ -258,13 +394,11 @@ const html = `
     }
     
     #decrement {
-        margin-inline: 0 0.5ch;
         border-right: 1px solid currentColor;
         border-radius: 2px 0 0 2px;
     }
     
     #increment {
-        margin-inline: 0.5ch 0;
         border-left: 1px solid currentColor;
         border-radius: 0 2px 2px 0;
     }
@@ -273,6 +407,8 @@ const html = `
         border: none;
         outline: none;
         text-align: right;
+        flex-shrink: 1;
+        width: 100%;
     }
 </style>
 `;
@@ -280,5 +416,4 @@ const html = `
 const Actions = {
   Increment: 0,
   Decrement: 1,
-  Typing: 2,
 }

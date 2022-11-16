@@ -396,11 +396,13 @@ export class DropdownSelector extends StyledComponent(LabelledComponent(HTMLElem
   }
 
   get autofocus() {
-    return this.getAttribute('autofocus');
+    // boolean attributes have no value - they either exist or they don't
+    return this.hasAttribute('autofocus');
   }
 
   set autofocus(newValue) {
     if (newValue) {
+      // boolean attributes have no value - they either exist or they don't
       this.setAttribute('autofocus', '');
     } else {
       this.removeAttribute('autofocus');
@@ -450,11 +452,13 @@ export class DropdownSelector extends StyledComponent(LabelledComponent(HTMLElem
   }
 
   get required() {
-    return this.getAttribute('required');
+    // boolean attributes have no value - they either exist or they don't
+    return this.hasAttribute('required');
   }
 
   set required(newValue) {
     if (newValue) {
+      // boolean attributes have no value - they either exist or they don't
       this.setAttribute('required', '');
     } else {
       this.removeAttribute('required');

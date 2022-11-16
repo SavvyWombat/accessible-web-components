@@ -10,7 +10,20 @@
     </script>
 
     <style>
+        form {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          align-items: center;
+        }
 
+        input {
+          width: 20ch;
+        }
+
+        spin-selector {
+          width: 20ch;
+        }
     </style>
 </head>
 
@@ -34,8 +47,30 @@
                            value="-1"
             ></spin-selector>
 
-            <input type="number"
+            <label id="label-for-disabled-spin-selector">Disabled spinner</label>
+            <spin-selector id="disabled-spin-selector"
+                           aria-labelledby="label-for-disabled-spin-selector"
+                           disabled
+                           min="0"
+                           max="1"
+                           step="0.1"
+                           value="-1"
+            ></spin-selector>
 
+            <label id="label-for-readonly-spin-selector">Readonly spinner</label>
+            <spin-selector id="readonly-spin-selector"
+                           aria-labelledby="label-for-readonly-spin-selector"
+                           readonly
+                           min="0"
+                           max="1"
+                           step="0.1"
+                           value="-1"
+            ></spin-selector>
+
+            <label for="native-input">Native number input</label>
+            <input id="native-input"
+                   readonly
+                   type="number"
                    step="7"
                    max="10"
                    value="12"

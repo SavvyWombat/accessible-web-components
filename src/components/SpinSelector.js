@@ -26,7 +26,7 @@ export class SpinSelector extends LabelledComponent(HTMLElement) {
       super.connectedCallback();
     }
 
-    this.closest('form').addEventListener('formdata', this.formdata.bind(this));
+    this.closest('form')?.addEventListener('formdata', this.formdata.bind(this));
 
     this.__root = this.shadowRoot.getElementById('root');
     this.__input = this.shadowRoot.getElementById('input');
@@ -79,7 +79,7 @@ export class SpinSelector extends LabelledComponent(HTMLElement) {
     if (this.isConnected) {
       super.disconnectedCallback();
 
-      this.closest('form').removeEventListener('formdata', this.formdata.bind(this));
+      this.closest('form')?.removeEventListener('formdata', this.formdata.bind(this));
 
       this.shadowRoot.removeEventListener('click', this.click.bind(this));
       this.shadowRoot.removeEventListener('keydown', this.keydown.bind(this));

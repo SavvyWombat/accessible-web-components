@@ -19,7 +19,7 @@ export class DropdownSelector extends StyledComponent(LabelledComponent(HTMLElem
     if (this.isConnected) {
       super.connectedCallback();
 
-      this.closest('form').addEventListener('formdata', this.formdata.bind(this));
+      this.closest('form')?.addEventListener('formdata', this.formdata.bind(this));
 
       this.__root = this.shadowRoot.getElementById('root');
       this.__combobox = this.shadowRoot.getElementById('combobox');
@@ -76,7 +76,7 @@ export class DropdownSelector extends StyledComponent(LabelledComponent(HTMLElem
   disconnectedCallback() {
     super.disconnectedCallback();
 
-    this.closest('form').removeEventListener('formdata', this.formdata.bind(this));
+    this.closest('form')?.removeEventListener('formdata', this.formdata.bind(this));
 
     this.__combobox.removeEventListener('blur', this.blur.bind(this));
     this.__combobox.removeEventListener('click', this.click.bind(this));

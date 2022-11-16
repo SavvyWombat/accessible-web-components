@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en-GB">
 <head>
-    <title>Spin Selector | HTML Demo | Accessible Web Components | Savvy Wombat</title>
+    <title>Spin Button | HTML Demo | Accessible Web Components | Savvy Wombat</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -21,7 +21,7 @@
           width: 20ch;
         }
 
-        spin-selector {
+        spin-button {
           width: 20ch;
         }
     </style>
@@ -35,40 +35,41 @@
 
 <main>
     <section class="demo">
-        <h1>Spin Selector</h1>
+        <h1>Spin Button</h1>
 
         <form id="form" method="get">
-            <label id="label-for-spin-selector">Choose a number</label>
-            <spin-selector id="spin-selector"
-                           name="spin-selector"
-                           aria-labelledby="label-for-spin-selector"
+            <label id="label-for-spin-button">Choose a number</label>
+            <spin-button id="spin-button"
+                         autofocus
+                           name="spin-button"
+                           aria-labelledby="label-for-spin-button"
                            min="0"
-                           max="1"
+                           max="5"
                            step="0.1"
                            value="-1"
-            ></spin-selector>
+            ></spin-button>
 
-            <label id="label-for-disabled-spin-selector">Disabled spinner</label>
-            <spin-selector id="disabled-spin-selector"
-                           name="disabled-spin-selector"
-                           aria-labelledby="label-for-disabled-spin-selector"
+            <label id="label-for-disabled-spin-button">Disabled spinner</label>
+            <spin-button id="disabled-spin-button"
+                           name="disabled-spin-button"
+                           aria-labelledby="label-for-disabled-spin-button"
                            disabled
                            min="0"
                            max="1"
                            step="0.1"
                            value="-1"
-            ></spin-selector>
+            ></spin-button>
 
-            <label id="label-for-readonly-spin-selector">Readonly spinner</label>
-            <spin-selector id="readonly-spin-selector"
-                           name="readonly-spin-selector"
-                           aria-labelledby="label-for-readonly-spin-selector"
+            <label id="label-for-readonly-spin-button">Readonly spinner</label>
+            <spin-button id="readonly-spin-button"
+                           name="readonly-spin-button"
+                           aria-labelledby="label-for-readonly-spin-button"
                            readonly
                            min="0"
                            max="1"
                            step="0.1"
                            value="-1"
-            ></spin-selector>
+            ></spin-button>
 
             <label for="native-input">Native number input</label>
             <input id="native-input"
@@ -79,9 +80,19 @@
                    value="12"
             />
 
-            <label for="disable-input">Disabled number input</label>
-            <input id="disable-input"
-                   name="disable-input"
+            <label for="disabled-input">Disabled number input</label>
+            <input id="disabled-input"
+                   name="disabled-input"
+                   disabled
+                   type="number"
+                   step="7"
+                   max="10"
+                   value="12"
+            />
+
+            <label for="readonly-input">Readonly number input</label>
+            <input id="readonly-input"
+                   name="readonly-input"
                    readonly
                    type="number"
                    step="7"

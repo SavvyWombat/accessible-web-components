@@ -1,7 +1,7 @@
 import { html, fixture, expect } from '@open-wc/testing';
-import { SpinSelector } from '../../src/index.js';
+import { SpinButton } from '../../src/index.js';
 
-window.customElements.define('spin-selector', SpinSelector);
+window.customElements.define('spin-selector', SpinButton);
 
 describe('SpinSelector', () => {
   it('loads an empty spin selector', async () => {

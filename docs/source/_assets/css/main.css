@@ -15,6 +15,7 @@ h3 {
   @apply mt-4 text-2xl text-blue-500;
 }
 
+dt,
 h4 {
   @apply mt-4 text-xl text-blue-500;
 }

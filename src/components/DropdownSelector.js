@@ -19,7 +19,7 @@ export class DropdownSelector extends StyledComponent(LabelledComponent(HTMLElem
     if (this.isConnected) {
       super.connectedCallback();
 
-      this.closest('form')?.addEventListener('formdata', this.formdata.bind(this));
+      document.getElementById(this.form)?.addEventListener('formdata', this.formdata.bind(this));
 
       this.__root = this.shadowRoot.getElementById('root');
       this.__combobox = this.shadowRoot.getElementById('combobox');
@@ -76,7 +76,7 @@ export class DropdownSelector extends StyledComponent(LabelledComponent(HTMLElem
   disconnectedCallback() {
     super.disconnectedCallback();
 
-    this.closest('form')?.removeEventListener('formdata', this.formdata.bind(this));
+    document.getElementById(this.form)?.removeEventListener('formdata', this.formdata.bind(this));
 
     this.__combobox.removeEventListener('blur', this.blur.bind(this));
     this.__combobox.removeEventListener('click', this.click.bind(this));
@@ -109,6 +109,10 @@ export class DropdownSelector extends StyledComponent(LabelledComponent(HTMLElem
   }
 
   formdata(event) {
+    if (this.disabled) {
+      return;
+    }
+
     event.formData.append(this.name, this.value);
   }
 
@@ -396,7 +400,7 @@ export class DropdownSelector extends StyledComponent(LabelledComponent(HTMLElem
   }
 
   remove(index = null) {
-    if (isNaN(index)) {
+    if (index === null) {
       this.parentNode.removeChild(this);
     }
 
@@ -432,7 +436,19 @@ export class DropdownSelector extends StyledComponent(LabelledComponent(HTMLElem
   }
 
   get form() {
-    return this.getAttribute('form');
+    return this.getAttribute('form') || this.closest('form')?.id;
+  }
+
+  set form(newValue) {
+    document.getElementById(this.form)?.removeEventListener('formdata', this.formdata.bind(this));
+
+    if (newValue) {
+      this.setAttribute('form', newValue);
+    } else {
+      this.removeAttribute('form');
+    }
+
+    document.getElementById(this.form)?.addEventListener('formdata', this.formdata.bind(this));
   }
 
   get labels() {
@@ -493,10 +509,6 @@ export class DropdownSelector extends StyledComponent(LabelledComponent(HTMLElem
     } else {
       this.removeAttribute('tabIndex');
     }
-  }
-
-  get type() {
-    return 'select-one';
   }
 
   get value() {

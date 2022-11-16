@@ -27,6 +27,7 @@
 
             <li class="block pt-6 border-t-2 border-gray-100 font-bold"><a href="/component-library/">Component Library</a></li>
             <li><a href="/component-library/dropdown-selector/">Dropdown Selector</a></li>
+            <li><a href="/component-library/spin-button/">Spin Button</a></li>
             <li><a href="/component-library/tab-card/">Tab Card</a></li>
             <li><a href="/component-library/tab-group/">Tab Group</a></li>
             <li><a href="/component-library/vertical-menu/">Vertical Menu</a></li>

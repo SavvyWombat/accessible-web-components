@@ -27,6 +27,29 @@ title: Spin Selector
 
   <section>
     <h2>Demonstration</h2>
+
+    <p>
+      Under construction
+    </p>
+
+    <h3>Example usage</h3>
+
+    <pre>
+      <x-torchlight-code language="html">
+<form id="form" method="get">
+  <label id="label-for-rating">Rate this out of 5</label>
+  <spin-button id="rating"
+               name="rating"
+               aria-labelledby="label-for-rating"
+               min="0"
+               max="5"
+               step="0.1"
+               value="5"
+  ></spin-button>
+</form>
+
+      </x-torchlight-code>
+    </pre>
   </section>
 
   <section>
@@ -63,26 +86,6 @@ title: Spin Selector
     <p>
       As the user modifies the value, it will announce the new values accordingly.
     </p>
-  </section>
-
-  <section>
-    <h2>Example code</h2>
-
-    <pre>
-      <x-torchlight-code language="html">
-<form id="form" method="get">
-  <label id="label-for-rating">Rate this out of 5</label>
-  <spin-button id="rating"
-               name="rating"
-               aria-labelledby="label-for-rating"
-               min="0"
-               max="5"
-               step="0.1"
-               value="5"
-  ></spin-button>
-</form>
-      </x-torchlight-code>
-    </pre>
   </section>
 
   <section>
@@ -131,6 +134,14 @@ title: Spin Selector
       <dt>value</dt>
       <dd>The value of the <code class="html-tag">spin-button</code>.</dd>
     </dl>
+  </section>
+
+  <section>
+    <h2>Form data</h2>
+
+    <p>
+      The <code class="html-tag">spin-button</code> can be used in forms, and its name/value pair will be included in the GET or POST data submitted by its associated form.
+    </p>
   </section>
 
   <section>

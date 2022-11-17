@@ -27,6 +27,38 @@ title: Dropdown Selector
 
   <section>
     <h2>Demonstration</h2>
+
+    <p>
+      Under construction
+    </p>
+
+    <h3>Example usage</h3>
+
+    <pre>
+      <x-torchlight-code language="html">
+<form id="form" method="get">
+  <label for="dropdown-selector">Choose a month</label>
+  <dropdown-selector
+      id="dropdown-selector"
+      aria-labelledby="label-for-dropdown-selector"
+  >
+      <option value="0">January</option>
+      <option value="1">February</option>
+      <option value="2">March</option>
+      <option value="3">April</option>
+      <option value="4">May</option>
+      <option value="5" selected>June</option>
+      <option value="6">July</option>
+      <option value="7">August</option>
+      <option value="8">September</option>
+      <option value="9">October</option>
+      <option value="10">November</option>
+      <option value="11">December</option>
+  </dropdown-selector>
+</form>
+
+      </x-torchlight-code>
+    </pre>
   </section>
 
   <section>
@@ -91,94 +123,6 @@ title: Dropdown Selector
   </section>
 
   <section>
-    <h2>Example code</h2>
-
-    <tab-group>
-      <tab-card>
-        <h3>Vanilla</h3>
-
-        <pre>
-                <x-torchlight-code language="html">
-<label for="choose-month">Choose a month</label>
-<dropdown-selector id="choose-month">
-    <option value="0">January</option>
-    <option value="1">February</option>
-    <option value="2">March</option>
-    <option value="3">April</option>
-    <option value="4">May</option>
-    <option value="5" selected>June</option>
-    <option value="6">July</option>
-    <option value="7">August</option>
-    <option value="8">September</option>
-    <option value="9">October</option>
-    <option value="10">November</option>
-    <option value="11">December</option>
-</dropdown-selector>
-                </x-torchlight-code>
-            </pre>
-
-      </tab-card>
-
-      <tab-card>
-        <h3>Vue.js</h3>
-
-        <pre>
-                <x-torchlight-code language="vue">
-<script setup>
-const months = [
-  'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',
-]
-
-const month = ref(5);
-</script>
-
-<template>
-    <label for="choose-month">Choose a month</label>
-    <dropdown-selector id="choose-month" v-model="month">
-        <option v-for="(month, m) in months" :key="m" :value="m">@{{ month }}</option>
-    </dropdown-selector>
-</template>
-                </x-torchlight-code>
-            </pre>
-      </tab-card>
-
-      <tab-card>
-        <h3>React</h3>
-
-        <pre>
-                <x-torchlight-code language="jsx">
-const months = [
-    'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December',
-]
-
-const [month, setMonth] = useState(5);
-
-useLayoutEffect(() => {
-    const {current} = selectorRef;
-
-    const handleChange = (event) => {
-      setOutput(event.target.value)
-    };
-    current.addEventListener('change', handleChange);
-
-    return () => current.removeEventListener('change', handleChange);
-  }, [selectorRef]);
-
-return (
-    <label htmlFor="choose-month" value="{month}">Choose a month</label>
-    <dropdown-selector id="choose-month">
-        { months.map((month, m) => (
-            <option key={m} value="{m}">{month}</option>
-        ))}
-    </dropdown-selector>
-)
-                </x-torchlight-code>
-            </pre>
-      </tab-card>
-    </tab-group>
-  </section>
-
-  <section>
     <h2>Attributes</h2>
 
     <p>
@@ -212,6 +156,14 @@ return (
       <dt>value</dt>
       <dd>The value of the <code class="html-tag">dropdown-selector</code>.</dd>
     </dl>
+  </section>
+
+  <section>
+    <h2>Form data</h2>
+
+    <p>
+      The <code class="html-tag">dropdown-selector</code> can be used in forms, and its name/value pair will be included in the GET or POST data submitted by its associated form.
+    </p>
   </section>
 
   <section>

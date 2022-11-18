@@ -24,6 +24,8 @@
 
         <link rel="alternate" type="application/atom+xml" href="/rss.xml" title="Accessible Web Components - Blog Posts">
 
+        <link rel="me" href="https://phpc.social/@horuskol">
+
         <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/favicon-192x192.png">
         <link rel="icon" type="image/png" sizes="96x96" href="/assets/images/favicon-96x96.png">

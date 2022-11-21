@@ -38,6 +38,18 @@
       @endif
     </section>
 
+    @if ($page->series)
+    <section>
+      <h2 class="text-xl">{{ $page->series['title'] }}</h2>
+
+      <ol class="flex flex-col ml-8 mt-2 gap-2 list-decimal">
+        @foreach ($page->series['posts'] as $post)
+          <li class="pl-2"><a href="{{ $post['url'] }}">{{ $post['title'] }}</a></li>
+        @endforeach
+      </ol>
+    </section>
+    @endif
+
     <section class="markdown">
       @yield('content')
     </section>

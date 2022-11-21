@@ -8,6 +8,15 @@ description: What I learnt when trying to make an accessible Web Component.
 canonical:
  url: https://www.horuskol.net/blog/2022-02-08/making-web-components-accessible/
  title: "HorusKol: Making Web Components accessible"
+series:
+  title: Working with Web Components
+  posts:
+    - post:
+      title: Making Web Components accessible
+      url: /blog/2022-11-14/making-web-components-accessible/
+    - post:
+      title: Making Web Components stylable
+      url: /blog/2022-11-22/making-web-components-stylable/
 ---
 
 Last week, I set out to make a stylable and accessible replacement for the default `<select>` element. This started out from me building a custom date-picker for an app, and I wanted to create a standard that I could reuse.

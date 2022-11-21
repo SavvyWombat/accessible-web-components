@@ -3,8 +3,7 @@ import App from './App.vue'
 
 import '../../common/base.css'
 
-import {DropdownSelector} from "../../../src/DropdownSelector.js"
-
-customElements.define('dropdown-selector', DropdownSelector)
+import {defineAccessibleWebComponents} from '../../../src/index.js';
+defineAccessibleWebComponents();
 
 createApp(App).mount('#app')

@@ -4,9 +4,8 @@ import './index.css'
 import '../../common/base.css'
 import App from './App'
 
-import {DropdownSelector} from "../../../src/DropdownSelector.js";
-
-customElements.define('dropdown-selector', DropdownSelector);
+import {defineAccessibleWebComponents} from '../../../src/index.js';
+defineAccessibleWebComponents();
 
 ReactDOM.render(
   <React.StrictMode>
